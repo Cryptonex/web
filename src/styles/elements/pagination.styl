@@ -1,7 +1,6 @@
 .list__pagination
   position: relative;
   display flex
-  justify-content center
   width 100%
   flex-wrap wrap
   &__item
@@ -20,6 +19,7 @@
     margin-left: -1px;
     flex auto
     font-size 1em
+    max-width 48px
     &.active
       color: #999999;
       background-color: #f5f5f5;
@@ -27,5 +27,7 @@
       cursor: default;
     &.prev
       border-radius 5px 0 0 5px
+      max-width 100px
     &.next
       border-radius 0px 5px 5px 0px
+      max-width 100px

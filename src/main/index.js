@@ -7,6 +7,7 @@ import style from 'styles/index';
 import { Route, Switch, Redirect} from 'react-router-dom';
 import Replenishment from 'replenishment/index';
 import Transactions from 'transactions/index';
+import Withdraw from 'withdraw/index';
 
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
         <TopMenu match={match}/>
         <Route path='/app/replenishment' component={Replenishment}/>
         <Route path='/app/transactions' component={Transactions}/>
+        <Route path='/app/withdraw' component={Withdraw}/>
       </div>
     );
   }

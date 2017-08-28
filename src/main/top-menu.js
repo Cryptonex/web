@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 
 const links = [
   {title: 'Replenishment', path: '/replenishment'},
-  {title: 'Transactions', path: '/transactions'}
-  ]
+  {title: 'Transactions', path: '/transactions'},
+  {title: 'Withdraw', path: '/withdraw'}
+];
 
 class TopMenu extends Component {
   render() {

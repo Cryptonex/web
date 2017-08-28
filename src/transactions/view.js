@@ -21,39 +21,43 @@ class Transactions extends Component {
   }
 
   render() {
-    const { updateFilter, filter, updateList, processing } = this.props;
+    const { updateFilter, filter, updateList, processing, list } = this.props;
     return (
       <div className="transactions">
         {processing ? <Processing />: null}
-        <div className="container">
-          <div className="row filter">
-            <div className="col-md-3">
-              <label className="form-label">Date</label>
-              <select className="form form-full__width"
-                      onChange={e => updateFilter(filter, 'date', e.target.value)}>
-                {dateOptions.map((item, index) =>
-                  <option value={item.value} key={index}>{item.name}</option>
-                )}
-              </select>
-            </div>
-            <div className="col-md-3">
-              <label className="form-label">Status</label>
-              <select className="form form-full__width"
-                      onChange={e => updateFilter(filter, 'status', e.target.value)}>
-                {statusOptions.map((item, index) =>
-                  <option value={item.value} key={index}>{item.name}</option>
-                )}
-              </select>
-            </div>
-          </div>
-          <div className="row pagination">
-            <div className="col-md-7">
-              <div className="filter__pagination">
-                <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
+        <div className="transactions__content">
+          <div className="container">
+            <div className="row filter">
+              <div className="col-md-3">
+                <label className="form-label">Date</label>
+                <select className="form form-full__width"
+                        onChange={e => updateFilter(filter, 'date', e.target.value)}>
+                  {dateOptions.map((item, index) =>
+                    <option value={item.value} key={index}>{item.name}</option>
+                  )}
+                </select>
+              </div>
+              <div className="col-md-3">
+                <label className="form-label">Status</label>
+                <select className="form form-full__width"
+                        onChange={e => updateFilter(filter, 'status', e.target.value)}>
+                  {statusOptions.map((item, index) =>
+                    <option value={item.value} key={index}>{item.name}</option>
+                  )}
+                </select>
               </div>
             </div>
+            <div className="row pagination">
+              <div className="col-md-8">
+                <div className="filter__pagination">
+                  <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
+                </div>
+              </div>
+            </div>
+            <div className="transactions__table">
+              <ResponsiveTable columns={cols} rows={rows}/>
+            </div>
           </div>
-          <ResponsiveTable columns={cols} rows={rows}/>
         </div>
 
       </div>

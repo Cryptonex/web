@@ -91,13 +91,21 @@ export default {
       dispatch(this.getList(newFilter));
     }
   },
-  updateList: (filter, page) => {
+  updateList: function(filter, page) {
     let newFilter = Object.assign({}, filter);
-    newFilter.offset = newFilter.max_count * page;
+    newFilter.offset = newFilter.max_count * (page - 1);
     if (page == 1) {
       newFilter.offset = '';
     }
-    return dispatch =>
+    return dispatch => {
+      dispatch({
+        type: constants.TRANSACTIONS_UPDATE_LIST,
+        payload: {
+          page
+        }
+      });
+
       dispatch(this.getList(newFilter));
+    }
   }
 };

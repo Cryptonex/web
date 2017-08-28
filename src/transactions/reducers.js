@@ -20,6 +20,16 @@ let pagination = (state={page: 6, page_count: 20, max_count: 10}, action) => {
   }
 };
 
+
+let list = (state=[], action) => {
+  switch (action.type) {
+    case constants.TRANSACTIONS_FETCH_LIST_SUCCESS:
+      return action.payload.transactions
+    default:
+      return state;
+  }
+};
+
 const defaultFilter = {
   start_stamp: '',
   end_stamp: '',
@@ -53,7 +63,8 @@ let processing = (state=false, action) => {
 const transactions = combineReducers({
   pagination,
   filter,
-  processing
+  processing,
+  list
 });
 
 
