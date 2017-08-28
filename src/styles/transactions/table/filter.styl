@@ -1,0 +1,47 @@
+.transactions__filter
+  display flex
+  width 100%
+  flex-direction column
+  &-current
+    display flex
+    margin 20px 0
+    &__item
+      margin 0px
+      margin-right 50px
+      font-family Circle55
+      font-size 3em
+      cursor pointer
+      color #8a8a8d
+      &.active
+        color black
+  &-options
+    display flex
+    width 100%
+    &__date
+      position relative
+      height 41px
+      width 100%
+      border 2px solid #e0e0e0
+      background none
+      cursor pointer
+      text-align center
+      border-radius 5px
+      font-family Circle55
+      span.dates
+        line-height 42px
+      &.focus
+        background #fff
+      &-item
+        position absolute
+        top: 100%
+        visibility hidden
+        opacity 0
+        .rdr-DateRange
+          text-align center
+          border 2px solid #e0e0e0
+
+
+
+
+
+

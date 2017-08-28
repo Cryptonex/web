@@ -1,0 +1,159 @@
+.replenishment
+  width 100%
+  display flex
+  overflow auto
+  &__container
+    max-width 800px
+    margin auto
+    width 100%
+    display flex
+    flex-direction column
+    border-radius 10px
+    border 1px solid #dddddd
+    padding 15px
+    &-logo
+      position relative
+      display flex
+      width 100%
+      justify-content center
+      &__item
+        background-image url(../assets/images/logo256.png)
+        width: 80px;
+        height: 80px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin 5px 0
+        &:after
+          content ''
+          width 100%
+          height 2px
+          position absolute
+          bottom 0px
+          left 0px
+          background: linear-gradient(135deg, #1274A3 0%, #68AD74 100%);
+    &-balance
+      align-items center
+      display flex
+      flex-direction column
+      margin-top 10px
+      margin-bottom 30px
+      &__title
+        font-family Circle55
+        font-weight bold
+        text-transform uppercase
+      &__current
+        font-family CircleExtraBold
+        text-transform uppercase
+        margin 0
+        font-size 3em
+        font-weight 900
+        color black
+        border-bottom 2px solid #1274A3
+        span
+          font-size 0.7em
+      &__alternative
+        margin-top 10px
+        font-family CircleExtraBold
+        text-transform uppercase
+        font-size 1em
+        color black
+        span
+          font-size 0.7em
+    &-current
+      display flex
+      flex-direction column
+      border 1px solid #B5B8BC
+      padding 15px
+      border-radius 10px
+      &__title
+        font-size 1.5em
+        font-family Circle55
+        font-weight bold
+        margin-bottom 10px
+        color #858aa2
+      &__container
+        display flex
+        align-items center
+        &-input, &-value
+          display flex
+          width 50%
+          justify-content center
+
+        &-input
+          align-items flex-start
+          padding-right 10px
+          flex-direction column
+          position relative
+          height: 100%;
+          .absolute
+            position absolute
+            top 5px
+            right 15px
+            z-index 99999
+          &__item
+            width 100%
+            height 40px
+            outline none
+            border 1px solid #3e455c
+            font-size 1em
+            border-radius 5px
+            font-family Circle55
+            padding 0 15px
+
+        &-value
+          flex-direction column
+          font-size 1.5em
+          border-left  2px solid rgba(68, 77, 103, 0.3);
+          font-family CircleExtraBold
+          align-items: center;
+
+        &-button
+          margin-top 30px
+          display block
+          padding 10px
+          text-align center
+          color #fff
+          background #444d67
+          cursor pointer
+          border-radius 4px
+    &-other
+      margin-top 20px
+      display flex
+      align-items center
+      flex-direction column
+      &__logo
+        &.btc
+          background-image url(../assets/images/BTC.svg)
+          width: 80px;
+          height: 80px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin 5px 0
+        &.eth
+          background-image url(../assets/images/ETH.svg)
+          width: 80px;
+          height: 80px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin 5px 0
+      &__purse
+        font-family Circle55
+        &-item, &-title
+          margin 5px 0
+        &-item
+          font-weight bold
+      &__code
+        background-image url(../assets/images/q-code.svg)
+        width: 150px;
+        height: 150px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin 5px 0
+      &__container
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+
+

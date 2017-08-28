@@ -1,0 +1,10 @@
+__pycache__/
+*.db
+.cache/
+*.pyc
+/static
+/node_modules
+/bower_components
+.babelrc
+.idea
+/dist

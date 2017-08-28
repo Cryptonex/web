@@ -1,0 +1,181 @@
+@import "~styles/colors.styl"
+.login
+  width 100%
+  display flex
+
+  &__form
+    position: relative
+    margin auto
+    background #fff
+    border-radius 2px
+    flex-direction column
+    display flex
+    align-items center
+    max-width 360px
+    width 100%
+    box-shadow: 0 5px 10px rgba(0,0,0,.25), 0 10px 50px rgba(0,0,0,.25);
+
+
+    &-logo
+      background-image url(../assets/images/logo256.png)
+      width: 60px;
+      height: 60px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin 20px 0
+      margin-bottom 10px
+    &-title
+      display flex
+      flex-direction column
+      align-items center
+      margin-bottom 10px
+      &__item
+        position: relative
+        margin 0
+        font-family Circle55
+        font-size 1.5em
+        font-weight bold
+        color #142645
+        margin-bottom 5px
+      &__description
+        margin 0
+        font-family Circle55
+        font-size 1.3em
+        color #a2a5a8
+
+
+    &-container
+      width 100%
+      display flex
+      flex-direction column
+      padding 0 15px
+      visibility hidden
+      opacity 0.01
+      max-height 0
+      transition: max-height 1000ms ease
+      &.entering, &.entered
+        visibility visible
+        opacity 1
+        max-height 400px
+        transition: all 700ms ease
+      &__item
+        width 100%
+        display flex
+        margin 10px 0
+        &-input
+          width 100%
+          outline none
+          border 2px solid #e1e4e5
+          background none
+          border-radius 2px
+          line-height 40px
+          padding 0 15px
+          font-family Circle55
+          font-size 1.2em
+        &-button
+          width 100%
+          display flex
+          text-align center
+          justify-content center
+          background #2f8793
+          border-radius 2px
+          height 40px
+          align-items center
+          font-family Circle55
+          font-weight bold
+          color #fff
+          border 1px solid #1375a2
+          margin-bottom 10px
+          cursor pointer
+
+      &__error
+        padding-left: 10px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        font-family Circle55
+        color md-red-300
+        width: 50%;
+
+      &__link
+        display flex
+        width 100%
+        justify-content center
+        margin-bottom 15px
+        cursor pointer
+        flex-direction column
+        align-items center
+        &-item
+          color: #bbb
+          display block
+          font-family Circle55
+          cursor pointer
+          padding 5px 0
+          &:hover
+            text-decoration underline
+
+#login__recaptcha
+  height: 76px;
+  width: 50%;
+  overflow: hidden;
+  border-right: 1px solid lightgrey;
+  border-radius: 3px;
+
+.auth__form-container
+  display flex
+  flex-direction column
+  padding 0 15px;
+  visibility hidden
+  opacity 0.01
+  max-height 0
+  transition: max-height 0ms ease
+  &.entered
+    visibility visible
+    opacity 1
+    max-height 400px
+    transition: all 1500ms ease
+  &__buttons
+    margin 15px -15px
+    display flex
+    &-item
+      width 50%
+      padding 0 15px
+      &__cancel
+        width 100%
+        display block
+        text-align center
+        padding 10px 0
+        background: #f2f2f2;
+        color: #555;
+        cursor pointer
+        border-radius 2px
+      &__authenticate
+        width 100%
+        display block
+        text-align center
+        padding 10px 0
+        background #2f8793
+        border: 1px solid #1375a2;
+        color: #fff;
+        cursor pointer
+        border-radius 2px
+
+.example-enter {
+  opacity: 0.01;
+  transition: opacity 1.5s ease-in;
+  -webkit-transition: opacity 1.5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.example-leave {
+  opacity: 1;
+  transition: opacity 1.5s ease-in;
+  -webkit-transition: opacity 1.5s ease-in;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}

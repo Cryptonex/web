@@ -1,0 +1,109 @@
+@import "~styles/colors.styl"
+.registration
+  width 100%
+  display flex
+  &__form
+    margin auto
+    background #fff
+    border-radius 2px
+    flex-direction column
+    display flex
+    align-items center
+    max-width 360px
+    width 100%
+    box-shadow: 0 5px 10px rgba(0,0,0,.25), 0 10px 50px rgba(0,0,0,.25)
+    position relative
+    &-logo
+      background-image url(../assets/images/logo256.png)
+      width: 60px;
+      height: 60px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin 20px 0
+      margin-bottom 10px
+    &-title
+      display flex
+      flex-direction column
+      align-items center
+      margin-bottom 10px
+      &__item
+        margin 0
+        font-family Circle55
+        font-size 1.5em
+        font-weight bold
+        color #142645
+        margin-bottom 5px
+      &__description
+        margin 0
+        font-family Circle55
+        font-size 1.3em
+        color #a2a5a8
+
+
+    &-container
+      width 100%
+      display flex
+      flex-direction column
+      padding 0 15px
+      &__item
+        width 100%
+        display flex
+        margin 10px 0
+        &-input
+          width 100%
+          outline none
+          border 2px solid #e1e4e5
+          background none
+          border-radius 2px
+          line-height 40px
+          padding 0 15px
+          font-family Circle55
+          font-size 1.2em
+        &-button
+          width 100%
+          display flex
+          text-align center
+          justify-content center
+          background #2f8793
+          border-radius 2px
+          height 40px
+          align-items center
+          font-family Circle55
+          font-weight bold
+          color #fff
+          border 1px solid #1375a2
+          margin-bottom 10px
+          cursor pointer
+
+      &__error
+        width: 50%;
+        padding-left: 10px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        font-family Circle55
+        color md-red-300
+
+      &__link
+        display flex
+        width 100%
+        justify-content center
+        margin-bottom 15px
+        cursor pointer
+        flex-direction column
+        align-items center
+        &-item
+          color: #bbb
+          display block
+          font-family Circle55
+          cursor pointer
+          padding 5px 0
+          &:hover
+            text-decoration underline
+
+#registration__recaptcha
+  height: 76px;
+  width: 50%;
+  overflow: hidden;
+  border-right: 1px solid lightgrey;
+  border-radius: 3px;

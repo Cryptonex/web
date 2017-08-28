@@ -1,0 +1,103 @@
+.top-menu
+  display flex
+  max-height 65px
+  overflow hidden
+  min-height 65px
+  width 100%
+  background #ffff
+  justify-content space-between
+  padding 0 15px
+  margin-bottom 50px
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px
+  .navbar
+    display flex
+    width 100%
+    height 100%
+  &__logo
+    display flex
+    align-items center
+    height 100%
+    &-item
+      background-image url(../assets/images/logo256.png)
+      width: 60px;
+      height: 60px;
+      background-size: cover;
+      background-repeat: no-repeat;
+    &-title
+      font-family CircleBold
+      font-size 2em
+      margin 0
+      color #142645
+      font-weight 800
+  &__user
+    display flex
+    align-items center
+    font-family Circle55
+    font-weight bold
+    margin-right 20px
+    &-text
+      padding-right 20px
+      &__item
+        margin 0px
+        color #639395
+        span
+          font-family CircleExtraBold
+    &-button
+      border 2px solid #ecf0f0
+      padding 7px
+      border-radius 90px
+      cursor pointer
+      &__exit
+        background-image url(/assets/images/exit.svg)
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        background-repeat: no-repeat;
+  &__routers
+    display flex
+    align-items center
+    width 100%
+    justify-content space-between
+    &-list
+      padding-top 12px
+      margin 0px
+      list-style-type none
+      &__item
+        display inline-flex
+        &-link
+          margin-right 15px
+          display inline-flex
+          font-size 1.3em
+          color #4f616a
+          font-family Circle55
+          padding-bottom 5px
+          border-bottom  3px solid transparent
+          &.active
+            border-color rgb(35, 168, 245);
+          &:hover
+            border-color rgb(35, 168, 245);
+    &-user
+      display: flex;
+      height: 100%;
+      align-items: center;
+      &__balance
+        padding-right  15px
+        margin 0
+        color #4d729e
+        font-size 1.3em
+        font-family CircleExtraBold
+        margin-top 5px
+
+      &__logout
+        cursor pointer
+        display flex
+        align-items center
+        font-size 1.1em
+        font-family Circle55
+        span
+          background-image url('~assets/images/log-out.svg')
+          width: 25px;
+          height: 25px;
+          background-size: cover;
+          background-repeat: no-repeat;
+

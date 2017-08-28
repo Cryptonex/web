@@ -1,0 +1,31 @@
+.list__pagination
+  position: relative;
+  display flex
+  justify-content center
+  width 100%
+  flex-wrap wrap
+  &__item
+    position: relative;
+    display flex;
+    height 40px
+    text-decoration: none;
+    color: #2780e3;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    cursor pointer
+    align-items center
+    justify-content center
+    min-width 40px
+    margin 5px 0
+    margin-left: -1px;
+    flex auto
+    font-size 1em
+    &.active
+      color: #999999;
+      background-color: #f5f5f5;
+      border-color: #dddddd;
+      cursor: default;
+    &.prev
+      border-radius 5px 0 0 5px
+    &.next
+      border-radius 0px 5px 5px 0px

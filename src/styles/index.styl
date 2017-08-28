@@ -1,0 +1,76 @@
+@font-face {
+  font-family: Circle55;
+  src: url("../assets/fonts/CRC55.otf");
+}
+
+@font-face {
+  font-family: Dusha_v5;
+  src: url("../assets/fonts/Dusha_v5.ttf");
+}
+
+@font-face {
+  font-family: Circle35;
+  src: url("../assets/fonts/CRC35.otf");
+}
+
+
+@font-face {
+  font-family: CircleExtraBold;
+  src: url("../assets/fonts/Circe-ExtraBold.otf");
+}
+
+@font-face {
+  font-family: CircleBold;
+  src: url("../assets/fonts/Circe-Bold.otf");
+}
+
+
+html, body
+  overflow hidden
+
+html, body, #root, #root>main
+  height: 100%
+  background #fff
+  font-size 16px
+a
+  text-decoration none
+a:active, a:hover, a:focus, a:visited
+  outline: 0
+
+
+img
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+
+.wrap-content
+  display flex
+  flex: 1 0 auto;
+  height 100%
+  overflow auto
+  flex-direction column
+  &__main
+    display flex
+    flex-direction column
+    width 100%
+    background #f5f5f5
+    &-container
+      display: flex;
+      padding 0 30px
+
+.users
+  display flex
+  height 100%
+
+
+@import "./lib/bootstrap-grid.css"
+@import "./lib/normalize.css"
+@import "./lib/font-awesome.css"
+@import "./main/*"
+@import "./transactions/*"
+@import "./summary/*"
+@import "./elements/*"
+@import "./users/*"
+@import "./replenishment/*"
+
+
