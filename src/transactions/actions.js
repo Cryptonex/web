@@ -58,6 +58,9 @@ export default {
         }
       }).catch(error => {
         console.log(error);
+        return dispatch({
+          type: constants.TRANSACTIONS_FETCH_LIST_ERROR
+        });
       });
     }
   },

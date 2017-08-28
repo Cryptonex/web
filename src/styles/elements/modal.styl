@@ -1,0 +1,55 @@
+.fixed-overlay
+  position: fixed
+  overflow: auto
+  left: 0
+  top: 0
+  right: 0;
+  bottom: 0;
+  width: 99.99%
+  height: 100%
+  background-color: rgba(0,0,0,0.5)
+  z-index 9999999999999999
+
+  .modal-container
+    position: relative
+    margin: 30px auto
+    width: 100%;
+    max-width: 600px;
+    z-index 9999999
+
+    &_content
+      background-color: #fff
+      -webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5)
+      box-shadow: 0 3px 9px rgba(0,0,0,0.5)
+      min-height 250px
+
+      &-header
+        padding: 10px 20px;
+        border-bottom: 1px solid #e5e5e5;
+        min-height: 16.428571429px;
+        background: #40596b;
+        text-align center
+        position: relative
+        &-close
+          position absolute
+          right 10px
+          top 8px
+          color #c5d9e3
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          user-select: none;
+          i
+            padding 5px
+            border-radius 90px
+            cursor pointer
+        &__title
+          margin: 0;
+          color #fff
+          line-height: 1.428571429;
+          font-weight: 400;
+          font-size: 1.5em;
+
+      &-footer
+        margin: 15px 15px;
+        position: relative
+

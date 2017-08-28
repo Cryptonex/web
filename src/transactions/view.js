@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { map } from 'underscore';
 import Pagination from 'elements/pagination';
+import Processing from 'elements/processing'
 
 const statusOptions = [
   {name: 'All', value: ''}, {name: 'Created', value: 'created'}, {name: 'Moderated', value: 'moderated'},
@@ -11,7 +12,7 @@ const statusOptions = [
 const dateOptions = [
   {name: 'All', value: ''}, {name:'Today', value: 'day'}, {name: 'This week', value: 'week'},
   {name: 'This month', value: 'month'}, {name: 'This year', value: 'year'}
-]
+];
 
 class Transactions extends Component {
   componentDidMount() {
@@ -20,9 +21,10 @@ class Transactions extends Component {
   }
 
   render() {
-    const { updateFilter, filter, updateList} = this.props;
+    const { updateFilter, filter, updateList, processing } = this.props;
     return (
       <div className="transactions">
+        {processing ? <Processing />: null}
         <div className="container">
           <div className="row filter">
             <div className="col-md-3">
