@@ -31,7 +31,9 @@ let result = {
 
 export default {
   getList: function(filter) {
-    let params = Object.assign({}, filter);
+    let params = Object.assign({
+      ticket: localStorage.getItem('ticket')
+    }, filter);
 
     for (let prop in params) {
       if (!params[prop]) {
@@ -39,15 +41,12 @@ export default {
       }
     }
 
-    let data = Object.assign({
-      'ticket': localStorage.getItem('ticket'),
-    }, params);
 
     return dispatch => {
       dispatch({type: constants.TRANSACTIONS_FETCH_LIST});
-      return getData(5, data, 'balance_transaction.list').then((response)=> {
+      return getData(5, params, 'balance_transaction.list').then((response)=> {
         if (response.ok) {
-          result.getList(response, dispatch, data.max_count);
+          result.getList(response, dispatch, params.max_count);
         } else {
           return response.json().then(function (json) {
             return dispatch({

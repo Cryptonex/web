@@ -36,7 +36,7 @@ let error = (state='', action) => {
     case constants.WITHDRAW_UPDATE_FORM:
       return '';
     case constants.WITHDRAW_FETCH_FORM_SUCCESS:
-      return '';
+      return 'Success!';
     default:
       return state;
   }

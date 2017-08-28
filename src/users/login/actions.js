@@ -100,7 +100,6 @@ export let login = {
 
     }
   },
-
 };
 
 export let auth = {
