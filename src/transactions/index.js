@@ -10,6 +10,8 @@ const mapDispatchToProps = (dispatch) => {
     getList: filter => dispatch(transactions.getList(filter)),
     updateFilter: (filter, field, value) =>
       dispatch(transactions.updateFilter(filter, field, value)),
+    updateList: (filter, page) =>
+      dispatch(transactions.updateList(filter, page)),
   }
 };
 

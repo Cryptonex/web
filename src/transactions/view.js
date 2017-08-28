@@ -20,7 +20,7 @@ class Transactions extends Component {
   }
 
   render() {
-    const { updateFilter, filter } = this.props;
+    const { updateFilter, filter, updateList} = this.props;
     return (
       <div className="transactions">
         <div className="container">
@@ -47,7 +47,7 @@ class Transactions extends Component {
           <div className="row pagination">
             <div className="col-md-7">
               <div className="filter__pagination">
-                <Pagination pagination={this.props.pagination} update={(page)=> console.log(page)}/>
+                <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ const defaultFilter = {
   end_stamp: '',
   status: '',
   address: '',
-  max_count: 10
+  max_count: 10,
 };
 
 let filter = (state=defaultFilter, action) => {

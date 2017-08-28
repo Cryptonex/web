@@ -78,8 +78,6 @@ export default {
       newFilter.status = value;
     }
 
-    console.log(newFilter)
-
     return dispatch => {
       dispatch({
         type: constants.TRANSACTIONS_UPDATE_FILTER,
@@ -87,7 +85,16 @@ export default {
           filter: newFilter
         }
       });
+      dispatch(this.getList(newFilter));
     }
-
+  },
+  updateList: (filter, page) => {
+    let newFilter = Object.assign({}, filter);
+    newFilter.offset = newFilter.max_count * page;
+    if (page == 1) {
+      newFilter.offset = '';
+    }
+    return dispatch =>
+      dispatch(this.getList(newFilter));
   }
 };
