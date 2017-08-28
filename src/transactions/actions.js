@@ -77,7 +77,9 @@ export default {
     if (field == 'status') {
       newFilter.status = value;
     }
-    
+
+    console.log(newFilter)
+
     return dispatch => {
       dispatch({
         type: constants.TRANSACTIONS_UPDATE_FILTER,
