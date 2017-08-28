@@ -20,14 +20,15 @@ class Transactions extends Component {
   }
 
   render() {
-    const { updateFilter } = this.props;
+    const { updateFilter, filter } = this.props;
     return (
       <div className="transactions">
         <div className="container">
           <div className="row filter">
             <div className="col-md-3">
               <label className="form-label">Date</label>
-              <select className="form form-full__width">
+              <select className="form form-full__width"
+                      onChange={e => updateFilter(filter, 'date', e.target.value)}>
                 {dateOptions.map((item, index) =>
                   <option value={item.value} key={index}>{item.name}</option>
                 )}
@@ -35,7 +36,8 @@ class Transactions extends Component {
             </div>
             <div className="col-md-3">
               <label className="form-label">Status</label>
-              <select className="form form-full__width">
+              <select className="form form-full__width"
+                      onChange={e => updateFilter(filter, 'status', e.target.value)}>
                 {statusOptions.map((item, index) =>
                   <option value={item.value} key={index}>{item.name}</option>
                 )}

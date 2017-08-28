@@ -23,7 +23,7 @@ let pagination = (state={page: 6, page_count: 20, max_count: 10}, action) => {
 const defaultFilter = {
   start_stamp: '',
   end_stamp: '',
-  status: 'All',
+  status: '',
   address: '',
   max_count: 10
 };

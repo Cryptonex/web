@@ -31,9 +31,18 @@ let result = {
 
 export default {
   getList: function(filter) {
+    let params = Object.assign({}, filter);
+
+    for (let prop in params) {
+      if (!params[prop]) {
+        delete params[prop];
+      }
+    }
+
     let data = Object.assign({
       'ticket': localStorage.getItem('ticket'),
-    }, filter);
+    }, params);
+
     return dispatch => {
       dispatch({type: constants.TRANSACTIONS_FETCH_LIST});
       return getData(5, data, 'balance_transaction.list').then((response)=> {
@@ -53,6 +62,32 @@ export default {
     }
   },
   updateFilter: function(filter, field, value) {
-    console.log(filter)
+    let newFilter = Object.assign({}, filter);
+
+    if (field == 'date' && !value) {
+      newFilter.start_stamp = '';
+      newFilter.end_stamp = '';
+    }
+
+    if (field == 'date' && value) {
+      newFilter.end_stamp = moment().add(1, 'day').startOf('day').format('YYYY-MM-DD');
+      newFilter.start_stamp = moment().startOf(value).format('YYYY-MM-DD');
+    }
+
+    if (field == 'status') {
+      newFilter.status = value;
+    }
+
+    console.log(newFilter)
+
+    return dispatch => {
+      dispatch({
+        type: constants.TRANSACTIONS_UPDATE_FILTER,
+        payload: {
+          filter: newFilter
+        }
+      });
+    }
+
   }
 };

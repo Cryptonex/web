@@ -8,7 +8,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatch: params => dispatch(params),
     getList: filter => dispatch(transactions.getList(filter)),
-    updateFilter: filter => dispatch(transactions.updateFilter(filter))
+    updateFilter: (filter, field, value) =>
+      dispatch(transactions.updateFilter(filter, field, value)),
   }
 };
 
