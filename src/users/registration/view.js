@@ -60,7 +60,7 @@ class Registration extends Component {
             </div>
             <div className="registration__form-container__item">
               <a className="registration__form-container__item-button"
-                 onClick={e => console.log('reg')}>
+                 onClick={e => submit(registrationForm)}>
                 Create account
               </a>
             </div>

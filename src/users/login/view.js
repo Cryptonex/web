@@ -16,8 +16,8 @@ class Login extends Component {
   }
 
   render() {
-    const { loginForm, updateFormLogin, submitLogin, submitAuth,
-            content, cancel, error, authForm, updateFormAuth, processing} = this.props;
+    const { loginForm, updateLoginForm, submitLoginForm, submitAuthForm,
+            content, cancel, error, authForm, updateAuthForm, processing} = this.props;
     return (
       <div className="login">
         <div className="login__form">
@@ -40,12 +40,12 @@ class Login extends Component {
                 <div className="login__form-container__item">
                   <input type="text" className="login__form-container__item-input"
                          placeholder="Email" value={loginForm.email}
-                         onChange={e => updateFormLogin('email', e.target.value)}/>
+                         onChange={e => updateLoginForm('email', e.target.value)}/>
                 </div>
                 <div className="login__form-container__item">
                   <input type="password" className="login__form-container__item-input"
                          placeholder="Password"
-                         onChange={e => updateFormLogin('password', e.target.value)}/>
+                         onChange={e => updateLoginForm('password', e.target.value)}/>
                 </div>
                 <div className="login__form-container__item">
                   <Recaptcha
@@ -59,7 +59,7 @@ class Login extends Component {
                 </div>
                 <div className="login__form-container__item">
                   <a className="login__form-container__item-button"
-                     onClick={e => console.log('login')}>
+                     onClick={e => submitLoginForm(loginForm)}>
                     Login
                   </a>
                 </div>
@@ -81,7 +81,7 @@ class Login extends Component {
                 <div className="login__form-container__item">
                   <input type="text" className="login__form-container__item-input"
                          placeholder="Authentication code" value={authForm.code}
-                         onChange={e => updateFormAuth('code', e.target.value)}/>
+                         onChange={e => updateAuthForm('code', e.target.value)}/>
                 </div>
                 {error ?
                 <div className="login__form-container__item">
@@ -98,7 +98,7 @@ class Login extends Component {
                   </div>
                   <div className="auth__form-container__buttons-item">
                     <a className="auth__form-container__buttons-item__authenticate"
-                       onClick={ev => submitAuth(authForm)}>
+                       onClick={ev => submitAuthForm(authForm)}>
                       Authenticate
                     </a>
                   </div>
@@ -112,7 +112,5 @@ class Login extends Component {
     )
   }
 }
-
-
 
 export default Login;

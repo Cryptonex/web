@@ -1,20 +1,14 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Activation from './view';
-import {activation} from './actions';
+import actionsActivation from './actions';
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateForm: (field, value) => {
-      dispatch(activation.updateForm(field, value));
-    },
-    submit: (form) => {
-      dispatch(activation.submit(form));
-    },
-    dispatch: params => {
-      dispatch(params);
-    }
+    ...bindActionCreators(actionsActivation, dispatch),
+    dispatch: params => dispatch(params),
   }
 };
 

@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
+import { push } from 'react-router-redux'
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -17,9 +18,11 @@ let result = {
           });
         }
 
-        return dispatch({
+        dispatch({
           type: constants.USERS_REGISTRATION_FETCH_FORM_SUCCESS,
         });
+
+        dispatch(push('/users/activation'));
 
       });
     }
@@ -27,7 +30,7 @@ let result = {
 };
 
 
-export let registration = {
+export default {
   updateForm: (field, value) => {
     return {
       type: constants.USERS_REGISTRATION_UPDATE_FORM,
@@ -77,7 +80,7 @@ export let registration = {
 
       dispatch({type: constants.USERS_REGISTRATION_FETCH_FORM});
 
-      return getData(1, params, 'user.registration').then(response => {
+      return getData(1, params, 'user.register').then(response => {
         if (response.ok) {
           result.registration.submit(response, dispatch);
         } else {
@@ -93,7 +96,6 @@ export let registration = {
       }).catch(error => {
         console.log(error);
       });
-
     }
   },
 

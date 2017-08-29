@@ -55,7 +55,7 @@ class Activation extends Component {
             </div>: null}
             <div className="registration__form-container__item">
               <a className="registration__form-container__item-button"
-                 onClick={e => console.log('activation')}>
+                 onClick={e => submit(activationForm)}>
                  Activate
               </a>
             </div>

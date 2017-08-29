@@ -29,82 +29,86 @@ let result = {
   }
 };
 
-export default {
-  getList: function(filter) {
-    let params = Object.assign({
-      ticket: localStorage.getItem('ticket')
-    }, filter);
+export let getList = (filter) => {
+  let params = Object.assign({
+    ticket: localStorage.getItem('ticket')
+  }, filter);
 
-    for (let prop in params) {
-      if (!params[prop]) {
-        delete params[prop];
-      }
+  for (let prop in params) {
+    if (!params[prop]) {
+      delete params[prop];
     }
+  }
 
 
-    return dispatch => {
-      dispatch({type: constants.TRANSACTIONS_FETCH_LIST});
-      return getData(5, params, 'balance_transaction.list').then((response)=> {
-        if (response.ok) {
-          result.getList(response, dispatch, params.max_count);
-        } else {
-          return response.json().then(function (json) {
-            return dispatch({
-              type: constants.TRANSACTIONS_FETCH_LIST_ERROR,
-              payload: json
-            });
+  return dispatch => {
+    dispatch({type: constants.TRANSACTIONS_FETCH_LIST});
+    return getData(5, params, 'balance_transaction.list').then((response)=> {
+      if (response.ok) {
+        result.getList(response, dispatch, params.max_count);
+      } else {
+        return response.json().then(function (json) {
+          return dispatch({
+            type: constants.TRANSACTIONS_FETCH_LIST_ERROR,
+            payload: json
           });
-        }
-      }).catch(error => {
-        console.log(error);
-        return dispatch({
-          type: constants.TRANSACTIONS_FETCH_LIST_ERROR
         });
+      }
+    }).catch(error => {
+      console.log(error);
+      return dispatch({
+        type: constants.TRANSACTIONS_FETCH_LIST_ERROR
       });
-    }
-  },
-  updateFilter: function(filter, field, value) {
-    let newFilter = Object.assign({}, filter);
+    });
+  }
+};
 
-    if (field == 'date' && !value) {
-      newFilter.start_stamp = '';
-      newFilter.end_stamp = '';
-    }
 
-    if (field == 'date' && value) {
-      newFilter.end_stamp = moment().add(1, 'day').startOf('day').format('YYYY-MM-DD');
-      newFilter.start_stamp = moment().startOf(value).format('YYYY-MM-DD');
-    }
+export let updateFilter = (filter, field, value) => {
+  let newFilter = Object.assign({}, filter);
 
-    if (field == 'status') {
-      newFilter.status = value;
-    }
+  if (field == 'date' && !value) {
+    newFilter.start_stamp = '';
+    newFilter.end_stamp = '';
+  }
 
-    return dispatch => {
-      dispatch({
-        type: constants.TRANSACTIONS_UPDATE_FILTER,
-        payload: {
-          filter: newFilter
-        }
-      });
-      dispatch(this.getList(newFilter));
-    }
-  },
-  updateList: function(filter, page) {
-    let newFilter = Object.assign({}, filter);
-    newFilter.offset = newFilter.max_count * (page - 1);
-    if (page == 1) {
-      newFilter.offset = '';
-    }
-    return dispatch => {
-      dispatch({
-        type: constants.TRANSACTIONS_UPDATE_LIST,
-        payload: {
-          page
-        }
-      });
+  if (field == 'date' && value) {
+    newFilter.end_stamp = moment().add(1, 'day').startOf('day').format('YYYY-MM-DD');
+    newFilter.start_stamp = moment().startOf(value).format('YYYY-MM-DD');
+  }
 
-      dispatch(this.getList(newFilter));
-    }
+  if (field == 'status') {
+    newFilter.status = value;
+  }
+
+  return dispatch => {
+    dispatch({
+      type: constants.TRANSACTIONS_UPDATE_FILTER,
+      payload: {
+        filter: newFilter
+      }
+    });
+
+    dispatch(getList(newFilter));
+  }
+};
+
+export let updateList = (filter, page) => {
+  let newFilter = Object.assign({}, filter);
+  newFilter.offset = newFilter.max_count * (page - 1);
+
+  if (page == 1) {
+    newFilter.offset = '';
+  }
+
+  return dispatch => {
+    dispatch({
+      type: constants.TRANSACTIONS_UPDATE_LIST,
+      payload: {
+        page
+      }
+    });
+
+    dispatch(getList(newFilter));
   }
 };

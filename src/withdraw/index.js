@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
 
 import Withdraw from './view';
-import withdraw from './actions';
+import * as actionsWithdraw from './actions';
 
 const mapStateToProps = state => {
   return {
@@ -14,8 +14,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-   updateForm: (field, value) => dispatch(withdraw.updateForm(field, value)),
-   submit: form => dispatch(withdraw.submit(form)),
+   ...bindActionCreators(actionsWithdraw, dispatch),
+   dispatch: param => (dispatch(param)),
   }
 };
 

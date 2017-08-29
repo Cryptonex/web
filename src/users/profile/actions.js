@@ -54,7 +54,7 @@ export default {
     return dispatch => {
 
       if (!localStorage.ticket) {
-        localStorage.removeItem('current');
+        localStorage.removeItem('profile');
         return dispatch({
           type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
           payload: {
@@ -81,9 +81,7 @@ export default {
           });
         }
       }).catch( error => {
-        return {
-          type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
-        };
+        dispatch({type: constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR});
       });
     }
   },

@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
+import profile from 'users/profile/actions'
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -16,6 +17,9 @@ let result = {
             }
           });
         }
+
+        localStorage.setItem('ticket', json.result.ticket);
+        dispatch(profile)
         return dispatch({
           type: constants.USERS_LOGIN_FETCH_FORM_SUCCESS,
         });
@@ -45,7 +49,7 @@ let result = {
 
 
 export let login = {
-  updateForm: (field, value) => {
+  updateLoginForm: (field, value) => {
     return {
       type: constants.USERS_LOGIN_UPDATE_FORM,
       payload: {
@@ -53,7 +57,7 @@ export let login = {
       }
     }
   },
-  submit: form => {
+  submitLoginForm: form => {
     return dispatch  => {
 
       let params = Object.assign({}, form);
@@ -97,7 +101,6 @@ export let login = {
       }).catch(error => {
         console.log(error);
       });
-
     }
   },
 };
@@ -106,7 +109,7 @@ export let auth = {
   cancel: () => {
     return {type: constants.USERS_AUTH_CANCEL}
   },
-  updateForm: (field, value) => {
+  updateAuthForm: (field, value) => {
     return {
       type: constants.USERS_AUTH_UPDATE_FORM,
       payload: {
@@ -115,7 +118,7 @@ export let auth = {
       }
     }
   },
-  submit: form => {
+  submitAuthForm: form => {
     return dispatch => {
       let params = Object.assign({}, form);
 
@@ -146,7 +149,6 @@ export let auth = {
       }).catch(error => {
         console.log(error);
       });
-
     }
   }
 };

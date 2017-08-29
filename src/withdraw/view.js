@@ -11,7 +11,7 @@ let fields = [
 class Withdraw extends Component {
 
   render() {
-    const { updateForm, submit, error, form, processing} = this.props;
+    const { updateForm, submit, error, form, processing } = this.props;
     let classNameError = CN({
       'withdraw__container-form__item': true,
       'half': true,

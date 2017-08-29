@@ -41,6 +41,8 @@ let processingStartApp = (state=true, action) => {
   switch (action.type) {
     case constants.USERS_PROFILE_FETCH_INFO_ERROR:
       return false;
+    case constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR:
+      return false;
     case constants.USERS_PROFILE_FETCH_INFO_SUCCESS:
       return false;
     default:

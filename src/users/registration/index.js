@@ -1,20 +1,15 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 
 import Registration from './view';
-import {registration} from './actions';
+import actionsRegistration from './actions';
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateForm: (field, value) => {
-      dispatch(registration.updateForm(field, value));
-    },
-    submit: (form) => {
-      dispatch(registration.submit(form));
-    },
-    dispatch: params => {
-      dispatch(params);
-    }
+    ...bindActionCreators(actionsRegistration, dispatch),
+    dispatch: params => dispatch(params),
   }
 };
 

@@ -1,6 +1,6 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
-
+import { push } from 'react-router-redux'
 
 let result = {
   activation: {
@@ -15,9 +15,11 @@ let result = {
           });
         }
 
-        return dispatch({
+        dispatch({
           type: constants.USERS_ACTIVATION_FETCH_FORM_SUCCESS,
         });
+
+        dispatch(push('/users/login'));
 
       });
     }
@@ -25,7 +27,7 @@ let result = {
 };
 
 
-export let activation = {
+export default {
   updateForm: (field, value) => {
     return {
       type: constants.USERS_ACTIVATION_UPDATE_FORM,

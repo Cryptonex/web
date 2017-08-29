@@ -1,17 +1,15 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 
 import Transactions from './view';
-import transactions from './actions';
+import * as transactions from './actions';
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    ...bindActionCreators(transactions, dispatch),
     dispatch: params => dispatch(params),
-    getList: filter => dispatch(transactions.getList(filter)),
-    updateFilter: (filter, field, value) =>
-      dispatch(transactions.updateFilter(filter, field, value)),
-    updateList: (filter, page) =>
-      dispatch(transactions.updateList(filter, page)),
   }
 };
 

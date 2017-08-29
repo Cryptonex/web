@@ -1,13 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import {AppContainer} from 'react-hot-loader';
 
 import {routers} from 'base/routers';
-import store from 'base/store/index';
+import createStore from 'base/store/index';
+import profile from 'users/profile/actions';
+let store = createStore();
+
+store.dispatch(profile.getInfo());
+
+/*setInterval(() => {
+  store.dispatch(profile.getInfo());
+}, 180000);*/
 
 render(
-    <Provider store={store()}>
+    <Provider store={store}>
       {routers}
     </Provider>
 , document.querySelector('#root'));

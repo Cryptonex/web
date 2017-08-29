@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import Login from './view';
 import {login, auth} from './actions';
@@ -6,24 +7,8 @@ import {login, auth} from './actions';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateFormLogin: (field, value) => {
-      dispatch(login.updateForm(field, value));
-    },
-    submitLogin: (form) => {
-      dispatch(login.submit(form));
-    },
-    cancel: ()=> {
-      dispatch(auth.cancel());
-    },
-    updateFormAuth: (field, value) => {
-      dispatch(auth.updateForm(field, value));
-    },
-    submitAuth: form => {
-      dispatch(auth.submit(form));
-    },
-    dispatch: params => {
-      dispatch(params);
-    }
+    ...bindActionCreators({...login, ...auth}, dispatch),
+    dispatch: params => dispatch(params),
   }
 };
 
