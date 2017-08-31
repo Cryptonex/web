@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 // url api
 
-const API_URL = 'test';
+const API_URL = 'https://webapi.cryptonex.org/api';
 const API_TEST = 'test';
 const DOMAIN = 'cryptonex.org';
 

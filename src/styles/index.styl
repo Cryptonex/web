@@ -32,10 +32,23 @@ html, body, #root, #root>main
   height: 100%
   background #fff
   font-size 16px
+  color #353535
 a
   text-decoration none
 a:active, a:hover, a:focus, a:visited
   outline: 0
+body
+  background: #ffffff;
+  color: #353535;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+h5
+  font-size 1.3em
+  color #286c8e
+  margin 10px 0
+  font-weight 100
 
 
 img
@@ -49,6 +62,7 @@ img
   height 100%
   overflow auto
   flex-direction column
+  justify-content space-between
   &__main
     display flex
     flex-direction column
@@ -64,6 +78,18 @@ img
   display flex
   height 100%
 
+.footer
+  display flex
+  justify-content center
+  flex-direction column
+  align-items center
+  min-height 120px
+
+.default__info
+  margin 20px 0
+  padding: 15px 35px;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.12), 0 1px 6px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,0.12), 0 1px 6px 0 rgba(0,0,0,0.12);
 
 @import "./lib/bootstrap-grid.css"
 @import "./lib/normalize.css"
@@ -75,5 +101,5 @@ img
 @import "./users/*"
 @import "./replenishment/*"
 @import "./withdraw/*"
-
+@import "./referral/*"
 

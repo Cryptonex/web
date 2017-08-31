@@ -1,7 +1,8 @@
 import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
-import { push } from 'react-router-redux'
+import { routerActions, push} from 'react-router-redux'
+import { store } from 'index';
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -21,8 +22,6 @@ let result = {
         dispatch({
           type: constants.USERS_REGISTRATION_FETCH_FORM_SUCCESS,
         });
-
-        dispatch(push('/users/activation'));
 
       });
     }
@@ -57,7 +56,7 @@ export default {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,
           payload: {
-            error: 'The passwords are different!!'
+            error: 'The passwords are different!'
           }
         });
       }

@@ -2,14 +2,14 @@ import { combineReducers } from 'redux';
 import constants from 'base/constants';
 import update from 'react-addons-update';
 
-let loginForm = (state={email:'', password:''}, action) => {
+let loginForm = (state={login:'', password:''}, action) => {
   switch (action.type) {
     case constants.USERS_LOGIN_UPDATE_FORM:
       return update(state, {
         [action.payload.field]: {$set: action.payload.value}
       });
     case constants.USERS_LOGIN_FETCH_FORM_SUCCESS:
-      return {email:'', password:''};
+      return {login:'', password:''};
     default:
       return state;
   }
@@ -18,7 +18,7 @@ let loginForm = (state={email:'', password:''}, action) => {
 let content = (state='login', action) => {
   switch (action.type) {
     case constants.USERS_LOGIN_FETCH_FORM_SUCCESS:
-      return 'auth';
+      return 'login';
     case constants.USERS_AUTH_CANCEL:
       return 'login';
     default:

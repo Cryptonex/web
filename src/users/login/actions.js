@@ -1,7 +1,7 @@
 import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
-import profile from 'users/profile/actions'
+import * as actionsProfile from 'users/profile/actions'
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -19,11 +19,11 @@ let result = {
         }
 
         localStorage.setItem('ticket', json.result.ticket);
-        dispatch(profile)
+        dispatch(actionsProfile.getInfo());
         return dispatch({
           type: constants.USERS_LOGIN_FETCH_FORM_SUCCESS,
         });
-
+lf
       });
     }
   },
@@ -62,7 +62,7 @@ export let login = {
 
       let params = Object.assign({}, form);
 
-      if (!params.password || !params.email) {
+      if (!params.password || !params.login) {
         return dispatch({
           type: constants.USERS_LOGIN_FORM_ERROR,
           payload: {
@@ -71,7 +71,7 @@ export let login = {
         });
       }
 
-      if (!regEmail.test(params.email)) {
+      if (!regEmail.test(params.login)) {
         return dispatch({
           type: constants.USERS_LOGIN_FORM_ERROR,
           payload: {
@@ -81,7 +81,7 @@ export let login = {
       }
 
       params.password = sha256(params.password);
-      params.password = sha256(params.password + params.email);
+      params.password = sha256(params.password + params.login);
 
       dispatch({type: constants.USERS_LOGIN_FETCH_FORM});
 

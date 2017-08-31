@@ -8,12 +8,20 @@ const fields = [
   {name: 'email', placeholder: 'Email'},
   {name: 'password', placeholder: 'Password'},
   {name: 'confirm', placeholder: 'Confirm password'},
-  {name: 'code', placeholder: 'Referral code'}
 ];
 
 class Registration extends Component {
   constructor(){
     super(...arguments);
+  }
+
+  componentDidMount() {
+    const { match, updateForm} = this.props;
+    const { ref } = match.params;
+
+    if (ref && Number(ref)) {
+      updateForm('referer', Number(ref));
+    }
   }
 
   componentWillUnmount() {
@@ -26,14 +34,10 @@ class Registration extends Component {
     return (
       <div className="registration">
         <div className="registration__form">
-          <div className="registration__form-logo">
-          </div>
+
           <div className="registration__form-title">
-            <p className="registration__form-title__item">
-              Cryptonex
-            </p>
             <p className="registration__form-title__description">
-              Join the project
+              Create your account
             </p>
           </div>
           {processing ? <Processing />:null}
@@ -48,29 +52,31 @@ class Registration extends Component {
               </div>);
             })}
             <div className="registration__form-container__item">
-              <Recaptcha
-                sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
-                render='explicit'
-                elementID="registration__recaptcha"
-                onloadCallback={console.log.bind(this, "recaptcha loaded")}
-              />
-              <div className="registration__form-container__error">
-                {error}
-              </div>
-            </div>
-            <div className="registration__form-container__item">
+            <Recaptcha
+               sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
+               render='explicit'
+               elementID="registration__recaptcha"
+               onloadCallback={console.log.bind(this, "recaptcha loaded")}
+               />
               <a className="registration__form-container__item-button"
                  onClick={e => submit(registrationForm)}>
                 Create account
               </a>
             </div>
+            {error ?
+            <div className="registration__form-container__item">
+              <div className={error == 'success'? "registration__form-container__success" :
+                                                  "registration__form-container__error"}>
+                {error == 'success' ?
+                  'Thank you for registration! The message with instructions for activation was sent to your e-mail.'
+                  : error}
+              </div>
+            </div>: null}
+
 
             <div className="registration__form-container__link">
               <Link to='/users/login' className="registration__form-container__link-item">
-                Are you already registered? To come in!
-              </Link>
-              <Link to='/users/activation' className="registration__form-container__link-item">
-                Account activation!
+                Already have an account? Sign in.
               </Link>
             </div>
           </div>

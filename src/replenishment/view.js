@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DropCurrancy from './components/drop';
-
+import CN from 'classnames';
+import Purse from './components/purse';
 class Replenishment extends Component {
   constructor(){
     super(...arguments);
@@ -9,78 +10,74 @@ class Replenishment extends Component {
       value: 0,
       priceBtc: 0.0005,
       priceETH: 0.007,
-      current: 'btc'
+      current: 'btc',
+      content: 'bitcoin'
     }
   }
+
+  componentDidMount() {
+    const { getWallets } = this.props;
+    getWallets();
+  }
+
   render() {
+    const { wallets } = this.props;
     let price = this.state.current == 'btc' ? this.state.priceBtc : this.state.priceETH;
-    let value = this.state.value
+    let value = this.state.value;
     var number = Math.round(value / price * 10000 + value / price * 10000 / 100 * 20, 2) / 10000;
     return (
       <div className="replenishment">
-          <div className="replenishment__container">
-            <div className="replenishment__container-logo">
-              <div className="replenishment__container-logo__item"></div>
-            </div>
-            <div className="replenishment__container-balance">
-              <p className="replenishment__container-balance__title">
-                Account balance
-              </p>
-              <p className="replenishment__container-balance__current">
-                2400 <span>cnx</span>
-              </p>
-              <p className="replenishment__container-balance__alternative">
-                1 CNX = 0.0005 BTC or 0.007 ETH
-              </p>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 offset-md-2">
+                <div className="default__info">
+                  <div className="replenishment__info">
+                    <div className="replenishment__info-text">
+                      <h5>Welcome to your account!</h5>
+                      Here you will be able to deposit funds and purchase CNX, using BTC or ETH.<br/>
+                      The calculator is provided for your convenience. You can write down the number of BTC / ETH coins to know the sum, that you will get in your CNX wallet.
+                    </div>
+                    <div className="replenishment__container-current">
+                      1 CNX = 0.0005 BTC | 1 CNX = 0.007 ETH
+                      <div className="replenishment__container-current__container">
+                        <div className="replenishment__container-current__container-input">
+                          <input type="text"
+                                 onChange={this.onChange.bind(this)}
+                                 value={this.state.value}
+                                 placeholder="0.00"
+                                 className="replenishment__container-current__container-input__item"/>
+                          <div className="absolute">
+                            <DropCurrancy current={this.state.current} changeCurrent={this.changeCurrent.bind(this, name)} />
+                          </div>
+
+                        </div>
+                        <div className="replenishment__container-current__container-value">
+                          <p>{number}<span> CNX</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="row">
               <div className="col-md-8 offset-md-2">
-                <div className="replenishment__container-current">
-                  <div className="replenishment__container-current__title">
-                    Count!
-                  </div>
-                  <div className="replenishment__container-current__container">
-                    <div className="replenishment__container-current__container-input">
-                      <input type="text"
-                             onChange={this.onChange.bind(this)}
-                             value={this.state.value}
-                             placeholder="0.00"
-                             className="replenishment__container-current__container-input__item"/>
-                      <div className="absolute">
-                        <DropCurrancy current={this.state.current} changeCurrent={this.changeCurrent.bind(this, name)} />
+                <div className="default__info">
+                  <div className="replenishment__info">
+                    <div className="replenishment__info-title">
+                      <h5>Make a deposit</h5>
+                    </div>
+                    Deposit is automatically transferred in CNX.
+                    <div className="replenishment__payments">
+                      <div className="replenishment__payments-buttons">
+                        <a className={CN({active: this.state.content == 'bitcoin'})}
+                           onClick={this.onChangeContent.bind(this, 'bitcoin')}>Bitcoin</a>
+                        <a className={CN({active: this.state.content == "ethereum"})}
+                           onClick={this.onChangeContent.bind(this, "ethereum")}>Ether</a>
                       </div>
-
-                    </div>
-                    <div className="replenishment__container-current__container-value">
-                      <p>{number}<span> CNX</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="replenishment__container-other">
-                  <div className="replenishment__container-other__purse">
-                    <p className="replenishment__container-other__purse-title">Wallet BTC:</p>
-                    <p className="replenishment__container-other__purse-item">GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1</p>
-                  </div>
-                  <div className="replenishment__container-other__container">
-                    <div className="replenishment__container-other__logo btc">
-                    </div>
-                    <div className="replenishment__container-other__code">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="replenishment__container-other">
-                  <div className="replenishment__container-other__purse">
-                    <p className="replenishment__container-other__purse-title">Wallet ETH:</p>
-                    <p className="replenishment__container-other__purse-item">GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1</p>
-                  </div>
-                  <div className="replenishment__container-other__container">
-                    <div className="replenishment__container-other__logo eth">
-                    </div>
-                    <div className="replenishment__container-other__code">
+                      {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
+                        return <Purse wallet={item} key={index} />
+                      })}
                     </div>
                   </div>
                 </div>
@@ -101,6 +98,12 @@ class Replenishment extends Component {
     let state = this.state;
     state.value = ev.target.value.replace(",",".");
     
+    this.setState(state);
+  }
+
+  onChangeContent(content, ev) {
+    const state = Object.assign({}, this.props.state);
+    state.content = content;
     this.setState(state);
   }
 

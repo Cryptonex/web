@@ -8,8 +8,7 @@ import reducers from '../reducers';
 export default (initialState) => {
   const store = createStore(
     reducers,
-    applyMiddleware(thunk),
-    applyMiddleware(routerMiddleware(history))
+    applyMiddleware(thunk, routerMiddleware(history))
   );
 
   if (module.hot) {

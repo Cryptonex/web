@@ -76,6 +76,9 @@ const list = ({pagination, update})=>
   createArray(pagination.page_count).map(item.bind(null, {pagination, update}));
 
 export default ({pagination, update}) => {
+  if(pagination.page_count < 2) {
+    return null;
+  }
   return <div className={classNames({
     "list__pagination": true,
     "hidden": pagination.page_count < 2

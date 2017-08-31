@@ -28,7 +28,7 @@ class Transactions extends Component {
         <div className="transactions__content">
           <div className="container">
             <div className="row filter">
-              <div className="col-md-3">
+              <div className="col-md-3 offset-md-2">
                 <label className="form-label">Date</label>
                 <select className="form form-full__width"
                         onChange={e => updateFilter(filter, 'date', e.target.value)}>
@@ -47,15 +47,18 @@ class Transactions extends Component {
                 </select>
               </div>
             </div>
+
+            <div className="row">
+              <div className="transactions__table col-md-8 offset-md-2">
+                <ResponsiveTable columns={cols} rows={[]}/>
+              </div>
+            </div>
             <div className="row pagination">
-              <div className="col-md-8">
+              <div className="col-md-8 offset-md-2">
                 <div className="filter__pagination">
                   <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
                 </div>
               </div>
-            </div>
-            <div className="transactions__table">
-              <ResponsiveTable columns={cols} rows={rows}/>
             </div>
           </div>
         </div>

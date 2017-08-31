@@ -1,8 +1,9 @@
 .top-menu
   display flex
-  max-height 65px
+  padding-top 20px
+  max-height 70px
   overflow hidden
-  min-height 65px
+  min-height 70px
   width 100%
   background #ffff
   justify-content space-between
@@ -16,18 +17,13 @@
     display flex
     align-items center
     height 100%
+    margin-left: 35px;
     &-item
-      background-image url(../assets/images/logo256.png)
-      width: 60px;
-      height: 60px;
+      width 150px
+      height 50px
+      background-image url("~assets/images/150-50.png")
       background-size: cover;
       background-repeat: no-repeat;
-    &-title
-      font-family CircleBold
-      font-size 2em
-      margin 0
-      color #142645
-      font-weight 800
   &__user
     display flex
     align-items center
@@ -56,43 +52,51 @@
     display flex
     align-items center
     width 100%
-    justify-content space-between
+    justify-content flex-end
     &-list
-      padding-top 12px
       margin 0px
+      margin-top: 10px;
       list-style-type none
       &__item
         display inline-flex
         &-link
-          margin-right 15px
+          margin-right 10px
           display inline-flex
-          font-size 1.3em
-          color #4f616a
-          font-family Circle55
-          padding-bottom 5px
-          border-bottom  3px solid transparent
+          font-size 16px
+          color rgb(45, 44, 44)
+          font-family: Calibri, Arial, sans-serif
+          padding 7px 5px
+          padding-top 10px
+          border-bottom  2px solid transparent
+          border-top  2px solid transparent
+          text-transform uppercase
+          letter-spacing: 1px;
           &.active
-            border-color rgb(35, 168, 245);
+            color gray
+            border-color gray;
+            transition all 0.5s ease
           &:hover
-            border-color rgb(35, 168, 245);
+            color gray
+            border-color gray;
+            transition all 0.5s ease
     &-user
       display: flex;
-      height: 100%;
       align-items: center;
+      margin-top: 13px;
+      padding-left 20px
       &__balance
-        padding-right  15px
+        padding 0 15px
         margin 0
         color #4d729e
-        font-size 1.3em
-        font-family CircleExtraBold
-        margin-top 5px
+        font-family: Calibri, Arial, sans-serif
+        font-size 1em
 
       &__logout
         cursor pointer
         display flex
         align-items center
-        font-size 1.1em
-        font-family Circle55
+        font-size 1em
+        font-family: Calibri, Arial, sans-serif
         span
           background-image url('~assets/images/log-out.svg')
           width: 25px;

@@ -24,8 +24,25 @@ class Withdraw extends Component {
           {processing ? <Processing/>: null}
           <div className="container">
             <div className="row">
-              <div className="col-md-6 offset-md-3">
-                <div className="withdraw__container-form">
+              <div className="col-md-8 offset-md-2">
+                <div className="default__info">
+                  <div className="withdraw__info">
+                    <h5>
+                      You have: 0 CNX
+                    </h5>
+                  </div>
+                  <div className="withdraw__info-text">
+                    You can transfer CNX to your Cryptonex wallet (wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-win.zip"> Windows</a>,
+                    wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-linux.tar.gz"> Linux</a>),
+                    for example, for getting a reward from P-o-S mining. You can also withdraw coins to any
+                    Cryptonex address.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-8 offset-md-2">
+                <div className="withdraw__container-form default__info">
                   {fields.map((item, index) =>
                     <div className="withdraw__container-form__item" key={index}>
                       <label className="form-label">{item.title}</label>

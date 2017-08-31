@@ -4,8 +4,8 @@ import className from 'classnames';
 
 
 let curMap = [
-  {title: 'btc', key: 'btc'},
-  {title: 'eth', key: 'eth'}
+  {title: 'BTC', key: 'btc'},
+  {title: 'ETH', key: 'eth'}
 ];
 
 
@@ -33,7 +33,7 @@ class DropCurrancy extends Component {
     let currancyMap = curMap.map((item, index) => {
       return (
         <li className="currancy-dropdown__list-item"
-            onClick={e => this.props.changeCurrent(item.title)}
+            onClick={e => this.props.changeCurrent(item.key)}
           key={index}>
           {item.title}
         </li>

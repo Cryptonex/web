@@ -2,22 +2,9 @@ import { combineReducers } from 'redux';
 import constants from 'base/constants';
 import update from 'react-addons-update';
 
-let activationForm = (state={code: ''}, action) => {
-  switch (action.type) {
-    case constants.USERS_ACTIVATION_UPDATE_FORM:
-      return update(state, {
-        [action.payload.field]: {$set: action.payload.value}
-      });
-    case constants.USERS_ACTIVATION_FETCH_FORM_SUCCESS:
-      return {code: ''};
-    default:
-      return state;
-  }
-};
-
-
 
 let error = (state='', action) => {
+
   switch (action.type) {
     case constants.USERS_ACTIVATION_FORM_ERROR:
       return action.payload.error;
@@ -26,7 +13,7 @@ let error = (state='', action) => {
     case constants.USERS_ACTIVATION_UPDATE_FORM:
       return '';
     case constants.USERS_ACTIVATION_FETCH_FORM_SUCCESS:
-      return '';
+      return 'success';
     default:
       return state;
   }
@@ -48,7 +35,6 @@ let processing = (state=false, action) => {
 
 
 let activation =  combineReducers({
-  activationForm,
   error,
   processing
 });

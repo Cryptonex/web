@@ -19,8 +19,6 @@ let result = {
           type: constants.USERS_ACTIVATION_FETCH_FORM_SUCCESS,
         });
 
-        dispatch(push('/users/login'));
-
       });
     }
   },
@@ -40,15 +38,6 @@ export default {
     return dispatch  => {
 
       let params = Object.assign({}, form);
-
-      if (!params.code) {
-        return dispatch({
-          type: constants.USERS_ACTIVATION_FORM_ERROR,
-          payload: {
-            error: 'Fill in the field!'
-          }
-        });
-      }
 
       dispatch({type: constants.USERS_ACTIVATION_FETCH_FORM});
 

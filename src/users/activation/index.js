@@ -14,7 +14,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = state => {
   return {
-    activationForm: state.users.activation.activationForm,
     error: state.users.activation.error,
     processing: state.users.activation.processing
   }

@@ -5,7 +5,7 @@ let result = {
   info: (response, dispatch) => {
     return response.json().then( json => {
       if (json.error) {
-        localStorage.removeItem('current');
+        localStorage.removeItem('profile');
         return dispatch({
           type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
           payload: {
@@ -14,13 +14,12 @@ let result = {
         });
       }
 
-      console.log(json);
       let initState = {
         is_active: true,
         info: json.result,
         code: 'undefined',
       };
-
+      dispatch(getWallets());
       localStorage.setItem('profile', JSON.stringify(initState));
 
       return dispatch({
@@ -32,16 +31,38 @@ let result = {
 
     });
   },
+  wallets: (response, dispatch) => {
+    return response.json().then( json => {
+
+      if (json.error) {
+        return dispatch({
+          type: constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR,
+          payload: {
+            code: json.error.code
+          }
+        });
+      }
+
+      return dispatch({
+        type: constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS,
+        payload: {
+          wallets: json.result.wallets
+        }
+      });
+
+    });
+  },
   logout: (response, dispatch) => {
     return response.json().then( json => {
       if (json.error) {
+
         return dispatch({
           type: constants.USERS_PROFILE_LOGOUT_ERROR,
           payload: json.error
         });
       }
 
-      localStorage.removeItem('current');
+
       return dispatch({
         type: constants.USERS_PROFILE_LOGOUT_SUCCESS,
       });
@@ -49,63 +70,92 @@ let result = {
   }
 };
 
-export default {
-  getInfo: () => {
-    return dispatch => {
+export let getInfo = () => {
+  return dispatch => {
 
-      if (!localStorage.ticket) {
-        localStorage.removeItem('profile');
-        return dispatch({
-          type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
-          payload: {
-            error: 'undefined'
-          }
+    if (!localStorage.ticket) {
+      localStorage.removeItem('profile');
+      return dispatch({
+        type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
+        payload: {
+          error: 'undefined'
+        }
+      });
+    }
+
+
+    let params = {
+      'ticket' : localStorage.getItem('ticket')
+    };
+
+    dispatch({type: constants.USERS_PROFILE_FETCH_INFO});
+    return getData(2, params, 'user.info').then( response => {
+      if (response.ok) {
+        result.info(response, dispatch);
+      } else {
+        return response.json().then( json => {
+          return dispatch({
+            type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
+            payload: json
+          });
         });
       }
-
-      let params = {
-        'ticket' : localStorage.getItem('ticket')
-      };
-
-      dispatch({type: constants.USERS_PROFILE_FETCH_INFO});
-
-      return getData(2, params, 'user.info').then( response => {
-        if (response.ok) {
-          result.info(response, dispatch);
-        } else {
-          return response.json().then( json => {
-            return dispatch({
-              type: constants.USERS_PROFILE_FETCH_INFO_ERROR,
-              payload: json
-            });
-          });
-        }
-      }).catch( error => {
-        dispatch({type: constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR});
-      });
-    }
-  },
-  logout: () => {
-    return dispatch => {
-      let params = {
-        'ticket' : localStorage.getItem('ticket')
-      };
-      localStorage.removeItem('ticket');
-      location.reload();
-      return getData(4, params, 'user.logout').then(response =>{
-        if (response.ok){
-          result.logout(response, dispatch);
-        } else {
-          return response.json().then(json => {
-            return dispatch({
-              type: constants.USERS_PROFILE_LOGOUT_ERROR,
-              payload: json
-            });
-          });
-        }
-      }).catch(error => {
-        console.log(error);
-      });
-    }
+    }).catch( error => {
+      dispatch({type: constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR});
+    });
   }
-}
+};
+
+export let getWallets = () => {
+  return dispatch => {
+
+    let params = {
+      'ticket' : localStorage.getItem('ticket')
+    };
+
+    dispatch({type: constants.USERS_PROFILE_FETCH_LIST_WALLET});
+
+    return getData(2, params, 'user.account_list').then( response => {
+      if (response.ok) {
+        result.wallets(response, dispatch);
+      } else {
+        return response.json().then( json => {
+          return dispatch({
+            type: constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR,
+            payload: json
+          });
+        });
+      }
+    }).catch( error => {
+      dispatch({type: constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR});
+    });
+  }
+};
+
+export let logout =() => {
+  return dispatch => {
+    let params = {
+      'ticket' : localStorage.getItem('ticket')
+    };
+
+    localStorage.removeItem('ticket');
+    localStorage.removeItem('profile');
+
+    return getData(4, params, 'user.logout').then(response =>{
+      if (response.ok){
+        result.logout(response, dispatch);
+      } else {
+        return response.json().then(json => {
+          return dispatch({
+            type: constants.USERS_PROFILE_LOGOUT_ERROR,
+            payload: json
+          });
+        });
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+};
+
+

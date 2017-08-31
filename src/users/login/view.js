@@ -21,14 +21,9 @@ class Login extends Component {
     return (
       <div className="login">
         <div className="login__form">
-          <div className="login__form-logo">
-          </div>
           <div className="login__form-title">
-            <p className="login__form-title__item">
-              Cryptonex
-            </p>
             <p className="login__form-title__description">
-              Login in to the project
+              Sign in
             </p>
           </div>
           {processing ? <Processing />:null}
@@ -39,36 +34,37 @@ class Login extends Component {
                 <div className={`login__form-container ${state}`}>
                 <div className="login__form-container__item">
                   <input type="text" className="login__form-container__item-input"
-                         placeholder="Email" value={loginForm.email}
-                         onChange={e => updateLoginForm('email', e.target.value)}/>
+                         placeholder="Email" value={loginForm.login}
+                         onChange={e => updateLoginForm('login', e.target.value)}/>
                 </div>
                 <div className="login__form-container__item">
                   <input type="password" className="login__form-container__item-input"
                          placeholder="Password"
                          onChange={e => updateLoginForm('password', e.target.value)}/>
                 </div>
+                  <div className="login__form-container__item">
+                    <div className="login__form-container__item-recaptcha">
+                      <Recaptcha
+                        sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
+                        render='explicit'
+                        elementID="login__recaptcha"
+                        onloadCallback={console.log.bind(this, "recaptcha loaded")}/>
+                      <a className="login__form-container__item-button"
+                         onClick={e => submitLoginForm(loginForm)}>
+                        Login
+                      </a>
+                    </div>
+                  </div>
+                {error ?
                 <div className="login__form-container__item">
-                  <Recaptcha
-                    sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
-                    render='explicit'
-                    elementID="login__recaptcha"
-                    onloadCallback={console.log.bind(this, "recaptcha loaded")}/>
                   <div className="login__form-container__error">
                     {error}
                   </div>
-                </div>
-                <div className="login__form-container__item">
-                  <a className="login__form-container__item-button"
-                     onClick={e => submitLoginForm(loginForm)}>
-                    Login
-                  </a>
-                </div>
+                </div>: null}
+
                 <div className="login__form-container__link">
                   <Link to='/users/registration' className="login__form-container__link-item">
-                    You are not registred? Check in!
-                  </Link>
-                  <Link to='/users/activation' className="login__form-container__link-item">
-                    Account activation!
+                    Don't have an account? Create it.
                   </Link>
                 </div>
               </div>

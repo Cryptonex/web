@@ -37,14 +37,41 @@ let current = function (state = currentState, action) {
   }
 };
 
-let processingStartApp = (state=true, action) => {
+let wallets = (state=[], action) => {
+  switch (action.type) {
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
+      return action.payload.wallets;
+    default:
+      return state;
+  }
+};
+
+let processingStartApp = (state={info: true, wallets: true}, action) => {
   switch (action.type) {
     case constants.USERS_PROFILE_FETCH_INFO_ERROR:
-      return false;
+      return update(state, {
+        info: {$set: false}
+      });
     case constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR:
-      return false;
+      return update(state, {
+        info: {$set: false}
+      });
     case constants.USERS_PROFILE_FETCH_INFO_SUCCESS:
-      return false;
+      return update(state, {
+        info: {$set: false}
+      });
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR:
+      return update(state, {
+        wallets: {$set: false}
+      });
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_NETWORK_ERROR:
+      return update(state, {
+        wallets: {$set: false}
+      });
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
+      return update(state, {
+        wallets: {$set: false}
+      });
     default:
       return state;
   }
@@ -52,5 +79,6 @@ let processingStartApp = (state=true, action) => {
 
 export default combineReducers({
   current,
-  processingStartApp
+  processingStartApp,
+  wallets
 });

@@ -4,14 +4,26 @@ import { Provider } from 'react-redux';
 
 import {routers} from 'base/routers';
 import createStore from 'base/store/index';
-import profile from 'users/profile/actions';
-let store = createStore();
 
-store.dispatch(profile.getInfo());
+import  * as actionsProfile  from 'users/profile/actions';
+export let store = createStore();
+import Cookies from 'js-cookie';
 
-/*setInterval(() => {
-  store.dispatch(profile.getInfo());
-}, 180000);*/
+
+
+let cookiesTicket = Cookies.get('ticket');
+
+if (cookiesTicket) {
+  localStorage.setItem('ticket', cookiesTicket);
+  document.cookie = 'ticket' + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=.cryptonex.org";
+}
+
+store.dispatch(actionsProfile.getInfo());
+
+setInterval(() => {
+  store.dispatch(actionsProfile.getInfo());
+  store.dispatch(actionsProfile.getWallets());
+}, 180000);
 
 render(
     <Provider store={store}>

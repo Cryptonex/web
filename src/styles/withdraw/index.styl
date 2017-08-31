@@ -3,29 +3,42 @@
   width 100%
   padding 60px 0
   position relative
+  &__info
+    &-balance
+      font-weight bold
+      color #286c8e
+    &-text
+      padding-top 10px
+      > a
+        color #286c8e
+        cursor pointer
   &__container
     &-form
       width 100%
       display flex
       flex-direction column
-      margin 0 -15px
       &__item
         display flex
         flex-wrap wrap
         margin-bottom 15px
-        padding 0 15px
+        .form-label
+          color #286c8e
         &-button, &-error
           display flex
           width 50%
-          justify-content center
           padding 0px
           align-items center
+        &-error
+          justify-content flex-start
         &-button
+          display flex
+          justify-content: flex-end;
+          width 50%
           &__link
-            width 100%
+            width 120px
             text-align center
             display block
-            background #4d729e
+            background #27a2db
             padding 10px 0
             border-radius 2px
             color #fff
@@ -34,7 +47,7 @@
         .half
           width 50%
         .error, success
-          justify-content center
+          justify-content flex-start
           margin auto
           font-family Circle55
         .error

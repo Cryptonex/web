@@ -1,6 +1,39 @@
 .replenishment
   width 100%
   padding 60px 0
+  &__info
+    &-title
+      color #286c8e
+      font-weight bold
+  &__payments
+    padding-top 20px
+    .purse
+      margin-top 20px
+      background: #F2F2F2;
+      border-radius: 3px;
+      padding: 20px;
+      &__text
+        &-box
+          height: 123px;
+          margin-top: 0px;
+          background: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width 100%
+    &-buttons
+      .active
+        color #fff
+        background #27a2db
+      > a
+        display inline-block
+        margin-right 5px
+        border-radius: 5px;
+        padding: 5px 20px;
+        cursor pointer
+        &:hover
+          color #fff
+          background #27a2db
   &__container
     max-width 800px
     margin auto
@@ -61,9 +94,8 @@
     &-current
       display flex
       flex-direction column
-      border 1px solid #B5B8BC
-      padding 15px
-      border-radius 10px
+      margin-top 10px
+      align-items center
       &__title
         font-size 1.5em
         font-family Circle55
@@ -73,6 +105,8 @@
       &__container
         display flex
         align-items center
+        margin-top 20px
+        width: 100%
         &-input, &-value
           display flex
           width 50%
@@ -93,7 +127,7 @@
             width 100%
             height 40px
             outline none
-            border 1px solid #3e455c
+            border 1px solid #cbcbcb
             font-size 1em
             border-radius 5px
             font-family Circle55
@@ -103,8 +137,9 @@
           flex-direction column
           font-size 1.5em
           border-left  2px solid rgba(68, 77, 103, 0.3);
-          font-family CircleExtraBold
+          font-family Circle35
           align-items: center;
+          color #286c8e
 
         &-button
           margin-top 30px
