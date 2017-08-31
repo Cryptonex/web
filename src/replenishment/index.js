@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   return {
     wallets: state.users.profile.wallets,
   }
-}
+};
 
 export default connect(
   mapStateToProps, mapDispatchToProps

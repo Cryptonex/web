@@ -43,7 +43,7 @@ export let getList = (filter) => {
 
   return dispatch => {
     dispatch({type: constants.TRANSACTIONS_FETCH_LIST});
-    return getData(5, params, 'balance_transaction.list').then((response)=> {
+    return getData(5, params, 'transaction.list').then((response)=> {
       if (response.ok) {
         result.getList(response, dispatch, params.max_count);
       } else {

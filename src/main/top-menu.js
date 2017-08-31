@@ -10,7 +10,8 @@ const links = [
 
 class TopMenu extends Component {
   render() {
-    const { logout, profile } = this.props;
+    const { logout, profile, walletCNX } = this.props;
+
     return (
       <div className="top-menu">
         <div className="container">
@@ -30,7 +31,7 @@ class TopMenu extends Component {
               </ul>
               {profile.is_active ?
               <div className="top-menu__routers-user">
-                <p className="top-menu__routers-user__balance">Balance: 0 <span>CNX</span></p>
+                <p className="top-menu__routers-user__balance">Balance: {walletCNX ? walletCNX.balance: ''} <span>CNX</span></p>
                 <div className="top-menu__routers-user__logout" onClick={e => logout()}>
                   SIGN OUT
                 </div>

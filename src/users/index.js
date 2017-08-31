@@ -45,7 +45,9 @@ class Users extends Component {
     return (
       <div className="users">
         <TopMenu profile={profile}/>
-        {this.props.children}
+        <div className="content">
+          {this.props.children}
+        </div>
         <div className="footer">
           <div className="container">
             <div style={{borderBottom: '1px solid #dddddd', margin: '30px 0'}}></div>

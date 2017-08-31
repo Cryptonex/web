@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
   return {
     profile: state.users.profile.current,
     processingStartApp: state.users.profile.processingStartApp,
+    wallets: state.users.profile.wallets,
   }
 };
 
@@ -52,9 +53,9 @@ class App extends Component {
   }
 
   render() {
-    const { match, profile, processingStartApp, logout } = this.props;
+    const { match, profile, processingStartApp, logout, wallets} = this.props;
 
-    if (processingStartApp.info && processingStartApp.wallets) {
+    if (processingStartApp.info || processingStartApp.wallets) {
       return (
         <div className="wrap-content">
           <Processing/>
@@ -62,14 +63,18 @@ class App extends Component {
       )
     }
 
+    const walletCNX = wallets.filter((item, index) => item.currency == "cryptonex")[0];
+
     return (
       <div className="wrap-content">
-        <TopMenu match={match} logout={logout} profile={profile}/>
-        <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
-        <Route path='/app/deposit' component={Replenishment}/>
-        <Route path='/app/transactions' component={Transactions}/>
-        <Route path='/app/withdraw' component={Withdraw}/>
-        <Route path='/app/referral' component={Referral}/>
+        <TopMenu match={match} logout={logout} profile={profile} walletCNX={walletCNX}/>
+        <div className="content">
+          <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
+          <Route path='/app/deposit' component={Replenishment}/>
+          <Route path='/app/transactions' component={Transactions}/>
+          <Route path='/app/withdraw' component={Withdraw}/>
+          <Route path='/app/referral' component={Referral}/>
+        </div>
         <div className="footer">
           <div className="container">
             <div style={{borderBottom: '1px solid #dddddd', margin: '30px 0'}}></div>

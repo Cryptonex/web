@@ -19,6 +19,7 @@ function getIdRequest() {
 
 
 function getDataArray(params) {
+
   return fetch(API_URL, {
     method: 'POST',
     body: JSON.stringify(params),
@@ -26,13 +27,14 @@ function getDataArray(params) {
 }
 
 function getData(id, params, method) {
+
   let data = {
     'jsonrpc': '2.0',
     'method': method,
     'params': params,
     'id': id,
   };
-
+  
   return fetch(API_URL, {
     method: 'POST',
     body: JSON.stringify(data),

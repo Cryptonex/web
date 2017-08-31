@@ -17,7 +17,7 @@ class Referral extends Component {
                   <p className="referral__info-text" >{`${document.location.origin}/users/registration/${profile.info.id}`}</p>
                   <input type="hidden" value={`${document.location.origin}/users/registration/${profile.info.id}`}
                          ref="ref_url"/>
-                  <a className="referral__info-button" onClick={this.copyUrl.bind(this)}>Copy code</a>
+                  <a className="referral__info-button" onClick={this.copyUrl.bind(this)}>Copy link</a>
                 </div>
                 <div className="referral__info-description">
                   Send a referral link to your friend and get 20% each time your friend buys CNX. The reward is automatically transferred only in case the purchase has been done via the backoffice. Be careful while sending a referral link! The Bounty Program is valid until CNX 90,000,000 will be released for free circulation. After that the purchase of CNX via the backoffice will be unavailable.

@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     pagination: state.transactions.pagination,
     filter: state.transactions.filter,
     processing: state.transactions.processing,
-    list: state.transactions.list
+    list: state.transactions.list,
   }
 };
 

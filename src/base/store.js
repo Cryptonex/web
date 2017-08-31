@@ -6,6 +6,6 @@ import reducers from './reducers';
 
 export default createStore(
   reducers,
+  applyMiddleware(routerMiddleware(history)),
   applyMiddleware(thunk),
-  applyMiddleware(routerMiddleware(history))
 );
