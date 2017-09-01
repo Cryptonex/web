@@ -20,9 +20,8 @@ if (cookiesTicket) {
 
 store.dispatch(actionsProfile.getInfo());
 
-setInterval(() => {
+setInterval(function() {
   store.dispatch(actionsProfile.getInfo());
-  store.dispatch(actionsProfile.getWallets());
 }, 180000);
 
 render(

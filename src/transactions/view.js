@@ -11,7 +11,7 @@ const statusOptions = [
 
 const dateOptions = [
   {name: 'All', value: ''}, {name:'Today', value: 'day'}, {name: 'This week', value: 'week'},
-  {name: 'This month', value: 'month'}, {name: 'This year', value: 'year'}
+  {name: 'This month', value: 'month'}, {name: 'Last month', value: 'last_month'}, {name: 'This year', value: 'year'}
 ];
 
 class Transactions extends Component {
@@ -28,7 +28,7 @@ class Transactions extends Component {
         <div className="transactions__content">
           <div className="container">
             <div className="row filter">
-              <div className="col-md-3 offset-md-2">
+              <div className="col-md-3">
                 <label className="form-label">Date</label>
                 <select className="form form-full__width"
                         onChange={e => updateFilter(filter, 'date', e.target.value)}>
@@ -37,24 +37,15 @@ class Transactions extends Component {
                   )}
                 </select>
               </div>
-              <div className="col-md-3">
-                <label className="form-label">Status</label>
-                <select className="form form-full__width"
-                        onChange={e => updateFilter(filter, 'status', e.target.value)}>
-                  {statusOptions.map((item, index) =>
-                    <option value={item.value} key={index}>{item.name}</option>
-                  )}
-                </select>
-              </div>
             </div>
 
             <div className="row">
-              <div className="transactions__table col-md-8 offset-md-2">
-                <ResponsiveTable columns={cols} rows={[]}/>
+              <div className="transactions__table col-md-12">
+                <ResponsiveTable columns={cols} rows={list}/>
               </div>
             </div>
             <div className="row pagination">
-              <div className="col-md-8 offset-md-2">
+              <div className="col-md-12">
                 <div className="filter__pagination">
                   <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
                 </div>
@@ -78,18 +69,37 @@ class ResponsiveTable extends Component {
       );
     });
     return (
-      <tr>{columns}</tr>
+      <tr>
+        <th>{this.props.columns['update_stamp']}</th>
+        <th>{this.props.columns['from_hash']}</th>
+        <th>{this.props.columns['to_hash']}</th>
+        <th>{this.props.columns['status']}</th>
+      </tr>
     );
   }
 
   rows() {
     const { rows, columns } = this.props;
     return  map(rows, function(row, index) {
-      let values = map(columns, (colName, colKey) =>
-        <td data-label={colName} key={colKey}>{row[colKey]}</td>
-      );
+
       return (
-        <tr key={index}>{values}</tr>
+        <tr key={index}>
+          <td data-label="Time">
+            {row['update_stamp'].substr(0, row['update_stamp'].indexOf('.'))}
+          </td>
+          <td data-label="From">
+            <p>{row['from_hash']}</p>
+            <p>{Math.round(row['from_amount']* 100000000) /100000000} {row['from_currency']}</p>
+          </td>
+          <td data-label="To">
+            <p>{row['to_hash']}</p>
+            <p>{Math.round(row['to_amount']* 100000000) /100000000} {row['to_currency']}</p>
+          </td>
+          <td data-label="Status">
+            {row['status']}
+          </td>
+
+        </tr>
       );
     })
   }
@@ -109,76 +119,13 @@ class ResponsiveTable extends Component {
 };
 
 let cols = {
-  transaction: 'Transaction',
-  address: 'Address',
+  from_hash: 'From',
+  from_amount: 'Amount',
+  from_currency: 'Currency',
+  to_hash: 'To',
   status: 'Status',
-  date: 'Date',
-  amount: 'Amount(CNX)'
+  update_stamp: 'Time',
+  to_amount: 'Amount (CNX)'
 };
-
-let rows = [
-  {
-  transaction: '1',
-  address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-  status: 'Status',
-  date: '27.12.2017',
-  amount: '50'
-  },{
-    transaction: '2',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '27'
-  },{
-    transaction: '3',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },
-  {
-    transaction: '4',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '5',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '6',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '7',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '8',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '9',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '10',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },
-];
 
 export default Transactions;

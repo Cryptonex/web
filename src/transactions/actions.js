@@ -14,10 +14,16 @@ let result = {
       }
 
       let page_count = Math.floor(json.result.summary.total / max_count);
+
+      let transations = Object.assign({}, json).result.transactions.sort((first, second) => {
+        console.log(moment(first.update_stamp).valueOf() - moment(second.update_stamp).valueOf())
+        return moment(second.update_stamp).valueOf() - moment(first.update_stamp).valueOf()
+      });
+
       return dispatch({
         type: constants.TRANSACTIONS_FETCH_LIST_SUCCESS,
         payload: {
-          transactions: json.result.transactions,
+          transactions: transations,
           pagination: {
             max_count,
             total: json.result.summary.total,
@@ -75,6 +81,10 @@ export let updateFilter = (filter, field, value) => {
   if (field == 'date' && value) {
     newFilter.end_stamp = moment().add(1, 'day').startOf('day').format('YYYY-MM-DD');
     newFilter.start_stamp = moment().startOf(value).format('YYYY-MM-DD');
+    if (value == 'last_month') {
+      newFilter.end_stamp = moment().add(1, 'day').startOf('day').format('YYYY-MM-DD');
+      newFilter.start_stamp = moment().add(-1, 'month').startOf('day').format('YYYY-MM-DD');
+    }
   }
 
   if (field == 'status') {

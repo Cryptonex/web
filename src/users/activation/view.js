@@ -41,7 +41,7 @@ class Activation extends Component {
             </div>: null}
             {error == 'success' ? <div className="activation__form-container__item">
               <a className="activation__form-container__item-button" href="/users/login">
-                Sing in
+                Sign in
               </a>
             </div> : null }
           </div>
