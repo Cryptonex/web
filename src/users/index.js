@@ -12,7 +12,8 @@ import Activation from './activation/index';
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.users.profile.current
+    profile: state.users.profile.current,
+    walletCnx: state.users.profile.walletCnx
   }
 };
 
@@ -41,10 +42,10 @@ class Users extends Component {
   }
 
   render() {
-    const { profile, processingStartApp, dispatch } = this.props;
+    const { profile, processingStartApp, dispatch, walletCnx } = this.props;
     return (
       <div className="users">
-        <TopMenu profile={profile}/>
+        <TopMenu profile={profile} walletCnx={walletCnx}/>
         <div className="content">
           {this.props.children}
         </div>

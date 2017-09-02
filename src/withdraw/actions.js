@@ -15,6 +15,9 @@ let result = {
       }
       return dispatch({
         type: constants.WITHDRAW_FETCH_FORM_SUCCESS,
+        payload: {
+          cnx: json.result
+        }
       });
 
     });
@@ -26,7 +29,7 @@ export let submit = form => {
     ticket: localStorage.getItem('ticket'),
   }, form);
   return dispatch => {
-    if (!params.amount || !params.address) {
+    if (!params.amount || !params.to_hash) {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
         payload: {
@@ -44,11 +47,13 @@ export let submit = form => {
       })
     }
 
-    dispatch({type: constants.USERS_LOGIN_FETCH_FORM});
+    params.amount = Number(params.amount)
+
+    dispatch({type: constants.WITHDRAW_FETCH_FORM});
 
     return getData(1, params, 'account.withdraw').then(response => {
       if (response.ok) {
-        result.submit.submit(response, dispatch);
+        result.submit(response, dispatch);
       } else {
         return response.json().then(json => {
           return dispatch({
@@ -60,6 +65,7 @@ export let submit = form => {
         });
       }
     }).catch(error => {
+      console.log(error)
       return dispatch({
         type: constants.WITHDRAW_FETCH_FORM_ERROR,
         payload: {

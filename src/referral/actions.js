@@ -13,7 +13,7 @@ let result = {
         });
       }
 
-      let page_count = Math.floor(json.result.summary.total / max_count);
+      let page_count = Math.ceil(json.result.summary.total / max_count);
       return dispatch({
         type: constants.REFERRAL_FETCH_USER_LIST_SUCCESS,
         payload: {

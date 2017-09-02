@@ -44,15 +44,18 @@ class Login extends Component {
                 </div>
                   <div className="login__form-container__item">
                     <div className="login__form-container__item-recaptcha">
-                      <Recaptcha
+{/*                      <Recaptcha
                         sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
                         render='explicit'
                         elementID="login__recaptcha"
-                        onloadCallback={console.log.bind(this, "recaptcha loaded")}/>
-                      <a className="login__form-container__item-button"
-                         onClick={e => submitLoginForm(loginForm)}>
-                        Login
-                      </a>
+                        onloadCallback={console.log.bind(this, "recaptcha loaded")}/>*/}
+                        <div className="submit">
+                          <a className="login__form-container__item-button"
+                             onClick={e => submitLoginForm(loginForm)}>
+                            Login
+                          </a>
+                        </div>
+
                     </div>
                   </div>
                 {error ?

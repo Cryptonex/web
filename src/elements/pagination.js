@@ -14,7 +14,7 @@ const item = ({pagination, update}, page) => {
                 'list__pagination__item': true,
                 'active': pagination.page == page,
               })}
-              onClick={() => update(page)}>{page}</a>;
+              onClick={() =>pagination.page == page ? null : update(page)}>{page}</a>;
   }
   let middleLow = Math.ceil((pagination.page - 1) / 2);
 
@@ -25,7 +25,7 @@ const item = ({pagination, update}, page) => {
                   'list__pagination__item': true,
                   'active': pagination.page == page,
                 })}
-                onClick={() => update(page)}>{page}</a>;
+                onClick={() => pagination.page == page ? null : update(page)}>{page}</a>;
     }
 
     return <a key={page}
@@ -33,7 +33,7 @@ const item = ({pagination, update}, page) => {
                 'list__pagination__item': true,
                 'active': pagination.page == page,
               })}
-              onClick={() => update(middleLow)}>...</a>;
+              onClick={() => pagination.page == page ? null : update(middleLow)}>...</a>;
   }
 
   let middleHigh = Math.ceil(((pagination.page_count + 1 - pagination.page) / 2 + pagination.page) );
@@ -44,14 +44,14 @@ const item = ({pagination, update}, page) => {
                   'list__pagination__item': true,
                   'active': pagination.page == page,
                 })}
-                onClick={() => update(page)}>{page}</a>;
+                onClick={() => pagination.page == page ? null : update(page)}>{page}</a>;
     }
     return <a key={page}
               className={classNames({
                 'list__pagination__item': true,
                 'active': pagination.page == page,
               })}
-              onClick={() => update(middleHigh)}>...</a>;
+              onClick={() => pagination.page == page ? null : update(middleHigh)}>...</a>;
   }
   return null;
 }

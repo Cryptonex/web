@@ -13,10 +13,9 @@ let result = {
         });
       }
 
-      let page_count = Math.floor(json.result.summary.total / max_count);
+      let page_count = Math.ceil(json.result.summary.total / max_count);
 
       let transations = Object.assign({}, json).result.transactions.sort((first, second) => {
-        console.log(moment(first.update_stamp).valueOf() - moment(second.update_stamp).valueOf())
         return moment(second.update_stamp).valueOf() - moment(first.update_stamp).valueOf()
       });
 

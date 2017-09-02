@@ -37,10 +37,14 @@ let current = function (state = currentState, action) {
   }
 };
 
-let walletCnx = (state = {balance: '',currency: '', hash: ''}, action) => {
+let walletCnx = (state = {balance: '', currency: '', hash: ''}, action) => {
   switch (action.type) {
     case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
       return action.payload.cnx;
+    case constants.WITHDRAW_FETCH_FORM_SUCCESS:
+      return update(state, {
+        balance: {$set: action.payload.cnx.balance}
+      });
     default:
       return state;
   }

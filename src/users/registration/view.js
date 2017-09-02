@@ -52,16 +52,18 @@ class Registration extends Component {
               </div>);
             })}
             <div className="registration__form-container__item">
-            <Recaptcha
+{/*            <Recaptcha
                sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
                render='explicit'
                elementID="registration__recaptcha"
                onloadCallback={console.log.bind(this, "recaptcha loaded")}
-               />
-              <a className="registration__form-container__item-button"
-                 onClick={e => submit(registrationForm)}>
-                Create account
-              </a>
+               />*/}
+               <div className="submit">
+                 <a className="registration__form-container__item-button"
+                    onClick={e => submit(registrationForm)}>
+                   Create account
+                 </a>
+               </div>
             </div>
             {error ?
             <div className="registration__form-container__item">

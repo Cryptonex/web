@@ -9,6 +9,10 @@ let form = (state={amount:'', from_hash:'', to_hash: ''}, action) => {
       return update(state, {
         [action.payload.field]: {$set: action.payload.value}
       });
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
+      return update(state, {
+        ['from_hash']: {$set: action.payload.cnx.hash}
+      });
     default:
       return state;
   }

@@ -11,7 +11,7 @@ class Replenishment extends Component {
       priceBtc: 0.0005,
       priceETH: 0.007,
       current: 'btc',
-      content: 'bitcoin'
+      content: 'btc'
     }
   }
 
@@ -70,10 +70,10 @@ class Replenishment extends Component {
                     Deposit is automatically transferred in CNX.
                     <div className="replenishment__payments">
                       <div className="replenishment__payments-buttons">
-                        <a className={CN({active: this.state.content == 'bitcoin'})}
-                           onClick={this.onChangeContent.bind(this, 'bitcoin')}>Bitcoin</a>
-                        <a className={CN({active: this.state.content == "ethereum"})}
-                           onClick={this.onChangeContent.bind(this, "ethereum")}>Ether</a>
+                        <a className={CN({active: this.state.content == 'btc'})}
+                           onClick={this.onChangeContent.bind(this, 'btc')}>Bitcoin</a>
+                        <a className={CN({active: this.state.content == "eth"})}
+                           onClick={this.onChangeContent.bind(this, "eth")}>Ether</a>
                       </div>
                       {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
                         return <Purse wallet={item} key={index} />

@@ -42,15 +42,14 @@ let result = {
           }
         });
       }
-      let cnx = json.result.wallets.filter(item => item.currency == "cryptonex")[0];
+      let cnx = json.result.accounts.filter(item => item.currency == "cnx")[0];
       return dispatch({
         type: constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS,
         payload: {
-          wallets: json.result.wallets,
+          wallets: json.result.accounts,
           cnx
         }
       });
-
     });
   },
   logout: (response, dispatch) => {

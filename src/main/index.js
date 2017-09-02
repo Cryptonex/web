@@ -65,7 +65,7 @@ class App extends Component {
 
     return (
       <div className="wrap-content">
-        <TopMenu match={match} logout={logout} profile={profile} walletCNX={walletCnx}/>
+        <TopMenu match={match} logout={logout} profile={profile} walletCnx={walletCnx}/>
         <div className="content">
           <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
           <Route path='/app/deposit' component={Replenishment}/>
