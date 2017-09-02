@@ -5,20 +5,20 @@ import CN from 'classnames';
 
 let fields = [
   {name: 'amount', title: 'Amount:'},
-  {name: 'address', title: 'Send to:'},
+  {name: 'to_hash', title: 'Send to:'},
 ];
 
 class Withdraw extends Component {
 
   render() {
-    const { updateForm, submit, error, form, processing, wallets } = this.props;
+    const { updateForm, submit, error, form, processing, walletCnx } = this.props;
     let classNameError = CN({
       'withdraw__container-form__item': true,
       'half': true,
       'success': 'Success!' == error,
       'error': error && 'Success!' != error
     });
-    const walletCNX = wallets.filter((item, index) => item.currency == "cryptonex")[0];
+
     return(
       <div className="withdraw">
         <div className="withdraw__container">
@@ -29,7 +29,7 @@ class Withdraw extends Component {
                 <div className="default__info">
                   <div className="withdraw__info">
                     <h5>
-                      You have: {walletCNX ? walletCNX.balance: ''} CNX
+                      You have: {walletCnx.balance} CNX
                     </h5>
                   </div>
                   <div className="withdraw__info-text">

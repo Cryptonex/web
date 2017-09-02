@@ -37,6 +37,15 @@ let current = function (state = currentState, action) {
   }
 };
 
+let walletCnx = (state = {balance: '',currency: '', hash: ''}, action) => {
+  switch (action.type) {
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
+      return action.payload.cnx;
+    default:
+      return state;
+  }
+}
+
 let wallets = (state=[], action) => {
   switch (action.type) {
     case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
@@ -80,5 +89,6 @@ let processingStartApp = (state={info: true, wallets: true}, action) => {
 export default combineReducers({
   current,
   processingStartApp,
-  wallets
+  wallets,
+  walletCnx
 });

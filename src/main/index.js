@@ -28,7 +28,7 @@ const mapStateToProps = (state) => {
   return {
     profile: state.users.profile.current,
     processingStartApp: state.users.profile.processingStartApp,
-    wallets: state.users.profile.wallets,
+    walletCnx: state.users.profile.walletCnx
   }
 };
 
@@ -53,7 +53,7 @@ class App extends Component {
   }
 
   render() {
-    const { match, profile, processingStartApp, logout, wallets} = this.props;
+    const { match, profile, processingStartApp, logout, walletCnx} = this.props;
 
     if (processingStartApp.info || processingStartApp.wallets) {
       return (
@@ -63,11 +63,9 @@ class App extends Component {
       )
     }
 
-    const walletCNX = wallets.filter((item, index) => item.currency == "cryptonex")[0];
-
     return (
       <div className="wrap-content">
-        <TopMenu match={match} logout={logout} profile={profile} walletCNX={walletCNX}/>
+        <TopMenu match={match} logout={logout} profile={profile} walletCNX={walletCnx}/>
         <div className="content">
           <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
           <Route path='/app/deposit' component={Replenishment}/>

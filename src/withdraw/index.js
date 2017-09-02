@@ -9,7 +9,7 @@ const mapStateToProps = state => {
     form: state.withdraw.form,
     processing: state.withdraw.processing,
     error: state.withdraw.error,
-    wallets: state.users.profile.wallets,
+    walletCnx: state.users.profile.walletCnx,
   }
 };
 

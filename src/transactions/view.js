@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
 import { map } from 'underscore';
+import moment from 'moment';
+
+
 import Pagination from 'elements/pagination';
 import Processing from 'elements/processing'
 
@@ -71,6 +73,7 @@ class ResponsiveTable extends Component {
     return (
       <tr>
         <th>{this.props.columns['update_stamp']}</th>
+        <th>{this.props.columns['type']}</th>
         <th>{this.props.columns['from_hash']}</th>
         <th>{this.props.columns['to_hash']}</th>
         <th>{this.props.columns['status']}</th>
@@ -81,11 +84,15 @@ class ResponsiveTable extends Component {
   rows() {
     const { rows, columns } = this.props;
     return  map(rows, function(row, index) {
-
+      let localeTime = moment.utc(row['update_stamp']).toDate();
+      localeTime = moment(localeTime).format('YYYY-MM-DD HH:mm:ss');
       return (
         <tr key={index}>
           <td data-label="Time">
-            {row['update_stamp'].substr(0, row['update_stamp'].indexOf('.'))}
+            {localeTime}
+          </td>
+          <td data-label="Type">
+            <div className={'transfer'}></div>
           </td>
           <td data-label="From">
             <p>{row['from_hash']}</p>
@@ -120,6 +127,7 @@ class ResponsiveTable extends Component {
 
 let cols = {
   from_hash: 'From',
+  type: 'Type',
   from_amount: 'Amount',
   from_currency: 'Currency',
   to_hash: 'To',

@@ -3,7 +3,7 @@ import constants from 'base/constants';
 import update from 'react-addons-update';
 
 
-let form = (state={amount:'', address:''}, action) => {
+let form = (state={amount:'', from_hash:'', to_hash: ''}, action) => {
   switch (action.type) {
     case constants.WITHDRAW_UPDATE_FORM:
       return update(state, {

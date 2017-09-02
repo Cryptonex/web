@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 
 const API_URL = 'https://webapi.cryptonex.org/api';
 const API_TEST = 'http://dev-backoffice.cryptonex.internal/api';
+const API = API_TEST;
 const DOMAIN = 'cryptonex.org';
 
 // google recaptch
@@ -20,7 +21,7 @@ function getIdRequest() {
 
 function getDataArray(params) {
 
-  return fetch(API_URL, {
+  return fetch(API, {
     method: 'POST',
     body: JSON.stringify(params),
   });
@@ -35,7 +36,7 @@ function getData(id, params, method) {
     'id': id,
   };
   
-  return fetch(API_URL, {
+  return fetch(API, {
     method: 'POST',
     body: JSON.stringify(data),
   });
