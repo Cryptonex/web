@@ -23,7 +23,7 @@ let pagination = (state={page: 0, page_count: 1, max_count: 10}, action) => {
 let list = (state=[], action) => {
   switch (action.type) {
     case constants.REFERRAL_FETCH_USER_LIST_SUCCESS:
-      return action.payload.referrals;
+      return action.payload.transactions;
     default:
       return state;
   }
@@ -32,8 +32,6 @@ let list = (state=[], action) => {
 const defaultFilter = {
   start_stamp: '',
   end_stamp: '',
-  status: '',
-  address: '',
   max_count: 10,
 };
 

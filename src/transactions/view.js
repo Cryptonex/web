@@ -4,7 +4,7 @@ import moment from 'moment';
 
 
 import Pagination from 'elements/pagination';
-import Processing from 'elements/processing'
+import Processing from 'elements/processing';
 
 const statusOptions = [
   {name: 'All', value: ''}, {name: 'Created', value: 'created'}, {name: 'Moderated', value: 'moderated'},
@@ -73,7 +73,7 @@ class ResponsiveTable extends Component {
     return (
       <tr>
         <th>{this.props.columns['update_stamp']}</th>
-{/*        <th>{this.props.columns['type']}</th>*/}
+        <th>{this.props.columns['type']}</th>
         <th>{this.props.columns['from_hash']}</th>
         <th>{this.props.columns['to_hash']}</th>
         <th>{this.props.columns['status']}</th>
@@ -91,9 +91,11 @@ class ResponsiveTable extends Component {
           <td data-label="Time">
             {localeTime}
           </td>
-{/*          <td data-label="Type">
-            <div className={row['type']}></div>
-          </td>*/}
+          <td data-label="Type">
+            <img src={require(`assets/images/${row['type']}.png`)}
+                 className='type' title={row['type'] == 'deposit_referer' ? 'deposit referer' : row['type']}
+                 alt={row['type']}/>
+          </td>
           <td data-label="From">
             <p>{row['from_hash']}</p>
             <p>{Math.round(row['from_amount']* 100000000) /100000000} {row['from_currency']}</p>

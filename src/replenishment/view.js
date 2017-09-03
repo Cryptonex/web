@@ -24,7 +24,7 @@ class Replenishment extends Component {
     const { wallets } = this.props;
     let price = this.state.current == 'btc' ? this.state.priceBtc : this.state.priceETH;
     let value = this.state.value;
-    var number = Math.round(value / price * 10000 + value / price * 10000 / 100 * 20, 2) / 10000;
+    var number = Math.round(value / price * 10000, 2) / 10000;
     return (
       <div className="replenishment">
           <div className="container">

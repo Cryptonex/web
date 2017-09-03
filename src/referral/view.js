@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import { map } from 'underscore';
 import Clipboard from 'clipboard';
+import moment from 'moment';
+import Pagination from 'elements/pagination';
+import Processing from 'elements/processing'
+
+const dateOptions = [
+  {name: 'All', value: ''}, {name:'Today', value: 'day'}, {name: 'This week', value: 'week'},
+  {name: 'This month', value: 'month'}, {name: 'Last month', value: 'last_month'}, {name: 'This year', value: 'year'}
+];
 
 class Referral extends Component {
-
+  componentDidMount() {
+    const { getList, filter} = this.props;
+    getList(filter);
+  }
   render() {
-    const { profile } = this.props;
+    const { profile, updateFilter, filter, list, processing, updateList } = this.props;
     return (
       <div className="referral">
+
         <div className="container">
           <div className="row">
             <div className="col-md-8 offset-md-2">
+              {processing ? <Processing />: null}
               <div className="referral__info">
                 <h5>Your referral link</h5>
                 <div className="referral__info-action">
@@ -24,7 +37,21 @@ class Referral extends Component {
                 </div>
               </div>
               <div>
-                <ResponsiveTable columns={cols} rows={[]} />
+                <div className="row filter">
+                  <div className="col-md-3">
+                    <label className="form-label">Date</label>
+                    <select className="form form-full__width"
+                            onChange={e => updateFilter(filter, 'date', e.target.value)}>
+                      {dateOptions.map((item, index) =>
+                        <option value={item.value} key={index}>{item.name}</option>
+                      )}
+                    </select>
+                  </div>
+                </div>
+                <ResponsiveTable columns={cols} rows={list}/>
+                <div className="filter__pagination">
+                  <Pagination pagination={this.props.pagination} update={(page)=> updateList(filter, page)}/>
+                </div>
               </div>
             </div>
           </div>
@@ -49,18 +76,32 @@ class ResponsiveTable extends Component {
       );
     });
     return (
-      <tr>{columns}</tr>
+      <tr>
+        <th>{this.props.columns['update_stamp']}</th>
+        <th>{this.props.columns['to_hash']}</th>
+        <th>{this.props.columns['status']}</th>
+      </tr>
     );
   }
 
   rows() {
     const { rows, columns } = this.props;
     return  map(rows, function(row, index) {
-      let values = map(columns, (colName, colKey) =>
-        <td data-label={colName} key={colKey}>{row[colKey]}</td>
-      );
+      let localeTime = moment.utc(row['update_stamp']).toDate();
+      localeTime = moment(localeTime).format('YYYY-MM-DD HH:mm:ss');
       return (
-        <tr key={index}>{values}</tr>
+        <tr key={index}>
+          <td data-label="Time">
+            {localeTime}
+          </td>
+          <td data-label="To">
+            <p>{Math.round(row['to_amount']* 100000000) /100000000} {row['to_currency']}</p>
+          </td>
+          <td data-label="Status">
+            {row['status']}
+          </td>
+
+        </tr>
       );
     })
   }
@@ -80,77 +121,15 @@ class ResponsiveTable extends Component {
 };
 
 let cols = {
-  transaction: 'Transaction',
-  address: 'Address',
+  from_hash: 'From',
+  type: 'Type',
+  from_amount: 'Amount',
+  from_currency: 'Currency',
+  to_hash: 'To',
   status: 'Status',
-  date: 'Date',
-  amount: 'Amount (CNX)'
+  update_stamp: 'Time',
+  to_amount: 'Amount (CNX)'
 };
-
-let rows = [
-  {
-    transaction: '1',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '50'
-  },{
-    transaction: '2',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '27'
-  },{
-    transaction: '3',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },
-  {
-    transaction: '4',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '5',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '6',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '7',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '8',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '9',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },{
-    transaction: '10',
-    address: 'GYctgrcpDVBQ9q5TJC2nnPyV9n3892xdY1',
-    status: 'Status',
-    date: '27.12.2017',
-    amount: '37'
-  },
-];
 
 
 export default Referral;
