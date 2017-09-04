@@ -98,11 +98,11 @@ class ResponsiveTable extends Component {
           </td>
           <td data-label="From">
             <p>{row['from_hash']}</p>
-            <p>{Math.round(row['from_amount']* 100000000) /100000000} {row['from_currency']}</p>
+            <p>{Math.round(row['from_amount']* 100000000) /100000000} {row['from_currency'].toUpperCase()}</p>
           </td>
           <td data-label="To">
             <p>{row['to_hash']}</p>
-            <p>{Math.round(row['to_amount']* 100000000) /100000000} {row['to_currency']}</p>
+            <p>{Math.round(row['to_amount']* 100000000) /100000000} {row['to_currency'].toUpperCase()}</p>
           </td>
           <td data-label="Status">
             {row['status']}

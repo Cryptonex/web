@@ -10,6 +10,11 @@ let fields = [
 
 class Withdraw extends Component {
 
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch({type: 'WITHDRAW_LEAVE_PAGE'});
+  }
+
   render() {
     const { updateForm, submit, error, form, processing, walletCnx } = this.props;
     let classNameError = CN({

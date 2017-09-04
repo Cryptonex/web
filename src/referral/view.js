@@ -125,7 +125,7 @@ let cols = {
   type: 'Type',
   from_amount: 'Amount',
   from_currency: 'Currency',
-  to_hash: 'To',
+  to_hash: 'Amount',
   status: 'Status',
   update_stamp: 'Time',
   to_amount: 'Amount (CNX)'

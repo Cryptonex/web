@@ -23,7 +23,6 @@ let result = {
         return dispatch({
           type: constants.USERS_LOGIN_FETCH_FORM_SUCCESS,
         });
-lf
       });
     }
   },

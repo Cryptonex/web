@@ -8,6 +8,7 @@ let defaultState = {
     login: '',
     name: '',
     role: '',
+    auth_2fa: false,
     client: {},
     actions: {}
   },
@@ -32,6 +33,13 @@ let current = function (state = currentState, action) {
       });
     case constants.USERS_PROFILE_LOGOUT_SUCCESS:
       return defaultState;
+    case constants.USERS_SETTINGS_QRCODE_SET_ENABLE_2FA_SUCCESS:
+      console.log(action.payload.status)
+      return update(state, {
+        'info': {
+          auth_2fa: {$set: action.payload.status}
+        }
+      });
     default:
       return state;
   }
@@ -48,7 +56,7 @@ let walletCnx = (state = {balance: '', currency: '', hash: ''}, action) => {
     default:
       return state;
   }
-}
+};
 
 let wallets = (state=[], action) => {
   switch (action.type) {

@@ -42,7 +42,7 @@ class Users extends Component {
   }
 
   render() {
-    const { profile, processingStartApp, dispatch, walletCnx } = this.props;
+    const { profile, walletCnx } = this.props;
     return (
       <div className="users">
         <TopMenu profile={profile} walletCnx={walletCnx}/>
