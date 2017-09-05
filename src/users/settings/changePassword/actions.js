@@ -1,7 +1,15 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
 
-
+export let updateForm = (field, value) => {
+  return {
+    type: constants.USERS_SETTINGS_PASSWORD_UPDATE_FORM,
+    payload: {
+      field,
+      value
+    }
+  }
+};
 
 
 let result = {
@@ -22,17 +30,6 @@ let result = {
 
     });
   },
-};
-
-
-export let updateForm = (field, value) => {
-  return {
-    type: constants.USERS_SETTINGS_PASSWORD_UPDATE_FORM,
-    payload: {
-      field,
-      value
-    }
-  }
 };
 
 
@@ -57,7 +54,7 @@ export let submit = form => {
       });
     }
 
-    if (form.new.length < 5) {
+    if (form.new.length < 6) {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {

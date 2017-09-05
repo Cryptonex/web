@@ -10,7 +10,7 @@ class ChangePassword extends Component {
           <div className="default__info">
             {processing ? <Processing />: null}
             <h5>Change password</h5>
-            <p>Set minimum password length value to 5</p>
+            <p>Set minimum password length value to 6</p>
             <div className="settings__form-item">
               <label className="form-label">Old password</label>
               <input type="password" className="form form-full__width"

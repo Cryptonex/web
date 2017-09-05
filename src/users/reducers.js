@@ -6,8 +6,8 @@ import registration from './registration/reducers';
 import activation from './activation/reducers';
 import profile from './profile/reducers';
 import settings from './settings/reducers';
-
+import restorePassword from './restorePassword/reducers'
 
 export default combineReducers({
-  login, registration, activation, profile, settings
+  login, registration, activation, profile, settings, restorePassword
 })
