@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
 
 import ChangePassword from './view';
+import * as actionsChangePassword from './actions';
+
 
 const mapStateToProps = state => {
   return {
@@ -9,6 +11,13 @@ const mapStateToProps = state => {
   }
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    ...bindActionCreators(actionsChangePassword, dispatch),
+  }
+};
+
+
 export default connect(
-  mapStateToProps, null
+  mapStateToProps, mapDispatchToProps
 )(ChangePassword);
