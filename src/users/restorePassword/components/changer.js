@@ -1,12 +1,18 @@
 import React, { PureComponent } from 'react';
 import Processing from 'elements/processing';
-
+import { Redirect } from 'react-router-dom';
 
 
 class Changer extends PureComponent {
+
   render() {
     const { form, updateForm, submitChanger, error, processing } = this.props;
-    const { key } = this.props.match.params
+    const { key } = this.props.match.params;
+
+    if (key.length != 32) {
+      return <Redirect to="/users/reset/password"/>;
+    }
+
     return (
       <div className="col-md-8 offset-md-2">
         <div className="default__info">
@@ -23,12 +29,14 @@ class Changer extends PureComponent {
             <input type="password" className="form form-full__width"
                    value={form.confirm} onChange={e => updateForm('confirm', e.target.value)}/>
           </div>
+          <div className="settings__form-item" style={{marginBottom: 0}}>
+            <p className='error' style={{marginLeft: 0}}>
+              {error}
+            </p>
+          </div>
           <div className="settings__form-item">
             <a className="settings__form-item__button"
                onClick={e => submitChanger(form, key)}>Change</a>
-            <p className="error">
-              {error}
-            </p>
           </div>
         </div>
       </div>

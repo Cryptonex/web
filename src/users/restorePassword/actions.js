@@ -26,9 +26,11 @@ let result = {
           }
         });
       }
-      dispatch(push('/users'));
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM_SUCCESS,
+        payload: {
+          success: 'Success! The message with instructions for restore password was sent to your e-mail.'
+        }
       });
 
     });
@@ -58,7 +60,7 @@ export let submitRequest = form => {
 
     if (!form.email || !regEmail.test(form.email)) {
       return dispatch({
-        type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
+        type: constants.USERS_RESTORE_PASSWORD_FORM_ERROR,
         payload: {
           error: 'Invalid format login!'
         }

@@ -18,6 +18,13 @@ let result = {
           });
         }
 
+
+        if (!json.result.ticket) {
+          return dispatch({
+            type: constants.USERS_LOGIN_CONTENT_AUTHENTICATION,
+          })
+        }
+
         localStorage.setItem('ticket', json.result.ticket);
         dispatch(actionsProfile.getInfo());
         return dispatch({
@@ -37,6 +44,10 @@ let result = {
             }
           });
         }
+
+        localStorage.setItem('ticket', json.result.ticket);
+        dispatch(actionsProfile.getInfo());
+
         return dispatch({
           type: constants.USERS_LOGIN_FETCH_FORM_SUCCESS,
         });
@@ -117,11 +128,10 @@ export let auth = {
       }
     }
   },
-  submitAuthForm: form => {
+  submitAuthForm: (form, login)=> {
     return dispatch => {
-      let params = Object.assign({}, form);
 
-      if(!params.code) {
+      if(!form.code) {
         return dispatch({
           type: constants.USERS_AUTH_FORM_ERROR,
           payload: {
@@ -130,9 +140,23 @@ export let auth = {
         });
       }
 
+      if(!Number(form.code)) {
+        return dispatch({
+          type: constants.USERS_AUTH_FORM_ERROR,
+          payload: {
+            error: 'Enter the 6-digit code!'
+          }
+        });
+      }
+
+      let params = {
+        login: login,
+        'auth_2fa_code': Number(form.code)
+      };
+
       dispatch({type: constants.USERS_AUTH_FETCH_FORM});
 
-      return getData(1, params, 'user.authenticate').then(response => {
+      return getData(1, params, 'user.login').then(response => {
         if (response.ok) {
           result.auth.submit(response, dispatch);
         } else {

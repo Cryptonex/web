@@ -5,7 +5,7 @@ import Processing from 'elements/processing';
 
 class Request extends PureComponent {
   render() {
-    const { form, updateForm, submitRequest, error, processing } = this.props;
+    const { form, updateForm, submitRequest, error, processing, success } = this.props;
     return (
       <div className="col-md-8 offset-md-2">
         <div className="default__info">
@@ -16,12 +16,15 @@ class Request extends PureComponent {
             <input type="test" className="form form-full__width"
                    value={form.email} onChange={e => updateForm('email', e.target.value)}/>
           </div>
+          <div className="settings__form-item" style={{marginBottom: 0}}>
+            <p className={error ? 'error': 'success'} style={{marginLeft: 0}}>
+              {error || success}
+            </p>
+          </div>
+
           <div className="settings__form-item">
             <a className="settings__form-item__button"
                onClick={e => submitRequest(form)}>Restore</a>
-            <p className="error">
-              {error}
-            </p>
           </div>
         </div>
       </div>

@@ -6,8 +6,13 @@ import Request from './components/request';
 import Changer from './components/changer';
 
 class RestorePassword extends Component {
+
+  componentWillUnmount() {
+    const { dispatch } = this.props
+    dispatch({type: 'USERS_RESTORE_PASSWORD_LEAVE_PAGE'});
+  }
+
   render() {
-    const { form, submitRequest, error, dispatch, updateForm}  = this.props;
     return (
       <div className="container">
         <div className="row">

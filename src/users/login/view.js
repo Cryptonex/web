@@ -97,7 +97,7 @@ class Login extends Component {
                   </div>
                   <div className="auth__form-container__buttons-item">
                     <a className="auth__form-container__buttons-item__authenticate"
-                       onClick={ev => submitAuthForm(authForm)}>
+                       onClick={ev => submitAuthForm(authForm, loginForm.login)}>
                       Authenticate
                     </a>
                   </div>

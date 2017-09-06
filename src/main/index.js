@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'
+import { push, replace } from 'react-router-redux'
 import * as actionsProfile from 'users/profile/actions';
 import { bindActionCreators } from 'redux';
 
@@ -42,7 +42,7 @@ class App extends Component {
     const { profile, processingStartApp, dispatch } = this.props;
 
     if (!processingStartApp.info && !profile.is_active) {
-      return dispatch(push('/users'))
+      return dispatch(replace('/users'))
     }
   }
 
@@ -50,7 +50,7 @@ class App extends Component {
     const { profile, processingStartApp, dispatch } = this.props;
 
     if (!processingStartApp.info && !profile.is_active) {
-      return dispatch(push('/users'))
+      return dispatch(replace('/users'))
     }
   }
 

@@ -3,7 +3,7 @@ import Processing from 'elements/processing';
 
 class ChangePassword extends Component {
   render() {
-    const { form, updateForm, submit, error, processing } = this.props;
+    const { form, updateForm, submit, error, processing, success } = this.props;
     return (
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -29,8 +29,8 @@ class ChangePassword extends Component {
             <div className="settings__form-item">
               <a className="settings__form-item__button"
                  onClick={e => submit(form)}>Change</a>
-              <p className="error">
-                {error}
+              <p className={error ? "error": 'success'}>
+                {error || success}
               </p>
             </div>
           </div>

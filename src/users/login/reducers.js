@@ -17,8 +17,8 @@ let loginForm = (state={login:'', password:''}, action) => {
 
 let content = (state='login', action) => {
   switch (action.type) {
-    case constants.USERS_LOGIN_FETCH_FORM_SUCCESS:
-      return 'login';
+    case constants.USERS_LOGIN_CONTENT_AUTHENTICATION:
+      return 'auth';
     case constants.USERS_AUTH_CANCEL:
       return 'login';
     default:
@@ -77,6 +77,8 @@ let processing = (state=false, action) => {
     case constants.USERS_AUTH_FETCH_FORM_ERROR:
       return false;
     case constants.USERS_AUTH_FETCH_FORM_SUCCESS:
+      return false;
+    case constants.USERS_LOGIN_CONTENT_AUTHENTICATION:
       return false;
     default:
       return state;

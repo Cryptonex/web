@@ -31,6 +31,17 @@ let error = (state='', action) => {
   }
 };
 
+let success = (state='', action) => {
+  switch (action.type) {
+    case constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_SUCCESS:
+      return action.payload.success;
+    case constants.USERS_SETTINGS_PASSWORD_UPDATE_FORM:
+      return '';
+    default:
+      return state;
+  }
+};
+
 let processing = (state=false, action) => {
   switch (action.type) {
     case constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM:
@@ -46,5 +57,5 @@ let processing = (state=false, action) => {
 
 
 export default combineReducers({
-  form, error, processing
+  form, error, processing, success
 });

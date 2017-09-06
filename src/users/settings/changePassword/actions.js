@@ -26,6 +26,9 @@ let result = {
 
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_SUCCESS,
+        payload: {
+          success: 'Success!'
+        }
       });
 
     });
@@ -58,7 +61,7 @@ export let submit = form => {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Set minimum password length value to 5'
+          error: 'Set minimum password length value to 6'
         }
       });
     }
