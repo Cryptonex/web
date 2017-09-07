@@ -40,7 +40,10 @@ class Login extends Component {
                 <div className="login__form-container__item">
                   <input type="password" className="login__form-container__item-input"
                          placeholder="Password"
+                         style={{paddingRight: '120px'}}
                          onChange={e => updateLoginForm('password', e.target.value)}/>
+                  <a href="/users/reset/password"
+                     className="login__form-container__item-forgot">Forgot password?</a>
                 </div>
                   <div className="login__form-container__item">
                     <div className="login__form-container__item-recaptcha">

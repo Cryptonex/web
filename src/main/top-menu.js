@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const links = [
   {title: 'Deposit', path: '/app/deposit'},
@@ -32,6 +32,9 @@ class TopMenu extends Component {
               {profile.is_active ?
               <div className="top-menu__routers-user">
                 <p className="top-menu__routers-user__balance">Balance: {walletCnx.balance} <span>CNX</span></p>
+                <Link className="top-menu__routers-user__settings"  to="/app/settings">
+                  <img src={require('assets/images/settings.png')} alt=""/>
+                </Link>
                 <div className="top-menu__routers-user__logout" onClick={e => logout()}>
                   SIGN OUT
                 </div>

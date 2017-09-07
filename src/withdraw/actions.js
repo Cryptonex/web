@@ -24,11 +24,30 @@ let result = {
   }
 };
 
-export let submit = form => {
+export let submit = (form, status) => {
   let params = Object.assign({
     ticket: localStorage.getItem('ticket'),
   }, form);
   return dispatch => {
+
+    if (status && !form.auth_2fa_code) {
+      return dispatch({
+        type: constants.WITHDRAW_FORM_ERROR,
+        payload: {
+          error: 'Fill in all the fields!'
+        }
+      })
+    }
+
+    if (status && !Number(form.auth_2fa_code) && form.auth_2fa_code.length !=6) {
+      return dispatch({
+        type: constants.WITHDRAW_FORM_ERROR,
+        payload: {
+          error: 'Invalid format code!'
+        }
+      })
+    }
+
     if (!params.amount || !params.to_hash) {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
@@ -48,6 +67,12 @@ export let submit = form => {
     }
 
     params.amount = Number(params.amount)
+
+    if (status) {
+      params.auth_2fa_code = Number(params.auth_2fa_code)
+    } else {
+      delete params.auth_2fa_code;
+    }
 
     dispatch({type: constants.WITHDRAW_FETCH_FORM});
 

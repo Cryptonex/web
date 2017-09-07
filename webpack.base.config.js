@@ -100,6 +100,10 @@ module.exports = {
       filename: '[name].css',
       disable: process.env.NODE_ENV == 'development'
     }),
+    new CopyWebpackPlugin([
+      {from: `${DIR_SRC}/6896553.txt`},
+      {from: `${DIR_SRC}/capitalist_ddccb5dbd2.txt`}
+    ])
   ],
 
   devtool: "cheap-eval-source-map",

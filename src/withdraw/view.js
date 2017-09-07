@@ -16,7 +16,7 @@ class Withdraw extends Component {
   }
 
   render() {
-    const { updateForm, submit, error, form, processing, walletCnx } = this.props;
+    const { updateForm, submit, error, form, processing, walletCnx, userInfo } = this.props;
     let classNameError = CN({
       'withdraw__container-form__item': true,
       'half': true,
@@ -41,7 +41,7 @@ class Withdraw extends Component {
                     You can transfer CNX to your Cryptonex wallet (wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-win.zip"> Windows</a>,
                     wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-linux.tar.gz"> Linux</a>),
                     for example, for getting a reward from P-o-S mining. You can also withdraw coins to any
-                    Cryptonex address.
+                    Cryptonex address. With 2FA enabled, you will be asked to enter your 2FA code when placing withdrawals.
                   </div>
                 </div>
               </div>
@@ -56,13 +56,21 @@ class Withdraw extends Component {
                              onChange={e => updateForm(item.name, e.target.value)}/>
                     </div>
                   )}
+                  { userInfo.auth_2fa ?
+                    <div className="withdraw__container-form__item">
+                      <label className="form-label">Enter the 6-digit code by Google Authenticator:</label>
+                      <input type="text" className="form form-full__width"
+                             onChange={e => updateForm('auth_2fa_code', e.target.value)}/>
+
+                    </div>: null }
+
                   <div className="withdraw__container-form__item">
                     <div className={classNameError}>
                       {error}
                     </div>
                     <div className="withdraw__container-form__item-button">
                       <a className="withdraw__container-form__item-button__link"
-                         onClick={e => submit(form)}>Send</a>
+                         onClick={e => submit(form, userInfo.auth_2fa)}>Send</a>
                     </div>
                   </div>
                 </div>

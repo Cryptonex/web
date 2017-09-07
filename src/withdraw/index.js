@@ -6,10 +6,9 @@ import * as actionsWithdraw from './actions';
 
 const mapStateToProps = state => {
   return {
-    form: state.withdraw.form,
-    processing: state.withdraw.processing,
-    error: state.withdraw.error,
+    ...state.withdraw,
     walletCnx: state.users.profile.walletCnx,
+    userInfo: state.users.profile.current.info
   }
 };
 

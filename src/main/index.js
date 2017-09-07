@@ -30,7 +30,8 @@ const mapStateToProps = (state) => {
   return {
     profile: state.users.profile.current,
     processingStartApp: state.users.profile.processingStartApp,
-    walletCnx: state.users.profile.walletCnx
+    walletCnx: state.users.profile.walletCnx,
+    wallets: state.users.profile.wallets
   }
 };
 
@@ -55,12 +56,28 @@ class App extends Component {
   }
 
   render() {
-    const { match, profile, processingStartApp, logout, walletCnx} = this.props;
+    const { match, profile, processingStartApp, logout, walletCnx, wallets} = this.props;
 
     if (processingStartApp.info || processingStartApp.wallets) {
       return (
         <div className="wrap-content">
           <Processing/>
+        </div>
+      )
+    }
+
+    if (wallets.length < 3) {
+      return (
+        <div className="wrap-content" style={{justifyContent: 'center'}}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 offset-md-3">
+                <div className="default__info" style={{textAlign: 'center'}}>
+                  <h5>Wallets are being created.</h5>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )
     }
