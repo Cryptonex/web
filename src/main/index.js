@@ -40,8 +40,7 @@ const mapStateToProps = (state) => {
 
 class App extends Component {
   componentDidMount() {
-    const { profile, processingStartApp, dispatch } = this.props;
-
+    const { profile, processingStartApp, dispatch, match } = this.props;
     if (!processingStartApp.info && !profile.is_active) {
       return dispatch(replace('/users'))
     }

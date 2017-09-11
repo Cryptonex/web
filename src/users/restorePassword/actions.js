@@ -115,15 +115,6 @@ export let submitChanger = (form, code) => {
       });
     }
 
-    if (form.new.length < 6) {
-      return dispatch({
-        type: constants.USERS_RESTORE_PASSWORD_FORM_ERROR,
-        payload: {
-          error: 'Set minimum password length value to 6'
-        }
-      });
-    }
-
     const params = {
       'password': form.new,
       code: code

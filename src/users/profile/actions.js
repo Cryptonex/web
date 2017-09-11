@@ -42,7 +42,7 @@ let result = {
           }
         });
       }
-      let cnx = json.result.accounts.filter(item => item.currency == "cnx")[0];
+      let cnx = json.result.accounts.filter(item => item.currency == "cnx")[0] || {balance: '', currency: '', hash: ''};
       return dispatch({
         type: constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS,
         payload: {

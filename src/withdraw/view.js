@@ -66,7 +66,8 @@ class Withdraw extends Component {
 
                   <div className="withdraw__container-form__item">
                     <div className={classNameError}>
-                      {error}
+                      {error == 'Success!' && userInfo.auth_2fa ? 'Success!':
+                        error != 'Success!' ? error: 'Check your e-mail for confirming of transaction.'}
                     </div>
                     <div className="withdraw__container-form__item-button">
                       <a className="withdraw__container-form__item-button__link"

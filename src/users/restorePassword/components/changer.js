@@ -18,7 +18,6 @@ class Changer extends PureComponent {
         <div className="default__info">
           {processing ? <Processing />: null}
           <h5>Change password</h5>
-          <p>Set minimum password length value to 6</p>
           <div className="settings__form-item">
             <label className="form-label">New password</label>
             <input type="password" className="form form-full__width"

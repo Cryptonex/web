@@ -21,10 +21,11 @@ class Replenishment extends Component {
   }
 
   render() {
-    const { wallets } = this.props;
+    const { wallets, profile } = this.props;
     let price = this.state.current == 'btc' ? this.state.priceBtc : this.state.priceETH;
     let value = this.state.value;
     let number = Math.round(value / price * 1000000, 2) / 1000000;
+    let walletETH = wallets.filter(wallet => wallet.currency == 'eth')[0];
     return (
       <div className="replenishment">
           <div className="container">
@@ -79,6 +80,26 @@ class Replenishment extends Component {
                         return <Purse wallet={item} key={index} />
                       })}
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-8 offset-md-2">
+                <div className="default__info">
+                  <h5>Bounty program</h5>
+                  <h5>You have: {profile.info.eth_cnx_bonus} bonus CNX</h5>
+                  <p>According to our Bounty program, we created and started sending CNX (ETH) tokens.
+                    The tokens are not sold. You can exchange these tokens to CNX coin 1:1 in backoffice.
+                    For this you should sign up and transfer CNX (ETH) tokens from your Ethereum wallet.
+                    You can use your bonus. If you buy CNX coin in your Cryptonex account, you get the bonus of 20%.
+                  </p>
+                  <p>For example, you transfer 1000 CNX (ETH) tokens and purchase 5000 CNX coins, using BTC or ETH. You get 6000 CNX coins.</p>
+                  <div className="withdraw__container-form__item">
+                    <label className="form-label">Send your CNX (ETH) tokens:</label>
+                    <input type="text" className="form form-full__width"
+                           value={walletETH.hash} readOnly={true}/>
+
                   </div>
                 </div>
               </div>

@@ -26,8 +26,8 @@ class Code extends PureComponent {
         <div  ref='qrcode' style={{textAlign: 'center'}}>
 
         </div>
-        <div style={{textAlign: 'center'}}>
-          <a href={this.state.url} download="qrcode.gif" className="settings__form-item__button">Download</a>
+        <div style={{marginTop: '18px', textAlign: 'center'}}>
+          <a href={this.state.url} download="qrcode.gif" className="settings__form-item__button">Save QR code</a>
         </div>
       </div>
     )

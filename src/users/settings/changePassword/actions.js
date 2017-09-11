@@ -57,15 +57,6 @@ export let submit = form => {
       });
     }
 
-    if (form.new.length < 6) {
-      return dispatch({
-        type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
-        payload: {
-          error: 'Set minimum password length value to 6'
-        }
-      });
-    }
-
     const params = {
       'ticket' : localStorage.getItem('ticket'),
       'password_old': form.old,

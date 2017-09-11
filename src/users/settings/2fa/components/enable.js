@@ -22,13 +22,13 @@ class TwoFaEnable extends PureComponent {
                 To get this code, download Google Authenticator and scan QR code.</p>
               <div className="settings__form-item">
                 <label className="form-label">Enter the 6-digit code:</label>
-                <input type="text" className="form form-full__width" placeholder="code"
+                <input type="text" className="form" placeholder="code"
                        value={form.code} onChange={e => updateForm('code', e.target.value)}/>
               </div>
               <div className="settings__form-item">
                 { !url ?
                   <a className="settings__form-item__button"
-                     onClick={e => getQrcodeUrl()}>Show Qr Code</a> :
+                     onClick={e => getQrcodeUrl()}>Qr Code</a> :
                   <a className="settings__form-item__button"
                      onClick={e => setEnable2fa(form, true)}>Enable</a>}
                   <p className="error">
@@ -37,7 +37,7 @@ class TwoFaEnable extends PureComponent {
               </div>
             </div>
             <div className="col-md-6">
-              <h5>Qr code</h5>
+              <h5 style={{textAlign: 'center'}}>Qr code</h5>
               {url ? <Code url={url}/> : null}
             </div>
           </div>

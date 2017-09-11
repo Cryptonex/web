@@ -51,9 +51,13 @@ let error = (state='', action) => {
   }
 };
 
-let authForm = (state={code: ''}, action) => {
+let authForm = (state={code: '', login: '', password: ''}, action) => {
   switch (action.type) {
     case constants.USERS_AUTH_UPDATE_FORM:
+      return update(state, {
+        [action.payload.field]: {$set: action.payload.value}
+      });
+    case constants.USERS_LOGIN_UPDATE_FORM:
       return update(state, {
         [action.payload.field]: {$set: action.payload.value}
       });

@@ -154,6 +154,9 @@ export let auth = {
         'auth_2fa_code': Number(form.code)
       };
 
+      params.password = sha256(form.password);
+      params.password = sha256(params.password + params.login);
+
       dispatch({type: constants.USERS_AUTH_FETCH_FORM});
 
       return getData(1, params, 'user.login').then(response => {
