@@ -17,7 +17,7 @@ class Login extends Component {
 
   render() {
     const { loginForm, updateLoginForm, submitLoginForm, submitAuthForm,
-            content, cancel, error, authForm, updateAuthForm, processing} = this.props;
+            content, cancel, error, authForm, updateAuthForm, processing } = this.props;
     return (
       <div className="login">
         <div className="login__form">

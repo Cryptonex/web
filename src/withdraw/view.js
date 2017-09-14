@@ -3,6 +3,7 @@ import Processing from 'elements/processing';
 import CN from 'classnames';
 
 
+
 let fields = [
   {name: 'amount', title: 'Amount:'},
   {name: 'to_hash', title: 'Send to:'},

@@ -68,13 +68,16 @@ class Replenishment extends Component {
                     <div className="replenishment__info-title">
                       <h5>Make a deposit</h5>
                     </div>
-                    Deposit is automatically transferred in CNX.
+                    {this.state.content != "cnx" ? 'Deposit is automatically transferred in CNX.':
+                      'CNX is deposited without any bonuses.'}
                     <div className="replenishment__payments">
                       <div className="replenishment__payments-buttons">
                         <a className={CN({active: this.state.content == 'btc'})}
                            onClick={this.onChangeContent.bind(this, 'btc')}>Bitcoin</a>
                         <a className={CN({active: this.state.content == "eth"})}
                            onClick={this.onChangeContent.bind(this, "eth")}>Ether</a>
+                        <a className={CN({active: this.state.content == "cnx"})}
+                           onClick={this.onChangeContent.bind(this, "cnx")}>CNX</a>
                       </div>
                       {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
                         return <Purse wallet={item} key={index} />
