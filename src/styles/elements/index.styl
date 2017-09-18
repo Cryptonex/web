@@ -14,3 +14,138 @@
 
 .form-full__width
   width 100%
+
+
+  label, button
+user-select: none
+
+button
+  padding: 0.5rem 1rem
+
+a, button
+  position: relative
+  z-index: 1
+  cursor: pointer
+  text-align: left
+  line-height: 100%
+  outline: none;
+  & > i,
+  & > img,
+  & > span
+    display: inline-block
+    vertical-align: middle
+  i, img
+    max-width: 1em
+  i + span
+    margin-left: 0.5rem
+  .counter
+    position: absolute
+    top: 50%
+    right: 0
+    font-size: 0.75rem
+    transform: translate(25%, -1.5em)
+    background-color: danger-n
+    border-radius: 1rem
+    color: #fff
+    padding: 0.125rem 0.25rem
+
+.button
+  display: inline-block
+  width: 100%
+  line-height: 100%
+  background-color: transparent
+  border: 1px solid transparent
+  border-radius: button-corner
+  transition: all transition-delay transition-curve
+
+  &.button-processing
+    position: relative
+    .button-processing-animate
+      display: flex
+      position: absolute
+      top: 50%
+      left: 50%
+      height: 100%
+      padding: 0.5rem 0
+      transform: translate(-50%, -50%)
+      span,
+      &:before,
+      &:after
+        content: ''
+        width: 6px
+        margin: 0 0.125em
+        background-color: #fff
+      &:before
+        animation: line-process 1.2s .0s infinite
+      span
+        animation: line-process 1.2s .2s infinite
+      &:after
+        animation: line-process 1.2s .4s infinite
+
+    .button-text
+      visibility: hidden
+
+  &:not(.button-processing)
+    .button-processing-animate
+      display: none
+
+  &.button-text
+    text-align: center
+
+  &.button-icon
+    width: auto !important
+    padding: 0.625rem !important
+    &:before
+      content: ''
+      position: absolute
+      z-index: -1
+      top: 50%
+      left: 50%
+      width: 0
+      height: 0
+      background-color: #f3f3f3
+      border-radius: 5rem
+      transform: translate(-50%, -50%)
+      transition: all transition-delay transition-curve
+    i
+      font-size: 1.25rem
+    &:hover:before
+      width: 100%
+      height: 100%
+
+  &.button-corner
+    border-radius: 2rem
+
+  &.button-tint
+    &.button-primary
+      background-color: primary-n !important
+      color: #fff !important
+      &:hover
+        background-color: primary-l !important
+    &.button-second
+      background-color: second-n !important
+      color: #fff !important
+      &:hover
+        background-color: second-l !important
+
+  &.button-border
+    &.button-primary
+      border-color: primary-l !important
+      color: primary-n
+      &:hover
+        background-color: primary-l !important
+        color: #fff
+    &.button-second
+      border-color: second-l !important
+      color: second-n
+      &:hover
+        background-color: second-l !important
+        color: #fff
+
+@keyframes line-process
+  0%
+    transform: scaleY(0)
+  50%
+    transform: scaleY(1)
+  100%
+    transform: scaleY(0)

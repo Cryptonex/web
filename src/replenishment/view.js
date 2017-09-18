@@ -30,7 +30,7 @@ class Replenishment extends Component {
       <div className="replenishment">
           <div className="container">
             <div className="row">
-              <div className="col-md-8 offset-md-2">
+              <div className="col-sm-12 col-md-8 offset-md-2">
                 <div className="default__info">
                   <div className="replenishment__info">
                     <div className="replenishment__info-text">

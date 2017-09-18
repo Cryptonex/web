@@ -1,13 +1,8 @@
 .top-menu
-  display flex
-  padding-top 20px
-  max-height 70px
-  overflow hidden
-  min-height 70px
   width 100%
   background #ffff
   justify-content space-between
-  padding 0 15px
+  padding 7px 15px
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px
   .navbar
     display flex
@@ -94,10 +89,12 @@
         cursor pointer
         color transparent
         padding-right 5px
+        span
+          display none
         img
           width 20px
           position: relative;
-          top: 2px;
+          top: -1px;
 
       &__logout
         cursor pointer
@@ -112,3 +109,56 @@
           background-size: cover;
           background-repeat: no-repeat;
 
+@media (min-width: 1200px)
+  .menu-toggle
+    display none
+
+@media (max-width: 1199px)
+  .navbar
+    justify-content space-between
+    position relative
+  .top-menu
+    &__routers
+      display none
+      position absolute
+      right 0rem
+      top 100%
+      background #fff
+      z-index 2000
+      width auto
+      box-shadow: 0 5px 10px rgba(0,0,0,0.25), 0 10px 50px rgba(0,0,0,0.25);
+      &.show
+        display block
+      &-list
+        padding 15px
+        &__item
+          display block
+          margin 5px 0
+          &-link
+            display block
+      &-user
+        margin 0
+        padding-bottom 10px
+        display block
+        div
+          display block
+        &__settings
+          padding-left 10px
+          img
+            display none
+          span
+            display inline-block
+            color black
+            padding 5px 0
+        &__logout
+          padding-left 10px
+
+    &__logo
+      display flex
+      align-items center
+      height 100%
+      margin-left 0px
+  .menu-toggle
+    display inline-flex
+    align-items center
+    position relative
