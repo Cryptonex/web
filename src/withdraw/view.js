@@ -41,8 +41,9 @@ class Withdraw extends Component {
                   <div className="withdraw__info-text">
                     You can transfer CNX to your Cryptonex wallet (wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-win.zip"> Windows</a>,
                     wallet for <a href="https://github.com/Cryptonex/release/raw/master/cryptonex-linux.tar.gz"> Linux</a>),
-                    for example, for getting a reward from P-o-S mining. You can also withdraw coins to any
-                    Cryptonex address. With 2FA enabled, you will be asked to enter your 2FA code when placing withdrawals.
+                    for example, to get a reward from P-o-S mining. You can also withdraw coins to any
+                    Cryptonex address. With 2FA enabled, you will be asked to enter your 2FA
+                    code when placing withdrawals.
                   </div>
                 </div>
               </div>

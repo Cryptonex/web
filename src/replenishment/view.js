@@ -36,7 +36,7 @@ class Replenishment extends Component {
                     <div className="replenishment__info-text">
                       <h5>Welcome to your account!</h5>
                       Here you will be able to deposit funds and purchase CNX, using BTC or ETH.<br/>
-                      The calculator is provided for your convenience. You can write down the number of BTC / ETH coins to know the sum, that you will get in your CNX wallet.
+                      The calculator is provided for your convenience. You can write down the amount of BTC / ETH coins to learn the sum, which you will get in your CNX wallet.
                     </div>
                     <div className="replenishment__container-current">
                       1 CNX = 0.0005 BTC | 1 CNX = 0.007 ETH
@@ -93,11 +93,12 @@ class Replenishment extends Component {
                   <h5>Bounty program</h5>
                   <h5>You have: {profile.info.eth_cnx_bonus} bonus CNX</h5>
                   <p>According to our Bounty program, we created and started sending CNX (ETH) tokens.
-                    The tokens are not sold. You can exchange these tokens to CNX coin 1:1 in backoffice.
-                    For this you should sign up and transfer CNX (ETH) tokens from your Ethereum wallet.
-                    You can use your bonus. If you buy CNX coin in your Cryptonex account, you get the bonus of 20%.
+                    These tokens are not sold. You can exchange these tokens for CNX coin 1:1 in the backoffice.
+                    To do this you should sign up and transfer CNX (ETH) tokens from your Ethereum wallet.
+                    You can use your bonus. If you buy CNX coins in your Cryptonex account, you get the 20%.bonus.
                   </p>
-                  <p>For example, you transfer 1000 CNX (ETH) tokens and purchase 5000 CNX coins, using BTC or ETH. You get 6000 CNX coins.</p>
+                  <p>For example, you transfer 1000 CNX (ETH) tokens and purchase 5000 CNX coins, using BTC or ETH.
+                    You get 6000 CNX coins.</p>
                   <div className="withdraw__container-form__item">
                     <label className="form-label">Send your CNX (ETH) tokens:</label>
                     <input type="text" className="form form-full__width"

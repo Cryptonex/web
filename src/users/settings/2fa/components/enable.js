@@ -17,9 +17,7 @@ class TwoFaEnable extends PureComponent {
           <div className="row">
             <div className="col-md-6">
               <h5>Enable two-step verification</h5>
-              <p>For more safety of your account, activate two-factor authentication (2FA).
-                To do this you need the code with 6 characters.
-                To get this code, download Google Authenticator and scan QR code.</p>
+              <p>For the sake of your account safety, activate the two-factor authentication (2FA). To do this you need the 6 - digit code. To get this code, download Google Authenticator and scan the QR code.</p>
               <div className="settings__form-item">
                 <label className="form-label">Enter the 6-digit code:</label>
                 <input type="text" className="form" placeholder="code"
