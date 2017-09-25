@@ -16,5 +16,9 @@ module.exports = merge(baseConfig, {
 		inline: true,
 		port: 3000,
 		publicPath: "/",
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
 	},
 });

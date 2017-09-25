@@ -1,0 +1,13 @@
+@import '~styles/variables.styl'
+
+.collapse
+  &.show
+    & > .collapse-content
+      display: block
+
+  .collapse-trigger
+    user-select: none
+    cursor: pointer
+
+  .collapse-content
+    display: none

@@ -107,7 +107,6 @@ class ResponsiveTable extends Component {
           <td data-label="Status">
             {row['status']}
           </td>
-
         </tr>
       );
     })
