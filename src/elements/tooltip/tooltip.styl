@@ -1,0 +1,82 @@
+@import '~styles/variables.styl'
+
+@keyframes fx-tooltip-top
+  from
+    transform: translateY(-1rem)
+    opacity: 0
+  to
+    transform: translateY(0)
+    opacity: 1
+
+@keyframes fx-tooltip-bottom
+  from
+    transform: translateY(1rem)
+    opacity: 0
+  to
+    transform: translateY(0)
+    opacity: 1
+
+@keyframes fx-tooltip-left
+  from
+    transform: translateX(-1rem)
+    opacity: 0
+  to
+    transform: translateX(0)
+    opacity: 1
+
+@keyframes fx-tooltip-right
+  from
+    transform: translateX(1rem)
+    opacity: 0
+  to
+    transform: translateX(0)
+    opacity: 1
+
+.tooltip
+  position: absolute
+  z-index: 9999
+  &.tooltip-top
+    animation: fx-tooltip-top .2s ease
+  &.tooltip-bottom
+    animation: fx-tooltip-bottom .2s ease
+  &.tooltip-left
+    animation: fx-tooltip-left .2s ease
+  &.tooltip-right
+    animation: fx-tooltip-right .2s ease
+
+  &-arrow
+    content: ''
+    position: absolute
+    border-style: solid
+    .tooltip-top &
+      top: 100%
+      left: 50%
+      border-left-color: transparent !important
+      border-right-color: transparent !important
+      border-bottom: none !important
+      transform: translate(-50%, 0%)
+    .tooltip-bottom &
+      bottom: 100%
+      left: 50%
+      border-left-color: transparent !important
+      border-right-color: transparent !important
+      border-top: none !important
+      transform: translate(-50%, 0%)
+    .tooltip-left &
+      top: 50%
+      left: 100%
+      border-top-color: transparent !important
+      border-bottom-color: transparent !important
+      border-right: none !important
+      transform: translate(0%, -50%)
+    .tooltip-right &
+      top: 50%
+      right: 100%
+      border-top-color: transparent !important
+      border-bottom-color: transparent !important
+      border-left: none !important
+      transform: translate(0%, -50%)
+
+  &-message
+    padding: 0.5rem
+    color: #fff
