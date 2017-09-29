@@ -62,7 +62,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(jpg|png|gif|svg)$/,
+        test: /\.(jpg|png|gif|svg|ico)$/,
         use: [{
           loader: 'file-loader',
           options: {
@@ -102,7 +102,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {from: `${DIR_SRC}/6896553.txt`},
-      {from: `${DIR_SRC}/capitalist_ddccb5dbd2.txt`}
+      {from: `${DIR_SRC}/capitalist_ddccb5dbd2.txt`},
+      {from: `${DIR_SRC}/${DIR_IMAGES}/favicon.ico`, to: `${DIR_BUILD}/${DIR_IMAGES}/`},
     ])
   ],
 

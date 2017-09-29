@@ -159,3 +159,38 @@ export let logout =() => {
 };
 
 
+const resultGetRate = (response, dispatch) => {
+  return response.json().then( json => {
+    if (json.error) {
+      console.log(json);
+      return false
+    }
+
+
+    console.log(json)
+  });
+};
+
+export let getRate = () => {
+  return dispatch => {
+
+    let params = {
+      ticket: localStorage.getItem('ticket'),
+    };
+
+    dispatch({type: constants.USERS_PROFILE_FETCH_INFO});
+    return getData(2, params, 'currency_pair.get_rate_list').then( response => {
+      if (response.ok) {
+        resultGetRate(response, dispatch);
+      } else {
+        return response.json().then( json => {
+
+        });
+      }
+    }).catch( error => {
+      dispatch({type: constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR});
+    });
+  }
+};
+
+

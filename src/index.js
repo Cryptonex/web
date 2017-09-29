@@ -9,8 +9,6 @@ import  * as actionsProfile  from 'users/profile/actions';
 export let store = createStore();
 import Cookies from 'js-cookie';
 
-
-
 let cookiesTicket = Cookies.get('ticket');
 
 if (cookiesTicket) {
@@ -22,6 +20,7 @@ store.dispatch(actionsProfile.getInfo());
 
 setInterval(function() {
   store.dispatch(actionsProfile.getInfo());
+  store.dispatch(actionsProfile.getRate());
 }, 180000);
 
 render(
