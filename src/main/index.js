@@ -57,7 +57,7 @@ class App extends Component {
   render() {
     const { match, profile, processingStartApp, logout, walletCnx, wallets} = this.props;
 
-    if (processingStartApp.info || processingStartApp.wallets) {
+    if (processingStartApp.info || processingStartApp.wallets || processingStartApp.rates) {
       return (
         <div className="wrap-content">
           <Processing/>

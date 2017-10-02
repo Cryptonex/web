@@ -1,5 +1,5 @@
 import constants from 'base/constants';
-import {getData} from 'base/settings';
+import { getData } from 'base/settings';
 
 let result = {
   info: (response, dispatch) => {
@@ -20,6 +20,7 @@ let result = {
         code: 'undefined',
       };
       dispatch(getWallets());
+      dispatch(fetchRates());
       localStorage.setItem('profile', JSON.stringify(initState));
 
       return dispatch({
@@ -159,32 +160,40 @@ export let logout =() => {
 };
 
 
-const resultGetRate = (response, dispatch) => {
+const resultFetchRates = (response, dispatch) => {
   return response.json().then( json => {
     if (json.error) {
-      console.log(json);
-      return false
+      return dispatch({
+        type: constants.USERS_PROFILE_FETCH_LIST_RATES_ERROR,
+        payload: json
+      });
     }
 
 
-    console.log(json)
+    return dispatch({
+      type: constants.USERS_PROFILE_FETCH_LIST_RATES_SUCCESS,
+      payload: {
+        rates: json.result.rates
+      }
+    });
+
   });
 };
 
-export let getRate = () => {
+export let fetchRates = () => {
   return dispatch => {
 
     let params = {
       ticket: localStorage.getItem('ticket'),
     };
 
-    dispatch({type: constants.USERS_PROFILE_FETCH_INFO});
+    dispatch({type: constants.USERS_PROFILE_FETCH_LIST_RATES});
     return getData(2, params, 'currency_pair.get_rate_list').then( response => {
       if (response.ok) {
-        resultGetRate(response, dispatch);
+        resultFetchRates(response, dispatch);
       } else {
         return response.json().then( json => {
-
+          dispatch({type: constants.USERS_PROFILE_FETCH_LIST_RATES_ERROR});
         });
       }
     }).catch( error => {

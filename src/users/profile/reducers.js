@@ -58,6 +58,16 @@ let walletCnx = (state = {balance: '', currency: '', hash: ''}, action) => {
   }
 };
 
+const rates = (state=[], action) => {
+  switch (action.type) {
+    case constants.USERS_PROFILE_FETCH_LIST_RATES_SUCCESS:
+      return action.payload.rates;
+    default:
+      return state;
+  }
+};
+
+
 let wallets = (state=[], action) => {
   switch (action.type) {
     case constants.USERS_PROFILE_FETCH_LIST_WALLET_SUCCESS:
@@ -67,25 +77,25 @@ let wallets = (state=[], action) => {
   }
 };
 
-let processingStartApp = (state={info: true, wallets: true}, action) => {
+let processingStartApp = (state={ info: true, wallets: true, rates: true }, action) => {
   switch (action.type) {
-    case constants.USERS_PROFILE_FETCH_INFO_ERROR:
+    case constants.USERS_PROFILE_FETCH_LIST_RATES_SUCCESS:
       return update(state, {
-        info: {$set: false}
+        rates: { $set: false }
       });
-    case constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR:
+    case constants.USERS_PROFILE_FETCH_LIST_RATES_ERROR:
       return update(state, {
-        info: {$set: false}
+        rates: { $set: false }
       });
     case constants.USERS_PROFILE_FETCH_INFO_SUCCESS:
       return update(state, {
         info: {$set: false}
       });
-    case constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR:
+    case constants.USERS_PROFILE_FETCH_INFO_ERROR:
       return update(state, {
-        wallets: {$set: false}
+        info: {$set: false}
       });
-    case constants.USERS_PROFILE_FETCH_LIST_WALLET_NETWORK_ERROR:
+    case constants.USERS_PROFILE_FETCH_LIST_WALLET_ERROR:
       return update(state, {
         wallets: {$set: false}
       });
@@ -102,5 +112,6 @@ export default combineReducers({
   current,
   processingStartApp,
   wallets,
-  walletCnx
+  walletCnx,
+  rates
 });

@@ -21,8 +21,11 @@ class Replenishment extends Component {
   }
 
   render() {
-    const { wallets, profile } = this.props;
-    let price = this.state.current == 'btc' ? this.state.priceBtc : this.state.priceETH;
+    const { wallets, profile, rates } = this.props;
+    const priceBTC = Number(rates.filter((item) => item.alias === 'CNX/BTC')[0].rate);
+    const priceETH = Number(rates.filter((item) => item.alias === 'CNX/ETH')[0].rate);
+
+    let price = this.state.current == 'btc' ? priceBTC : priceETH;
     let value = this.state.value;
     let number = Math.round(value / price * 1000000, 2) / 1000000;
     let walletETH = wallets.filter(wallet => wallet.currency == 'eth')[0];
@@ -39,7 +42,7 @@ class Replenishment extends Component {
                       The calculator is provided for your convenience. You can write down the amount of BTC / ETH coins to learn the sum, which you will get in your CNX wallet.
                     </div>
                     <div className="replenishment__container-current">
-                      1 CNX = 0.0005 BTC | 1 CNX = 0.007 ETH
+                      {`1 CNX = ${priceBTC} BTC | 1 CNX = ${priceETH} ETH`}
                       <div className="replenishment__container-current__container">
                         <div className="replenishment__container-current__container-input">
                           <input type="text"
@@ -87,27 +90,28 @@ class Replenishment extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-8 offset-md-2">
-                <div className="default__info">
-                  <h5>Bounty program</h5>
-                  <h5>You have: {profile.info.eth_cnx_bonus} bonus CNX</h5>
-                  <p>According to our Bounty program, we created and started sending CNX (ETH) tokens.
-                    These tokens are not sold. You can exchange these tokens for CNX coin 1:1 in the backoffice.
-                    To do this you should sign up and transfer CNX (ETH) tokens from your Ethereum wallet.
-                    You can use your bonus. If you buy CNX coins in your Cryptonex account, you get the 20%.bonus.
-                  </p>
-                  <p>For example, you transfer 1000 CNX (ETH) tokens and purchase 5000 CNX coins, using BTC or ETH.
-                    You get 6000 CNX coins.</p>
-                  <div className="withdraw__container-form__item">
-                    <label className="form-label">Send your CNX (ETH) tokens:</label>
-                    <input type="text" className="form form-full__width"
-                           value={walletETH.hash} readOnly={true}/>
+            { (profile.info.eth_cnx_bonus > 0) ?
+              <div className="row">
+                <div className="col-md-8 offset-md-2">
+                  <div className="default__info">
+                    <h5>Bounty program</h5>
+                    <h5>You have: {profile.info.eth_cnx_bonus} bonus CNX</h5>
+{/*                    <p>According to our Bounty program, we created and started sending CNX (ETH) tokens.
+                      These tokens are not sold. You can exchange these tokens for CNX coin 1:1 in the backoffice.
+                      To do this you should sign up and transfer CNX (ETH) tokens from your Ethereum wallet.
+                      You can use your bonus. If you buy CNX coins in your Cryptonex account, you get the 20%.bonus.
+                    </p>
+                    <p>For example, you transfer 1000 CNX (ETH) tokens and purchase 5000 CNX coins, using BTC or ETH.
+                      You get 6000 CNX coins.</p>
+                    <div className="withdraw__container-form__item">
+                      <label className="form-label">Send your CNX (ETH) tokens:</label>
+                      <input type="text" className="form form-full__width"
+                             value={walletETH.hash} readOnly={true}/>
 
+                    </div>*/}
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> : null }
           </div>
       </div>
     )

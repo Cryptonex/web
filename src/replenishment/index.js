@@ -12,7 +12,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     wallets: state.users.profile.wallets,
-    profile: state.users.profile.current
+    profile: state.users.profile.current,
+    rates: state.users.profile.rates
   }
 };
 

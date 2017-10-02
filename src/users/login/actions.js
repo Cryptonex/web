@@ -3,6 +3,8 @@ import sha256 from 'sha256';
 import { getData } from 'base/settings';
 import * as actionsProfile from 'users/profile/actions'
 
+
+
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 let result = {
@@ -18,6 +20,14 @@ let result = {
           });
         }
 
+        if (json.result.status === "registered") {
+          return dispatch({
+            type: constants.USERS_AUTH_FORM_ERROR,
+            payload: {
+              error: 'You’ve been sent a message with the link to your e-mail. Follow the link from the message to activate your account.'
+            }
+          })
+        }
 
         if (!json.result.ticket) {
           return dispatch({
@@ -27,6 +37,7 @@ let result = {
 
         localStorage.setItem('ticket', json.result.ticket);
         dispatch(actionsProfile.getInfo());
+
         return dispatch({
           type: constants.USERS_LOGIN_FETCH_FORM_SUCCESS,
         });

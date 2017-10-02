@@ -14,7 +14,7 @@ module.exports = merge(baseConfig, {
 	devServer: {
 		hot: true,
 		inline: true,
-		port: 3000,
+		port: 3333,
 		publicPath: "/",
     watchOptions: {
       aggregateTimeout: 300,

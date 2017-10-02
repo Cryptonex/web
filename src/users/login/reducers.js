@@ -28,6 +28,8 @@ let content = (state='login', action) => {
 
 let error = (state='', action) => {
   switch (action.type) {
+    case constants.USERS_AUTH_FETCH_FORM:
+      return '';
     case constants.USERS_LOGIN_FORM_ERROR:
       return action.payload.error;
     case constants.USERS_LOGIN_FETCH_FORM_ERROR:
@@ -70,6 +72,8 @@ let authForm = (state={code: '', login: '', password: ''}, action) => {
 
 let processing = (state=false, action) => {
   switch (action.type) {
+    case constants.USERS_AUTH_FORM_ERROR:
+      return false;
     case constants.USERS_LOGIN_FETCH_FORM:
       return true;
     case constants.USERS_LOGIN_FETCH_FORM_ERROR:

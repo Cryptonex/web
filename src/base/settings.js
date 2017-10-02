@@ -42,6 +42,7 @@ function getData(id, params, method) {
   });
 }
 
+
 function getUrlParams(name, url) {
   if (!url) {
     url = window.location.href;
