@@ -1,0 +1,75 @@
+@import '~styles/variables.styl'
+
+@keyframes fx-alert-in
+  0%
+    transform: perspective(20rem) rotate3d(1, 0, 0, 90deg)
+  40%
+    transform: perspective(20rem) rotate3d(1, 0, 0, -20deg)
+  60%
+    transform: perspective(20rem) rotate3d(1, 0, 0, 10deg)
+  80%
+    transform: perspective(20rem) rotate3d(1, 0, 0, -5deg)
+  100%
+    transform: perspective(20rem) rotate3d(1, 0, 0, 0deg)
+
+@keyframes fx-alert-out
+  0%
+    opacity: 1
+    transform: translateX(0%)
+  100%
+    opacity: 0
+    transform: translateX(100%)
+
+.alert-entering
+  animation: fx-alert-in .5s
+
+.alert-exiting
+  animation: fx-alert-out .25s
+
+.alerts
+  position: fixed
+  z-index: 99999
+  bottom: 1rem
+  right: 1rem
+  .alert
+    width: 20rem
+    position: relative
+    z-index: 1
+    bottom: 0
+    right: 0
+    background-color: #fff
+    border-left: 0.25rem solid transparent
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2)
+    &:not(:first-child)
+      margin-top: column-offset
+
+    &-info
+      border-color: info-n
+      .header button
+        background-color: info-n
+    &-warning
+      border-color: warning-n
+      .header button
+        background-color: warning-n
+    &-success
+      border-color: success-n
+      .header button
+        background-color: success-n
+    &-danger
+      border-color: danger-n
+      .header button
+        background-color: danger-n
+
+    .header
+      span
+        display: block
+        padding: .5rem 1rem
+        font-weight: bold
+      button
+        padding: .5rem
+        color: #fff
+        border: none
+        border-bottom-left-radius: .5rem
+
+    .content
+      padding: 1rem
