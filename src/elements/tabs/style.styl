@@ -1,0 +1,63 @@
+@import '~styles/variables.styl'
+
+tab-border = 2px
+
+.tabs
+  display: flex
+
+  &.top
+    flex-direction: column
+  &.bottom
+    flex-direction: column-reverse
+  &.left
+    flex-direction: row
+  &.right
+    flex-direction: row-reverse
+
+  &.top,
+  &.bottom
+    .tab-menu,
+    .tab-content
+      flex: 0 0 100%
+    .tab-menu
+      flex-direction: row
+
+  &.left,
+  &.right
+    .tab-menu
+      flex: 0 0 25%
+      flex-direction: column
+    .tab-content
+      flex: 0 0 75%
+
+  &.top
+    .tab-link
+      border-bottom-width: tab-border !important
+  &.bottom
+    .tab-link
+      border-top-width: tab-border !important
+  &.left
+    .tab-link
+      border-right-width: tab-border !important
+  &.right
+    .tab-link
+      border-left-width: tab-border !important
+
+  .tab-menu
+    display: flex
+    background-color: grey-l
+    .tab-link
+      user-select: none
+      cursor: pointer
+      padding: 0.75rem 1rem
+      border-color: transparent
+      border-style: solid
+      border-width: 0px
+      &:hover
+        border-color: primary-n
+      &.active
+        background-color: grey-n
+        border-color: danger-n
+
+  .tab-content
+    padding: 2rem

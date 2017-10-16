@@ -47,7 +47,8 @@ class Registration extends Component {
                 <input type={(item.name == 'email' || item.name == 'code') ? 'text': 'password'}
                        className="registration__form-container__item-input"
                        value={registrationForm[item.name]}
-                       onChange={e => updateForm(item.name, e.target.value)}
+                       onChange={e => item.name === 'email' ? updateForm(item.name, e.target.value.toLowerCase()):
+                         updateForm(item.name, e.target.value)}
                        placeholder={item.placeholder}/>
               </div>);
             })}
