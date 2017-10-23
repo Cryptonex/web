@@ -4,23 +4,40 @@ import PropTypes from 'prop-types';
 import style from './style.styl';
 
 import className from 'classnames';
-import Scrollbar from 'elements/scrollbar';
+import Scrollbar from '@/Scrollbar';
 
 
 const propTypes = {
-  options: PropTypes.array,
-  height: PropTypes.number,
-  search: PropTypes.number,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+  })),
+  maxHeight: PropTypes.number,
+  filter: PropTypes.bool,
   placeholder: PropTypes.string,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  multi: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  values: PropTypes.array,
+  nameClass: PropTypes.string
 };
 
 const defaultProps = {
   options: [],
-  height: 200,
-  search: 5,
-  placeholder: 'Поиск...',
-  onSelect: null
+  maxHeight: 200,
+  filter: false,
+  placeholder: 'Search...',
+  onSelect: null,
+  multi: false,
+  value: '',
+  values: [],
+  nameClass: 'default'
 };
 
 class Select extends Component {
@@ -29,11 +46,21 @@ class Select extends Component {
 
     this.state = {
       display: false,
-      option: null
     };
 
-    this.onToggle = this.onToggle.bind(this);
+  }
+
+  componentDidMount() {
+    this.selectOption = this.selectOption.bind(this);
     this.onClickOutside = this.onClickOutside.bind(this);
+    this.selectOption = this.selectOption.bind(this);
+    this.onToggle = this.onToggle.bind(this);
+    this.onClickRemoveMultiListElement = this.onClickRemoveMultiListElement.bind(this);
+    document.addEventListener('mouseup', this.onClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.onClickOutside)
   }
 
   onShow() {
@@ -59,70 +86,136 @@ class Select extends Component {
 
   }
 
-  componentDidMount() {
-    document.addEventListener('mouseup', this.onClickOutside);
-  }
 
-  componentWillUnmount() {
-    document.removeEventListener('mouseup', this.onClickOutside)
-  }
 
-  selectOption(el) {
-    const { onSelect } = this.props;
-
-    if (onSelect !== null) {
-      onSelect(el);
+  selectOption(value) {
+    const { onSelect, multi, values } = this.props;
+    if (onSelect !== null && !multi) {
+      onSelect(value);
     }
 
-    this.setState({ option: el })
+    if (multi) {
+      const newValues = [...values];
+
+      if (newValues.includes(value)) {
+        const index = values.findIndex((item) => item === value);
+        newValues.splice(index, 1);
+      } else {
+        newValues.push(value);
+      }
+
+      if (onSelect !== null) {
+        onSelect(newValues);
+      }
+    }
+  }
+
+  onClickRemoveMultiListElement(ev, index) {
+    ev.stopPropagation();
+    const { values, onSelect } = this.props;
+    const newValues = [...values];
+    newValues.splice(index, 1);
+    if (onSelect !== null) {
+      onSelect(newValues);
+    }
+  }
+
+  renderTrigger() {
+    const { display } = this.state;
+    const { value, options } = this.props;
+    const option = options.filter((option) => option.value === value)[0] || options[0];
+    return (
+      <div className='select-trigger' onClick={this.onToggle}>
+        <div className='select-trigger__selected'>
+          <span>{(typeof option === 'object') ? option.name : ''}</span>
+        </div>
+      </div>
+    );
+  }
+
+  renderMultiTrigger() {
+    const { options, values } = this.props;
+    return (
+      <div className='select-trigger' onClick={this.onToggle}>
+        <ul className='select-trigger__list'>
+          {values.map((value, index) => {
+            const indexOption = options.findIndex((option) => option.value === value);
+            if (indexOption !== -1) {
+              return (
+                <li key={value}>
+                  <span>{options[indexOption].name}</span>
+                  <i className="material-icons" onClick={(e) => this.onClickRemoveMultiListElement(e, index)}>
+                    close
+                  </i>
+                </li>
+              );
+            }
+          })}
+        </ul>
+      </div>
+    )
+  }
+
+  renderFilter() {
+    const { placeholder } = this.props;
+    return (
+      <div className="select-search" ref="search">
+        <input type="text" placeholder={placeholder} />
+      </div>
+    );
+  }
+
+  renderListOption() {
+    const { options, maxHeight } = this.props;
+    return (
+      <Scrollbar height={maxHeight}>
+        <ul>
+          {
+            options.map((option, index) => {
+              const
+                { multi, value, values} = this.props;
+
+              let buttonClass = option.value === value ? 'selected': '';
+              if (multi) {
+                buttonClass = (values.includes(option.value)) ? 'selected': '';
+              }
+
+              return (
+                <li key={index}>
+                  <button
+                    className={buttonClass}
+                    onClick={(e) => this.selectOption(option.value)}
+                  >
+                    {option.name}
+                  </button>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </Scrollbar>
+    );
   }
 
   render() {
-    const { display, option } = this.state;
-    const { children, value, options, height, search, placeholder } = this.props;
+    const
+      { display } = this.state,
+      { filter, options, multi, nameClass } = this.props,
+      selectClass = className({
+        select: true,
+        show: display,
+        [nameClass]: true,
+      });
 
     return (
-      <div className={className({
-        'select': true,
-        'show': display
-      })}>
-        <div className="select-trigger" onClick={this.onToggle}>
-          {
-            !option ?
-              <div className="select-trigger--selected">
-                {(typeof value === 'string') ? value : value.name}
-              </div>
-              : <div className="select-trigger--selected">{option.name}</div>
-          }
+      <div className={selectClass}>
+        {(multi) ? this.renderMultiTrigger(): this.renderTrigger()}
+        {(filter) ? this.renderFilter(): null }
+        <div className="select-content">
+          {options.length !== 0 ? this.renderListOption(): null}
         </div>
-        {
-          options.length ?
-            <div className="select-content">
-              {
-                options.length > search ?
-                  <div className="select-search" ref="search">
-                    <input type="text" placeholder={placeholder} />
-                  </div>
-                  : null
-              }
-              <Scrollbar height={height}>
-                <ul>
-                  {
-                    options.map((el, i) => {
-                      return (
-                        <li key={el.uuid}>
-                          <button onClick={this.selectOption.bind(this, el)}>{el.name}</button>
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
-              </Scrollbar>
-            </div>
-            : null
-        }
       </div>
-    )
+    );
   }
 }
 

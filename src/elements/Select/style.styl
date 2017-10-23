@@ -1,4 +1,4 @@
-@import '~style/variables.styl'
+@import '~styles/general/variables'
 
 @keyframes fx-select-vertical
   from
@@ -11,6 +11,9 @@
 .select
   position: relative
   &.show
+    .select-trigger
+      border-color #4fc3f7;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     .select-content
       display: block
       animation: fx-dropdown-vertical .2s ease
@@ -18,11 +21,35 @@
   .select-trigger
     user-select: none
     cursor: pointer
-    padding: 0.5rem 0
-    border-top-style: none
-    border-left-style: none
-    border-right-style: none
-    border-bottom: 1px solid primary-n
+    padding: 0.6rem 0
+    border: 1px solid #bdbdbd
+    border-radius 5px
+    &__selected
+      > span
+        padding-left 15px
+
+    &__list
+      padding-left 5px
+      margin 0
+      list-style-type none
+      min-height 26px
+      li
+        display inline-block
+        border: 1px solid #aaa;
+        padding 2px 4px
+        color #383349
+        border-radius: 3px;
+        font-size 0.9rem
+        background-color: #eeeeee;
+        margin-right 4px
+        margin-bottom 4px
+        i
+          padding-left 6px
+          font-size 1rem
+          position relative
+          color #888888
+          font-weight bold
+          vertical-align sub
 
   .select-search
     background-color: grey-l
@@ -39,8 +66,8 @@
     left: 0
     width: 100%
     background-color: #fff
-    box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.15)
-    transform: translateY(0.5rem)
+    box-shadow: 0 0.1rem 0.7rem rgba(0,0,0,0.15)
+    transform: translateY(0.1rem)
 
     ul
       margin: 0
@@ -61,3 +88,6 @@
           border: none
           &:hover
             background-color: #f3f3f3
+          &.selected
+            color #bdbdbd
+            cursor default
