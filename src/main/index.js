@@ -17,7 +17,7 @@ import Transactions from 'transactions/index';
 import Withdraw from 'withdraw/index';
 import Referral from 'referral/index';
 import Settings from 'users/settings/index';
-
+import Convert from 'convert';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -91,6 +91,7 @@ class App extends Component {
           <Route path='/app/withdraw' component={Withdraw}/>
           <Route path='/app/referral' component={Referral}/>
           <Route path='/app/settings'  component={Settings}/>
+          <Route path='/app/convert' component={Convert}/>
         </div>
         <div className="footer">
           <div className="container">

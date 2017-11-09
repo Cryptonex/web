@@ -1,3 +1,6 @@
+@import '~styles/variables';
+
+
 @font-face {
   font-family: Circle55;
   src: url("../assets/fonts/CRC55.otf");
@@ -110,6 +113,117 @@ img
   align-items center
 
 
+input, select
+  display: block
+  width: 100%
+  padding: 0.7rem
+  outline none
+
+input, select
+  border: 1px solid grey-n
+  background-color: #fff
+  border-radius: .5rem
+
+label
+  user-select: none
+  cursor: pointer
+  display: flex
+  align-items: center
+  position: relative
+  width: 100%
+  text-align: left
+
+input[type="checkbox"]
+  display: none
+  &:checked + *:before
+    transform: translateY(-50%)
+  &:checked + *:after
+    transform: translateY(-50%) scale(1) rotateZ(-45deg)
+    opacity: 1
+  & + *
+    padding-left: 2rem
+    text-align: left
+    &:before,
+    &:after
+      content: ''
+      position: absolute
+      top: 50%
+      left: 0
+    &:before
+      width: 1rem
+      height: 1rem
+      border: 1px solid grey-n
+      transform: translateY(-50%)
+    &:after
+      width: .7rem
+      height: .35rem
+      margin: -.1rem .15rem
+      border-left: 3px solid second-n
+      border-bottom: 3px solid second-n
+      transform: translateY(-50%) scale(0) rotateZ(-45deg)
+      opacity: 0
+      transition: all .1s ease
+
+button
+  background-color: transparent
+
+.button
+  display: inline-flex
+  align-items: center
+  padding: 1rem 1.5rem
+  border: 1px solid transparent
+  border-radius: .5rem
+  transition: all .2s ease
+
+  &-fill
+    color: #fff !important
+    &.primary
+      background-color: primary-n
+      &:hover
+        background-color: primary-l
+    &.second
+      background-color: second-n
+      &:hover
+        background-color: second-d
+
+  &-outline
+    background-color: transparent !important
+    &.primary
+      color: primary-n !important
+      border-color: primary-n
+    &.second
+      color: second-n !important
+      border-color: second-n
+
+  &-block
+    width: 100%
+    justify-content: center
+
+  &.small
+    padding: .75rem 1.25rem
+  &.large
+    padding: 1.25rem 2.5rem
+
+.arrow-down
+  display: inline-flex
+  align-items: center
+  padding: 0
+  &:after
+    content: "";
+    display inline-block
+    position relative
+    top: -3px;
+    right: 0;
+    width: 10px;
+    height: 4px;
+    margin-top: -5px;
+    background-image: url('~assets/images/triangle.svg');
+    transform: rotate(180deg);
+
+.show, .selected
+  .arrow-down:after
+    transform: rotateX(-180deg)
+
 @import "./lib/bootstrap-grid.css"
 @import "./lib/normalize.css"
 @import "./lib/font-awesome.css"
@@ -122,4 +236,5 @@ img
 @import "./replenishment/*"
 @import "./withdraw/*"
 @import "./referral/*"
+@import "./convert/*"
 

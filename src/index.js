@@ -21,6 +21,7 @@ store.dispatch(actionsProfile.getInfo());
 
 setInterval(function() {
   store.dispatch(actionsProfile.getInfo());
+  store.dispatch(actionsProfile.fetchRates());
 }, 30000);
 
 render(

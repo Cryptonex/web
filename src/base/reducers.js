@@ -7,6 +7,8 @@ import transactions from 'transactions/reducers';
 import withdraw from 'withdraw/reducers';
 import referral from 'referral/reducers';
 import activations from 'activations/reducers';
+import convert from 'convert/reducers';
+
 
 export default combineReducers({
   router: routerReducer,
@@ -14,5 +16,6 @@ export default combineReducers({
   transactions,
   withdraw,
   referral,
-  activations
+  activations,
+  convert
 });

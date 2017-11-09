@@ -1,85 +1,99 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import className from 'classnames';
+import style from './style';
 
-export default class DropDown extends Component {
-  constructor(props) {
-    super(props);
+const propTypes = {
+  trigger: PropTypes.node.isRequired,
+  placement: PropTypes.string,
+  autoclose: PropTypes.bool,
+  callback: PropTypes.func
+};
+
+const defaultProps = {
+  placement: 'left',
+  autoclose: true,
+  callback: null
+};
+
+class Dropdown extends Component {
+  constructor() {
+    super(...arguments);
+
     this.state = {
-      isOpen: false,
-      value: this.props.value || ''
+      display: false
     };
-    this.mounted = true;
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
-  }
-  componentDidMount() {
-    document.addEventListener('click',this.handleDocumentClick, false);
-    document.addEventListener('touched', this.handleDocumentClick, false);
+
+    this.onClickOutside = this.onClickOutside.bind(this);
   }
 
-  componentWillUnmount () {
-    this.mounted = false;
-    document.removeEventListener('click', this.handleDocumentClick, false);
-    document.removeEventListener('touched', this.handleDocumentClick, false)
+  onShow() {
+    this.setState({ display: true });
+  }
+
+  onHide() {
+    this.setState({ display: false });
+  }
+
+  onToggle() {
+    this.setState({ display: !this.state.display });
+  }
+
+  onClickOutside(e) {
+    const
+      { autoclose } = this.props,
+      content = this.refs.content;
+
+    if (autoclose && ReactDOM.findDOMNode(content).contains(e.target) || !ReactDOM.findDOMNode(this).contains(e.target)) {
+      this.onHide();
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const
+      { display } = this.state,
+      { callback } = this.props;
+
+    if (nextState.display !== display && nextState.display && callback) {
+      callback();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mouseup', this.onClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.onClickOutside);
   }
 
   render() {
-    const {dropContent, value, options} = this.props;
+    const
+      { display } = this.state,
+      { trigger, children, placement } = this.props,
+
+      dropdownClass = className({
+        'dropdown': true,
+        [`dropdown-${placement}`]: true,
+        'show': display
+      });
+
     return (
-      <div className={classNames({
-        dropdown: true,
-        open: this.state.isOpen,
-      })}
-           onClick={this.toggleDropdown.bind(this)}>
-        <div className="dropdown__triger">
-          <div className="dropdown__triger-title">
-            {this.state.value}
-          </div>
+      <div className={dropdownClass}>
+        <div className="dropdown-trigger" onClick={this.onToggle.bind(this)}>
+          {trigger}
         </div>
-        <div className="dropdown__content">
-          {options.map((item, index) => {
-            return(
-              <a key={index} onClick={this.elementClick.bind(this, item)}>{item.name}</a>
-            )
-          })}
+
+        <div className="dropdown-content" ref="content">
+          {children}
         </div>
       </div>
     );
   }
-
-  toggleDropdown(e) {
-    this.setState({'isOpen': !this.state.isOpen});
-  }
-
-  elementClick(item, ev) {
-    let state = Object.assign({}, this.state);
-    state.value = item.name;
-    this.setState(state);
-  }
-
-
-
-  handleDocumentClick(event) {
-    if (this.mounted) {
-      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
-        this.setState({ isOpen: false })
-      }
-    }
-  }
-
 }
 
-DropDown.defaultProps = {
-  value:'All',
-  options: [{value:'', title: ''}],
-  onChange: (value) => {
-    console.log(value);
-  },
-};
+Dropdown.propTypes = propTypes;
+Dropdown.defaultProps = defaultProps;
 
-DropDown.PropTypes = {
-  options: PropTypes.array,
-  onChange: PropTypes.func,
-  value: PropTypes.string
-};
+export default Dropdown;

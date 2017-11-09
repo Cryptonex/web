@@ -1,0 +1,60 @@
+@import '~styles/variables'
+
+@keyframes fx-dropdown-vertical
+  from
+    opacity: 0
+    transform: translateY(1rem)
+  to
+    opacity: 1
+    transform: translateY(0rem)
+
+.dropdown
+  display: inline-block
+  position: relative
+  &.show
+    .dropdown-content
+      display: block
+      animation: fx-dropdown-vertical .2s ease
+  &-left
+    .dropdown-content
+      top: 100%
+      left: 0
+      transform: translateY(0rem)
+  &-right
+    .dropdown-content
+      top: 100%
+      right: 0
+      transform: translateY(0rem)
+
+  .dropdown-content
+    display: none
+    position: absolute
+    z-index: 2000
+    min-width: 10rem
+    background-color: #fff
+    box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.25)
+    @media(max-width: width-xs)
+      position: fixed
+      top: 2rem
+      left: 1rem
+      right: 1rem
+      width: calc(100vw - 2rem)
+    ul
+      margin: 0
+      padding: 0.25rem 0
+      list-style: none
+      li
+        & > ul > li:first-child > span
+          display: block
+          padding: 0.5rem 1rem
+          background-color: grey-n
+          text-align: center
+          text-transform: uppercase
+        a, button
+          width: 100%
+          padding: 0.5rem 1rem
+          color: #303030
+          background-color: transparent
+          border: none
+          &:hover
+            background-color: grey-l

@@ -82,6 +82,9 @@ export {
   getData, getDataArray, getIdRequest, getUrlParams, DOMAIN, checkValidClientId
 };
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+
+export const isNumeric = (value) => {
+  const regex = /^[0-9.,\b]+$/;
+  value = value.replace(/,/g , '.');
+  return regex.test(value) && !isNaN(value);
+};
