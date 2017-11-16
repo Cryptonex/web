@@ -89,7 +89,7 @@ class App extends Component {
           <Route path='/app/deposit' component={Replenishment}/>
           <Route path='/app/transactions' component={Transactions}/>
           <Route path='/app/withdraw' component={Withdraw}/>
-          <Route path='/app/referral' component={Referral}/>
+          {/*<Route path='/app/referral' component={Referral}/>*/}
           <Route path='/app/settings'  component={Settings}/>
           <Route path='/app/convert' component={Convert}/>
         </div>

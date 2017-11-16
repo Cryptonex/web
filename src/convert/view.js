@@ -50,7 +50,7 @@ class Convert extends Component {
       <div className="container convert">
         <div className="row">
           <div className="offset-md-2 col-md-8">
-            <div className="default__info">
+{/*            <div className="default__info">
               {processing ? <Processing/>: null}
               <h5>Convert</h5>
               <div className="row">
@@ -150,7 +150,7 @@ class Convert extends Component {
                      >Convert</a>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
           <div className="offset-md-2 col-md-8">
             <table className="responsive-table">

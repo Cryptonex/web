@@ -5,14 +5,13 @@ const links = [
   {title: 'Deposit', path: '/app/deposit'},
   {title: 'Withdraw', path: '/app/withdraw'},
   {title: 'Transactions', path: '/app/transactions'},
-  {title: 'Referral link', path: '/app/referral'},
   {title: 'Convert', path: '/app/convert'},
 ];
 
 class TopMenu extends Component {
 
   constructor(){
-    super(...arguments)
+    super(...arguments);
     this.state = {
       show_menu: false
     }
@@ -40,7 +39,7 @@ class TopMenu extends Component {
               </ul>
               {profile.is_active ?
               <div className="top-menu__routers-user">
-{/*                <p className="top-menu__routers-user__balance">Balance: {walletCnx.balance} <span>CNX</span></p>*/}
+                <p className="top-menu__routers-user__balance">Balance: {walletCnx.balance} <span>CNX</span></p>
                 <Link className="top-menu__routers-user__settings"  to="/app/settings"
                       onClick={this.handleShowMenu.bind(this)}>
                   <img src={require('assets/images/settings.png')} alt=""/>
