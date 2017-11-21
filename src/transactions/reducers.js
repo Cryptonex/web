@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import update from 'react-addons-update';
 
 
-let pagination = (state={page: 0, page_count: 1, max_count: 10}, action) => {
+let pagination = (state={page: 1, page_count: 1, max_count: 10}, action) => {
   switch (action.type) {
     case constants.TRANSACTIONS_FETCH_LIST_SUCCESS:
       return Object.assign({}, state, {

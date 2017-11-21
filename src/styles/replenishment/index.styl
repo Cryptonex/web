@@ -22,17 +22,13 @@
           width 100%
     &-buttons
       .active
-        color #fff
-        background #27a2db
+        transition transform .2s ease
+        transform translateY(-20px)
       > a
         display inline-block
         margin-right 5px
         border-radius: 5px;
-        padding: 5px 20px;
         cursor pointer
-        &:hover
-          color #fff
-          background #27a2db
   &__container
     max-width 800px
     margin auto

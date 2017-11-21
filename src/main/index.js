@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { push, replace } from 'react-router-redux'
 import * as actionsProfile from 'users/profile/actions';
 import { bindActionCreators } from 'redux';
-
+import Alerts from 'elements/alerts/index';
 
 import style from 'styles/index';
-import TopMenu from './top-menu';
+import Header from './header';
+import Sidebar from './sidebar';
+import Breadcrumbs from './breadcrumbs';
 import Processing from 'elements/processing';
 
 
@@ -67,8 +69,8 @@ class App extends Component {
 
     if (wallets.length < 3) {
       return (
-        <div className="wrap-content" style={{justifyContent: 'center'}}>
-          <div className="container">
+        <div className="wrapper" style={{justifyContent: 'center'}}>
+          <div className="content">
             <div className="row">
               <div className="col-md-6 offset-md-3">
                 <div className="default__info" style={{textAlign: 'center'}}>
@@ -82,22 +84,49 @@ class App extends Component {
     }
 
     return (
-      <div className="wrap-content">
-        <TopMenu match={match} logout={logout} profile={profile} walletCnx={walletCnx}/>
-        <div className="content">
-          <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
-          <Route path='/app/deposit' component={Replenishment}/>
-          <Route path='/app/transactions' component={Transactions}/>
-          <Route path='/app/withdraw' component={Withdraw}/>
-          {/*<Route path='/app/referral' component={Referral}/>*/}
-          <Route path='/app/settings'  component={Settings}/>
-          <Route path='/app/convert' component={Convert}/>
-        </div>
-        <div className="footer">
-          <div className="container">
-            <div style={{borderBottom: '1px solid #dddddd', margin: '30px 0'}}></div>
+      <div className="wrapper">
+        <div className="row">
+          <div className="col-xs-12 col-sm-12">
+            <Header logout={logout} wallets={wallets} profile={profile}/>
           </div>
-          <p>2017 © Cryptonex ltd. All Rights Reserved</p>
+        </div>
+
+        <div className="row row-inline">
+          <div className="col-xs-0 col-sm-0 mobile-collapse">
+            <Sidebar />
+          </div>
+
+          <div className="col-xs-auto col-sm-auto">
+            <main className="workspace">
+              <div className="row">
+                <div className="col-xs-12 col-sm-12">
+                  <Breadcrumbs />
+                </div>
+              </div>
+
+              <div className="row row-auto">
+                <div className="col-xs-12 col-sm-12">
+                  <Switch>
+                    <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
+                    <Route path='/app/deposit' component={Replenishment}/>
+                    <Route path='/app/transactions' component={Transactions}/>
+                    <Route path='/app/withdraw' component={Withdraw}/>
+                    {/*<Route path='/app/referral' component={Referral}/>*/}
+                    <Route path='/app/settings'  component={Settings}/>
+                    <Route path='/app/exchange' component={Convert}/>
+                    <Route render={() => <Redirect to='/app/deposit'/>}/>
+                  </Switch>
+                </div>
+              </div>
+            </main>
+          </div>
+          <Alerts />
+        </div>
+
+        <div className="row">
+          <div className="col-xs-12 col-sm-12">
+{/*            <Footer />*/}
+          </div>
         </div>
       </div>
     );

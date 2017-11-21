@@ -26,7 +26,7 @@ class ChangePassword extends Component {
                      value={form.confirm} onChange={e => updateForm('confirm', e.target.value)}/>
             </div>
             <div className="settings__form-item">
-              <a className="settings__form-item__button"
+              <a className="button button-cover primary"
                  onClick={e => submit(form)}>Change</a>
               <p className={error ? "error": 'success'}>
                 {error || success}

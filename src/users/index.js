@@ -3,17 +3,20 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux'
-import TopMenu from 'main/top-menu';
+
 
 import Registration from './registration/index';
 import Login from './login/index';
 import Activation from './activation/index';
-
+import Header from 'main/header';
+import Sidebar from 'main/sidebar';
+import Breadcrumbs from 'main/breadcrumbs';
 
 const mapStateToProps = (state) => {
   return {
     profile: state.users.profile.current,
-    walletCnx: state.users.profile.walletCnx
+    walletCnx: state.users.profile.walletCnx,
+    wallets: state.users.profile.wallets
   }
 };
 
@@ -42,18 +45,41 @@ class Users extends Component {
   }
 
   render() {
-    const { profile, walletCnx } = this.props;
+    const { profile, walletCnx, wallets } = this.props;
     return (
-      <div className="users">
-        <TopMenu profile={profile} walletCnx={walletCnx}/>
-        <div className="content">
-          {this.props.children}
-        </div>
-        <div className="footer">
-          <div className="container">
-            <div style={{borderBottom: '1px solid #dddddd', margin: '30px 0'}}></div>
+      <div className="wrapper">
+        <div className="row">
+          <div className="col-xs-12 col-sm-12">
+            <Header profile={profile} wallets={wallets}/>
           </div>
-          <p>2017 © Cryptonex ltd. All Rights Reserved</p>
+        </div>
+
+        <div className="row row-inline">
+          <div className="col-xs-0 col-sm-0 mobile-collapse">
+            <Sidebar />
+          </div>
+
+          <div className="col-xs-auto col-sm-auto">
+            <main className="workspace">
+              <div className="row">
+                <div className="col-xs-12 col-sm-12">
+                  <Breadcrumbs />
+                </div>
+              </div>
+
+              <div className="row row-auto">
+                <div className="col-xs-12 col-sm-12">
+                  {this.props.children}
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-xs-12 col-sm-12">
+            {/*            <Footer />*/}
+          </div>
         </div>
       </div>
     )

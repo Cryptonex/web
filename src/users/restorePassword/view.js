@@ -14,7 +14,7 @@ class RestorePassword extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="content">
         <div className="row">
           <Switch>
             <Route path='/users/reset/password' exact render={() => <Request {...this.props}/>}/>

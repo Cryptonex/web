@@ -32,7 +32,7 @@ class Registration extends Component {
   render() {
     const { registrationForm, updateForm, submit, error, processing} = this.props;
     return (
-      <div className="registration">
+      <div className="registration content">
         <div className="registration__form">
 
           <div className="registration__form-title">
@@ -60,7 +60,7 @@ class Registration extends Component {
                onloadCallback={console.log.bind(this, "recaptcha loaded")}
                />*/}
                <div className="submit">
-                 <a className="registration__form-container__item-button"
+                 <a className="button button-cover primary"
                     onClick={e => submit(registrationForm)}>
                    Create account
                  </a>

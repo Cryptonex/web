@@ -20,7 +20,7 @@ class TwoFaDisable extends PureComponent {
                        value={form.code} onChange={e => updateForm('code', e.target.value)}/>
               </div>
               <div className="settings__form-item">
-                <a className="settings__form-item__button"
+                <a className="button button-cover primary"
                    onClick={e => setEnable2fa(form, false)}>Disable</a>
                 <p className="error">
                   {error}

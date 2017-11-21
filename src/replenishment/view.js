@@ -10,8 +10,8 @@ class Replenishment extends Component {
       value: 0,
       priceBtc: 0.0005,
       priceETH: 0.007,
-      current: 'btc',
-      content: 'btc'
+      current: 'cnx',
+      content: 'cnx'
     }
   }
 
@@ -22,18 +22,18 @@ class Replenishment extends Component {
 
   render() {
     const { wallets, profile, rates } = this.props;
-    const priceBTC = Number(rates.filter((item) => item.alias === 'CNX/BTC')[0].rate);
+/*    const priceBTC = Number(rates.filter((item) => item.alias === 'CNX/BTC')[0].rate);
     const priceETH = Number(rates.filter((item) => item.alias === 'CNX/ETH')[0].rate);
 
     let price = this.state.current == 'btc' ? priceBTC : priceETH;
     let value = this.state.value;
     let number = Math.round(value / price * 1000000, 2) / 1000000;
-    let walletETH = wallets.filter(wallet => wallet.currency == 'eth')[0];
+    let walletETH = wallets.filter(wallet => wallet.currency == 'eth')[0];*/
     return (
       <div className="replenishment">
-          <div className="container">
+          <div className="content">
             <div className="row">
-              <div className="col-sm-12 col-md-8 offset-md-2">
+{/*              <div className="col-sm-12 col-md-8 offset-md-2">
                 <div className="default__info">
                   <div className="replenishment__info">
                     <div className="replenishment__info-text">
@@ -62,10 +62,24 @@ class Replenishment extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>*/}
             </div>
             <div className="row">
-              <div className="col-md-8 offset-md-2">
+              <div className="col-md-12">
+                <p style={{marginBottom: '20px'}}>Make a deposit</p>
+                <div className="replenishment__payments-buttons">
+                  <a className={CN({active: this.state.content == ""})}
+                     onClick={this.onChangeContent.bind(this, "cnx")}>
+                    <img src={require('assets/images/Big-button_Cryptonex.png')} alt=""/>
+                  </a>
+                  <a className={CN({active: this.state.content == ''})}
+                     onClick={this.onChangeContent.bind(this, 'btc')}>
+                    <img src={require('assets/images/Big-button_Bitcoin.png')} alt=""/></a>
+                  <a className={CN({active: this.state.content == ""})}
+                     onClick={this.onChangeContent.bind(this, "eth")}>
+                    <img src={require('assets/images/Big-button_Ethereum.png')} alt=""/>
+                  </a>
+                </div>
                 <div className="default__info">
                   <div className="replenishment__info">
                     <div className="replenishment__info-title">
@@ -74,14 +88,6 @@ class Replenishment extends Component {
                     {this.state.content != "cnx" ? 'Deposit is automatically transferred in CNX.':
                       'CNX is deposited without any bonuses.'}
                     <div className="replenishment__payments">
-                      <div className="replenishment__payments-buttons">
-                        <a className={CN({active: this.state.content == 'btc'})}
-                           onClick={this.onChangeContent.bind(this, 'btc')}>Bitcoin</a>
-                        <a className={CN({active: this.state.content == "eth"})}
-                           onClick={this.onChangeContent.bind(this, "eth")}>Ether</a>
-                        <a className={CN({active: this.state.content == "cnx"})}
-                           onClick={this.onChangeContent.bind(this, "cnx")}>CNX</a>
-                      </div>
                       {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
                         return <Purse wallet={item} key={index} />
                       })}

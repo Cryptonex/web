@@ -18,166 +18,167 @@ class Convert extends Component {
     });
   }
 
+  componentDidUpdate(prevPrpos) {
+    const {
+      form,
+      updateSelect,
+      wallets,
+      rates,
+      updateInput
+    } = this.props;
+
+    if (prevPrpos.form.from_hash !== form.from_hash || prevPrpos.form.to_hash !== form.to_hash) {
+      const fromCurrentWallet = wallets.filter(item => form.from_hash === item.hash)[0];
+
+      const toCurrentWallet =  rates.filter(item => {
+        return (fromCurrentWallet.currency === item.base_currency && item.convert_type ==="cross") ||
+          (fromCurrentWallet.currency === item.rel_currency_id && item.convert_type ==="cross")
+      });
+
+      const toWallet = wallets.filter((item) => item.hash === form.to_hash)[0];
+
+      const toRate = toCurrentWallet.filter((item) => {
+        return (item.base_currency === fromCurrentWallet.currency && toWallet.currency === item.rel_currency_id) ||
+          (item.base_currency === toWallet.currency && fromCurrentWallet.currency === item.rel_currency_id)
+      })[0];
+
+
+      let currentRate = fromCurrentWallet.currency !== 'cnx' ? toRate.ask: toRate.bid;
+      currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
+      updateInput('', '', form, currentRate)
+    }
+
+
+  }
+
+  onSubmit = (ev) => {
+    const { submit, form, wallets, submitForm} = this.props;
+    ev.preventDefault();
+    submitForm(form, wallets);
+  };
+
   render() {
     const {
       form,
-      updateForm,
+      updateSelect,
       wallets,
-      currentWallets,
-      changeRate,
       rates,
+      updateInput,
       userInfo,
-      processing,
-      submitForm
+      processing
     } = this.props;
 
-    if (currentWallets.from === null || currentWallets.to === null) {
+    if (form.from_hash === '' && form.to_hash === '') {
       return null;
     }
 
-    let currentRate = rates.filter((rate) => {
-      return (
-        currentWallets.from.currency === rate.base_currency &&
-        currentWallets.to.currency === rate.rel_currency_id) ||
-      (currentWallets.to.currency === rate.base_currency &&  currentWallets.from.currency === rate.rel_currency_id)
+    const fromCurrentWallet = wallets.filter(item => form.from_hash === item.hash)[0];
+
+    const toCurrentWallet =  rates.filter(item => {
+      return (fromCurrentWallet.currency === item.base_currency && item.convert_type ==="cross") ||
+        (fromCurrentWallet.currency === item.rel_currency_id && item.convert_type ==="cross")
+    });
+
+    if (fromCurrentWallet.currency === 'cnx' || toCurrentWallet.length < 0) {
+      <div className="content">
+        <h1>Not exchanges</h1>
+      </div>
+    }
+
+    const toWallet = wallets.filter((item) => item.hash === form.to_hash)[0];
+
+    const toRate = toCurrentWallet.filter((item) => {
+      return (item.base_currency === fromCurrentWallet.currency && toWallet.currency === item.rel_currency_id) ||
+        (item.base_currency === toWallet.currency && fromCurrentWallet.currency === item.rel_currency_id)
     })[0];
 
-    currentRate = (currentWallets.from.currency === currentRate.base_currency) ?
-      currentRate.rate: 1 / currentRate.rate;
-
+    console.log(toCurrentWallet)
+    let currentRate = fromCurrentWallet.currency !== 'cnx' ? toRate.ask: toRate.bid;
+    currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
 
     return (
-      <div className="container convert">
-        <div className="row">
-          <div className="offset-md-2 col-md-8">
-{/*            <div className="default__info">
-              {processing ? <Processing/>: null}
-              <h5>Convert</h5>
-              <div className="row">
-                <div className="col-md-6 from__input">
-                  <label>Send</label>
-                  <div style={{position: 'relative'}}>
-                    <input
-                      type="text"
-                      value={form.amount}
-                      onChange={(e) => updateForm('amount', e.target.value)}
-                    />
-                    <span>Current Rate: {currentRate} </span>
-                    <div className="currency">
-                      <Dropdown
-                        trigger={
-                          <button className="button arrow-down">
-                            {currentWallets.from.currency.toUpperCase()}
-                          </button>
-                        }>
-                        <ul>
-                          {
-                            wallets.map((el, i) => {
-                              if (
-                                currentWallets.from.currency === el.currency ||
-                                currentWallets.to.currency === el.currency
-                              ) {
-                                return null;
-                              }
-
-                              return (
-                                <li key={i}>
-                                  <button
-                                    className="button"
-                                    onClick={e => changeRate('from', el) }
-                                  >
-                                    <span>{el.currency.toUpperCase()}</span>
-                                  </button>
-                                </li>
-                              );
-                            })
-                          }
-                        </ul>
-                      </Dropdown>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 to__input">
-                  <label>You receive</label>
-                  <div style={{position: 'relative'}}>
-                    <input type="text" readOnly={true} value={form.amount * currentRate}/>
-                    <div className="currency">
-                      <Dropdown
-                        trigger={
-                          <button className="button arrow-down">
-                            {currentWallets.to.currency.toUpperCase()}
-                          </button>
-                        }>
-                        <ul>
-                          {
-                            wallets.map((el, i) => {
-                              if (
-                                currentWallets.from.currency === el.currency ||
-                                currentWallets.to.currency === el.currency
-                              ) {
-                                return null;
-                              }
-
-                              return (
-                                <li key={i}>
-                                  <button
-                                    className="button"
-                                    onClick={e => changeRate('to', el) }
-                                  >
-                                    <span>{el.currency.toUpperCase()}</span>
-                                  </button>
-                                </li>
-                              );
-                            })
-                          }
-                        </ul>
-                      </Dropdown>
-                    </div>
-                  </div>
-                </div>
-                { userInfo.auth_2fa ?
-                  <div className="col-md-8" style={{marginTop: '20px'}}>
-                    <label className="form-label">Enter the 6-digit code by Google Authenticator:</label>
-                    <input type="text"
-                           value={form.auth_2fa_code}
-                           onChange={e => updateForm('auth_2fa_code', e.target.value)}
-                           className="form form-full__width"
-                           style={{borderWidth: '1px'}}/>
-                  </div>: null }
-                <div className="col-md-12" style={{marginTop: '20px'}}>
-                  <a className="withdraw__container-form__item-button__link"
-                     onClick={e => submitForm(form, wallets) }
-                     >Convert</a>
+      <div className="content">
+        <form style={{position: 'relative'}}  onSubmit={this.onSubmit}>
+          <div className="exchange">
+            {processing ? <Processing/>: null}
+            <div className="row row-grid row-bottom">
+              <div className="col-xs-12 col-sm-3">
+                <span className="label">You give</span>
+                <div className="form-compare">
+                  <input type="text" onChange={e => updateInput('amount', e.target.value, form, currentRate)} value={form.amount} />
+                  <select value={form.from_hash} onChange={e => updateSelect('from_hash', e.target.value, rates, wallets)}>
+                    {
+                      wallets.map((el, i) => {
+                        return (
+                          <option value={el.hash} key={i}>{el.currency.toUpperCase()}</option>
+                        );
+                      })
+                    }
+                  </select>
                 </div>
               </div>
-            </div>*/}
+
+              <div className="col-xs-12 col-sm-3">
+                <span className="label">Exchange rate</span>
+                <div className="form-compare">
+                  <span>{currentRate}</span>
+                </div>
+              </div>
+
+              <div className="col-xs-12 col-sm-3">
+                <span className="label">You receive</span>
+                <div className="form-compare">
+                  <input type="text" onChange={e => updateInput('to_amount', e.target.value, form, currentRate)} value={form.to_amount}/>
+                  <select value={form.to_hash} onChange={e => updateSelect('to_hash', e.target.value, rates, wallets)}>
+                    {
+                      wallets.map((el, i) => {
+
+                        if (form.from_hash === el.hash) {
+                          return null;
+                        }
+
+                        const isRel = toCurrentWallet.some(item => {
+                          return el.currency === item.rel_currency_id || el.currency === item.base_currency
+                        });
+
+                        if (!isRel) {
+                          return null
+                        }
+
+                        return (
+                          <option value={el.hash} key={i}>{el.currency.toUpperCase()}</option>
+                        );
+                      })
+                    }
+                  </select>
+                </div>
+              </div>
+
+              { userInfo.auth_2fa ?
+                <div className="col-md-12">
+                  <div className="row">
+                    <div className="col-md-8" style={{marginTop: '20px'}}>
+                      <label className="form-label">Enter the 6-digit code by Google Authenticator:</label>
+                      <input type="text"
+                             value={form.auth_2fa_code}
+                             onChange={e => updateInput('auth_2fa_code', e.target.value, form, rates)}
+                             className="form form-full__width"
+                             style={{borderWidth: '1px'}}/>
+                    </div>
+                  </div>
+                </div>
+                : null }
+
+              <div className="col-xs-12 col-sm-3">
+                <button className="button button-cover primary small">Exchange</button>
+              </div>
+            </div>
           </div>
-          <div className="offset-md-2 col-md-8">
-            <table className="responsive-table">
-              <thead>
-                <tr>
-                  <th>Currency</th>
-                  <th>Address</th>
-                  <th>Balance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {wallets.map((wallet, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{wallet.currency.toUpperCase()}</td>
-                      <td>{wallet.hash}</td>
-                      <td>{wallet.balance}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        </form>
       </div>
     )
   }
 }
 
 export default Convert;
+

@@ -8,7 +8,7 @@ import withdraw from 'withdraw/reducers';
 import referral from 'referral/reducers';
 import activations from 'activations/reducers';
 import convert from 'convert/reducers';
-
+import alerts from 'elements/alerts/reducers';
 
 export default combineReducers({
   router: routerReducer,
@@ -17,5 +17,6 @@ export default combineReducers({
   withdraw,
   referral,
   activations,
-  convert
+  convert,
+  alerts
 });

@@ -1,0 +1,14 @@
+.breadcrumbs
+  @extend .box-ext
+  padding: .75rem 1.5rem
+
+  ul
+    li
+      &:not(:first-child):before
+        content: '/'
+        margin: 0 .5rem
+        color: dark-l
+
+      span
+        color: dark-l
+        

@@ -1,0 +1,45 @@
+*
+  box-sizing: border-box
+
+body
+  margin: 0
+  padding: 0
+  overflow-x: hidden
+
+a
+  text-decoration: none
+
+aside,
+header,
+footer,
+main,
+section,
+article
+  display: block
+
+a, button
+  cursor: pointer
+  
+a, button, input, select
+  outline: none
+  line-height: 100%
+
+img + span
+  margin-left: .5em
+
+ul
+  &.clear
+    margin: 0
+    padding: 0
+    list-style: none
+  &.inline
+    display: flex
+    align-items: center
+
+p
+  margin: 0
+  &:not(:first-of-type)
+    margin-top: 1rem
+
+.content-center
+  text-align: center

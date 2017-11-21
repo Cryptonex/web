@@ -1,0 +1,37 @@
+.mobile-button
+  display: block
+  position: absolute
+  top: .75rem
+  right: 0
+  img
+    width: 1.5rem
+  @media(min-width: width-sm)
+    display: none
+
+.header
+  @extend .box-ext
+  padding: .75rem 1.5rem
+
+  .logotype
+    text-align: center
+    a
+      display: inline-block
+
+  .user-info
+    display: flex
+    align-items: center
+
+    & > span
+      color: dark-l
+      & + *
+        margin-left: 1rem
+
+    ul
+      li
+        &:not(:first-child)
+          margin-left: 1rem
+
+  .user-menu
+    a
+      &:not(:first-child)
+        margin-left: .75rem

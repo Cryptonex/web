@@ -28,16 +28,13 @@
 }
 
 
-html, body
-  overflow hidden
-
 html, body, #root, #root>main
   height: 100%
   background #fff
   font-size 16px
   color #353535
-a
-  text-decoration none
+  a
+    text-decoration none
 a:active, a:hover, a:focus, a:visited
   outline: 0
 body
@@ -224,7 +221,7 @@ button
   .arrow-down:after
     transform: rotateX(-180deg)
 
-@import "./lib/bootstrap-grid.css"
+/*@import "./lib/bootstrap-grid.css"*/
 @import "./lib/normalize.css"
 @import "./lib/font-awesome.css"
 @import "./lib/material-icons.css"
@@ -237,4 +234,23 @@ button
 @import "./withdraw/*"
 @import "./referral/*"
 @import "./convert/*"
+
+// by Arkanel
+@import 'general/variables'
+@import 'general/mixin'
+@import 'general/bootstrap'
+@import 'general/content'
+@import 'general/button'
+@import 'general/form'
+
+@import 'partial/content'
+@import 'partial/header'
+@import 'partial/footer'
+@import 'partial/main'
+@import 'partial/exchange'
+@import 'partial/sidebar'
+
+@import 'partial/breadcrumbs'
+@import 'partial/language'
+
 

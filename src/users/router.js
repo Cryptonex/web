@@ -10,7 +10,6 @@ import RestorePassword from './restorePassword/index';
 
 
 export let routerUsers = (
-
   <Switch>
     <Route path='/users' exact render={() => <Redirect to='/users/login'/>}/>
     <Route path='/users/login' exact render={(props) =><Users><Login match={props.match}/></Users>}/>

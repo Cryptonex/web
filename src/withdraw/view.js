@@ -11,13 +11,23 @@ let fields = [
 
 class Withdraw extends Component {
 
+  componentDidMount() {
+    const { dispatch, walletCnx } = this.props;
+    dispatch({
+      type: 'INIT_WITHDRAW',
+      payload: {
+        hash: walletCnx.hash
+      }
+    });
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({type: 'WITHDRAW_LEAVE_PAGE'});
   }
 
   render() {
-    const { updateForm, submit, error, form, processing, walletCnx, userInfo } = this.props;
+    const { updateForm, submit, error, form, processing, walletCnx, userInfo, wallets } = this.props;
     let classNameError = CN({
       'withdraw__container-form__item': true,
       'half': true,
@@ -29,9 +39,9 @@ class Withdraw extends Component {
       <div className="withdraw">
         <div className="withdraw__container">
           {processing ? <Processing/>: null}
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 offset-md-2">
+          <div className="content">
+{/*            <div className="row">
+              <div className="col-md-9 offset-md-2">
                 <div className="default__info">
                   <div className="withdraw__info">
                     <h5>
@@ -47,9 +57,26 @@ class Withdraw extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>*/}
             <div className="row">
-              <div className="col-md-8 offset-md-2">
+              <div className="col-md-12">
+                <p style={{marginBottom: '20px'}}>Choose a withdraw type</p>
+              </div>
+              <div className="col-md-12">
+                <div className="replenishment__payments-buttons">
+                  {[...wallets].reverse().map((item, index) => {
+                    return (
+                      <a className={CN({active: item.hash === ''})} key={item.hash} onClick={(e) => updateForm('from_hash', item.hash)}>
+                        {(item.currency === 'cnx') ? <img src={require('assets/images/Big-button_Cryptonex.png')} alt=""/>:
+                          (item.currency === 'btc') ? <img src={require('assets/images/Big-button_Bitcoin.png')} alt=""/>:
+                            <img src={require('assets/images/Big-button_Ethereum.png')} alt=""/>
+                        }
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="col-md-9 offset-md-2">
                 <div className="withdraw__container-form default__info">
                   {fields.map((item, index) =>
                     <div className="withdraw__container-form__item" key={index}>
@@ -72,7 +99,7 @@ class Withdraw extends Component {
                         error != 'Success!' ? error: 'Check your e-mail for confirming of transaction.'}
                     </div>
                     <div className="withdraw__container-form__item-button">
-                      <a className="withdraw__container-form__item-button__link"
+                      <a className="button button-cover primary"
                          onClick={e => submit(form, userInfo.auth_2fa)}>Send</a>
                     </div>
                   </div>

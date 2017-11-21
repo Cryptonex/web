@@ -8,7 +8,8 @@ const mapStateToProps = state => {
   return {
     ...state.withdraw,
     walletCnx: state.users.profile.walletCnx,
-    userInfo: state.users.profile.current.info
+    userInfo: state.users.profile.current.info,
+    wallets: state.users.profile.wallets
   }
 };
 

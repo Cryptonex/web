@@ -34,7 +34,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.styl'],
+    extensions: ['.js', '.styl', '.jsx'],
     modules: [
       DIR_SRC,
       'node_modules'

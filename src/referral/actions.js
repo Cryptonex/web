@@ -1,6 +1,8 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
 import moment from 'moment';
+import { alert } from 'elements/alerts/index';
+
 
 let result = {
   getList: (response, dispatch, max_count) => {

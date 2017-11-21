@@ -34,7 +34,7 @@ class Changer extends PureComponent {
             </p>
           </div>
           <div className="settings__form-item">
-            <a className="settings__form-item__button"
+            <a className="button button-cover primary"
                onClick={e => submitChanger(form, key)}>Change</a>
           </div>
         </div>

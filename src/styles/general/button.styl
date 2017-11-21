@@ -1,0 +1,39 @@
+button
+  background-color: transparent
+
+.button
+  display: inline-flex
+  align-items: center
+  padding: 1rem 1.5rem
+  border: 1px solid transparent
+  border-radius: .25rem
+  transition: all .2s ease
+
+  &-cover
+    color: #fff !important
+    &.primary
+      background-color: primary-n
+      &:hover
+        background-color: primary-l
+    &.second
+      background-color: second-n
+      &:hover
+        background-color: second-d
+
+  &-outline
+    background-color: transparent !important
+    &.primary
+      color: primary-n !important
+      border-color: primary-n
+    &.second
+      color: second-n !important
+      border-color: second-n
+
+  &-block
+    width: 100%
+    justify-content: center
+
+  &.small
+    padding: .35rem .75rem
+  &.large
+    padding: 1.25rem 2.5rem

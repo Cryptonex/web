@@ -19,7 +19,7 @@ class Login extends Component {
     const { loginForm, updateLoginForm, submitLoginForm, submitAuthForm,
             content, cancel, error, authForm, updateAuthForm, processing } = this.props;
     return (
-      <div className="login">
+      <div className="login content">
         <div className="login__form">
           <div className="login__form-title">
             <p className="login__form-title__description">
@@ -53,7 +53,7 @@ class Login extends Component {
                         elementID="login__recaptcha"
                         onloadCallback={console.log.bind(this, "recaptcha loaded")}/>*/}
                         <div className="submit">
-                          <a className="login__form-container__item-button"
+                          <a className="button button-cover primary"
                              onClick={e => submitLoginForm(loginForm)}>
                             Login
                           </a>
@@ -93,13 +93,13 @@ class Login extends Component {
                 </div>: null}
                 <div className="auth__form-container__buttons">
                   <div className="auth__form-container__buttons-item">
-                    <a className="auth__form-container__buttons-item__cancel"
+                    <a className="button button-cover primary"
                        onClick={e => cancel()}>
                       Cancel
                     </a>
                   </div>
                   <div className="auth__form-container__buttons-item">
-                    <a className="auth__form-container__buttons-item__authenticate"
+                    <a className="button button-cover primary"
                        onClick={ev => submitAuthForm(authForm, loginForm.login)}>
                       Authenticate
                     </a>

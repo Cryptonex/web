@@ -22,7 +22,7 @@ class Activation extends Component {
   render() {
     const { error, processing} = this.props;
     return (
-      <div className="activation">
+      <div className="activation content">
         <div className="activation__form">
           <div className="activation__form-title">
             <p className="activation__form-title__description">

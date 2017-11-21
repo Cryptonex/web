@@ -1,0 +1,94 @@
+make-columns(prefix)
+  .col-{prefix}-0
+    display: block
+    flex: 0 0 auto
+    width: auto
+
+  for i in (1..column-count)
+    .col-{prefix}-{i}
+      display: block
+      flex: 0 0 (100% / column-count) * i
+      width: (100% / column-count) * i
+
+  .col-{prefix}-auto
+    display: block
+    flex: auto
+    width: auto
+
+  .col-{prefix}-none
+    display: none
+
+.wrapper
+  position: relative
+  width: 100%
+  margin: 0 auto
+  padding: 0 column-offset
+  @media(max-width: width-xs)
+    max-width: 100%
+    text-align: center
+  @media(min-width: width-xs - 1)
+    max-width: width-xs - (column-offset * 2)
+  @media(min-width: width-sm - 1)
+    max-width: width-sm - (column-offset * 2)
+  @media(min-width: width-md)
+    max-width: width-md - (column-offset * 2)
+  @media(min-width: width-lg)
+    max-width: width-lg - (column-offset * 2)
+
+.row
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  justify-content: flex-start
+  position: relative
+  margin-left: - column-offset
+  margin-right: - column-offset
+
+.row
+  &:not(:first-of-type)
+    margin-top: column-offset * 2
+  &-grid
+    margin-top: - column-offset
+    margin-bottom: - column-offset
+    & > [class^=col-],
+    & > [class*=col-]
+      padding-top: column-offset
+      padding-bottom: column-offset
+  &-left
+    justify-content: flex-start
+  &-right
+    justify-content: flex-end
+  &-center
+    justify-content: center
+  &-between
+    justify-content: space-between
+  &-top
+    align-items: flex-start
+  &-middle
+    align-items: center
+  &-bottom
+    align-items: flex-end
+  &-inline
+    flex-wrap: nowrap
+  &-auto
+    flex: auto
+
+[class^=col-],
+[class*=col-]
+  max-width: 100%
+  padding-left: column-offset
+  padding-right: column-offset
+
+.col-center
+  align-self: center
+
+@media(max-width: width-xs)
+  make-columns(xs)
+@media(min-width: width-xs)
+  make-columns(xs)
+@media(min-width: width-sm)
+  make-columns(sm)
+@media(min-width: width-md)
+  make-columns(md)
+@media(min-width: width-lg)
+  make-columns(lg)

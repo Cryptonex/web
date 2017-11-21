@@ -25,9 +25,9 @@ class TwoFaEnable extends PureComponent {
               </div>
               <div className="settings__form-item">
                 { !url ?
-                  <a className="settings__form-item__button"
+                  <a className="button button-cover primary"
                      onClick={e => getQrcodeUrl()}>Qr Code</a> :
-                  <a className="settings__form-item__button"
+                  <a className="button button-cover primary"
                      onClick={e => setEnable2fa(form, true)}>Enable</a>}
                   <p className="error">
                     {error}

@@ -1,0 +1,73 @@
+@keyframes fx-opacity-toggle
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@keyframes fx-sidebar-toggle
+  from
+    transform: translateX(-100%)
+  to
+    transform: translateX(0)
+
+.sidebar
+  @extend .box-ext
+  min-height: 100%
+
+.expand
+  .mobile-overlay
+    content: ''
+    position: fixed
+    z-index: 1000
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0,0,0,.5)
+    animation: fx-opacity-toggle .2s ease
+
+  .mobile-collapse
+    display: block
+    position: fixed
+    z-index: 2000
+    top: 0
+    left: -1rem
+    bottom: 0
+    min-height: 100%
+    overflow-y: auto
+    animation: fx-sidebar-toggle .2s ease
+
+.mobile-collapse
+  @media(max-width: width-sm)
+    display: none
+  @media(min-width: width-sm)
+    display: block
+
+  .nav-menu
+    display: flex
+    flex-direction: column
+    position: relative
+    padding: .5rem 0
+    overflow-x: hidden
+
+    &:not(:hover)
+      a.active
+        box-shadow: 0 .1rem .75rem #83b4c5
+
+    a
+      display: block
+      padding: 1rem 1.25rem
+      color: grey-d
+      text-align: center
+      text-decoration: none
+      transition: all .2s ease
+      &:hover
+        color: dark-d
+        box-shadow: 0 .1rem .75rem #83b4c5
+      &.active
+        color: dark-d
+
+      span
+        display: block
+        margin: 0
+        margin-top: .5rem

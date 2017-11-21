@@ -13,6 +13,10 @@ let form = (state={amount:'', from_hash:'', to_hash: '', auth_2fa_code: ''}, act
       return update(state, {
         ['from_hash']: {$set: action.payload.cnx.hash}
       });
+    case constants.INIT_WITHDRAW:
+      return update(state, {
+        ['from_hash']: {$set: action.payload.hash}
+      });
     default:
       return state;
   }
