@@ -27,7 +27,7 @@ class Transactions extends Component {
     return (
       <div className="transactions">
         {processing ? <Processing />: null}
-        <div className="transactions__content">
+        <div className="transactions__content content">
           <div className="content">
             <div className="row filter">
               <div className="col-md-3">

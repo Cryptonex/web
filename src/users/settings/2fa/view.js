@@ -9,6 +9,11 @@ class TwoFa extends Component {
     const { form, error, url, updateForm, getQrcodeUrl, processing, setEnable2fa, profile } = this.props;
     const enableProps = { form, error, url, updateForm, getQrcodeUrl, processing, setEnable2fa };
     const disableProps = { form, error, updateForm, processing, setEnable2fa };
+    if (!profile.info.auth_2fa) {
+      return <TwoFaEnable {...enableProps}/>
+    }
+
+    return <TwoFaDisable {...disableProps} />;
     return (
       <div className="row">
         {!profile.info.auth_2fa ? <TwoFaEnable {...enableProps}/>: <TwoFaDisable {...disableProps} />}

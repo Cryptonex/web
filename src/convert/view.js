@@ -1,21 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import Dropdown from 'elements/dropDown';
 import Processing from 'elements/processing';
+import Chart from './Chart';
+import TablePair from './Table';
 
 
-class Convert extends Component {
+const listType = [
+  {name: 'H1', type: '1h'},
+  {name: 'D1', type: '1d'},
+  {name: 'W1', type: '1w'}
+];
+
+class Convert extends PureComponent {
   constructor() {
     super(...arguments);
+    this.state = {
+      type: '1h',
+      pair: 'CNX/BTC'
+    }
   }
 
   componentDidMount() {
-    const { dispatch, wallets } = this.props;
+    const { dispatch, wallets, loadDataChart } = this.props;
+    const { type, pair } = this.state;
     dispatch({
       type: 'INIT_CONVERT',
       payload: {
         wallets
       }
     });
+
+    loadDataChart(type, pair);
   }
 
   componentDidUpdate(prevPrpos) {
@@ -47,9 +62,23 @@ class Convert extends Component {
       currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
       updateInput('', '', form, currentRate)
     }
-
-
   }
+
+  onChangeType = (type) => {
+    const state = { ...this.state };
+    const { loadDataChart } = this.props;
+    state.type = type;
+    this.setState(state);
+    loadDataChart(state.type, state.pair);
+  };
+
+  onChangePair = (pair) => {
+    const state = { ...this.state };
+    const { loadDataChart } = this.props;
+    state.pair = pair;
+    this.setState(state);
+    loadDataChart(state.type, state.pair);
+  };
 
   onSubmit = (ev) => {
     const { submit, form, wallets, submitForm} = this.props;
@@ -65,7 +94,8 @@ class Convert extends Component {
       rates,
       updateInput,
       userInfo,
-      processing
+      processing,
+      charts
     } = this.props;
 
     if (form.from_hash === '' && form.to_hash === '') {
@@ -92,7 +122,6 @@ class Convert extends Component {
         (item.base_currency === toWallet.currency && fromCurrentWallet.currency === item.rel_currency_id)
     })[0];
 
-    console.log(toCurrentWallet)
     let currentRate = fromCurrentWallet.currency !== 'cnx' ? toRate.ask: toRate.bid;
     currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
 
@@ -175,6 +204,30 @@ class Convert extends Component {
             </div>
           </div>
         </form>
+        <div className="row" style={{marginTop: '20px', position: 'relative'}}>
+          {charts.processing ? <Processing/>: null}
+          <div className="col-md-4 col-sm-6 col-xs-12">
+            <TablePair rates={rates} onChangePair={this.onChangePair} pair={this.state.pair}/>
+          </div>
+          <div className="col-md-8 col-sm-6 col-xs-12">
+            <ul className="exchange-chart_list">
+              {
+                listType.map((item, index) => {
+                  return (
+                    <li
+                      key={item.name}
+                      className={item.type === this.state.type ? 'active': ''}
+                      onClick={e => this.onChangeType(item.type)}
+                    >
+                      {item.name}
+                    </li>
+                  )
+                })
+              }
+            </ul>
+            <Chart charts={charts} />
+          </div>
+        </div>
       </div>
     )
   }

@@ -24,6 +24,7 @@ const DIR_PUBLIC = '/';
 
 
 module.exports = {
+  context: __dirname,
   entry: {
     main: ['react-hot-loader/patch' ,'./src/index.js'],
     vendor: ['moment', 'react', 'react-dom'],
@@ -38,7 +39,10 @@ module.exports = {
     modules: [
       DIR_SRC,
       'node_modules'
-    ]
+    ],
+    alias: {
+      assets: path.resolve(__dirname, 'src/assets'),
+    }
   },
 
   module: {
@@ -104,10 +108,11 @@ module.exports = {
       {from: `${DIR_SRC}/6896553.txt`},
       {from: `${DIR_SRC}/capitalist_ddccb5dbd2.txt`},
       {from: `${DIR_SRC}/${DIR_IMAGES}/favicon.ico`, to: `${DIR_BUILD}/${DIR_IMAGES}/`},
+      {from: `${DIR_SRC}/assets/js`, to: `${DIR_BUILD}/assets/js/`}
     ])
   ],
 
-  devtool: "cheap-eval-source-map",
+  devtool: "cheap-inline-source-map",
   devServer: {
     historyApiFallback: true,
     hot: false,

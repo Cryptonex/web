@@ -21,9 +21,11 @@
           align-items: center;
           width 100%
     &-buttons
+      > a
+        opacity 0.5
       .active
         transition transform .2s ease
-        transform translateY(-20px)
+        opacity 1
       > a
         display inline-block
         margin-right 5px

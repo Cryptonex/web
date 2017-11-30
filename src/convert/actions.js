@@ -2,6 +2,7 @@ import constants from 'base/constants';
 import { getData, isNumeric } from 'base/settings';
 import { getWallets } from 'users/profile/actions'
 import { alert } from 'elements/alerts/index';
+import moment from 'moment';
 
 export const updateSelect = (field, value, toWallets, wallets) => {
 
@@ -170,8 +171,94 @@ export const updateInput = (field, value, form, rate) => {
         to_amount: form.amount * rate
       }
     })
+  }
+};
 
 
+const resultLoadDataChart = (response, dispatch) => {
+  return response.json().then(json => {
+    if (json.error) {
+      console.log(json)
+      alert.warning('Error!', 5);
+      return dispatch({
+        type: constants.CONVERT_FETCH_CHART_DATA_ERROR,
+      });
+    }
+    const data = json.result.candles.map((item) => {
+      return [moment(item.create_at).valueOf(), Number(item.open), Number(item.hight), Number(item.low), Number(item.close)];
+    });
+    return dispatch({
+      type: constants.CONVERT_FETCH_CHART_DATA_SUCCESS,
+      payload: {
+        data
+      }
+    });
+
+  });
+};
+
+export const loadDataChart = (type, pair) => {
+  let data = {
+    type,
+    start: time(type),
+    end: moment().utc().format('YYYY-MM-DD HH:mm:ss'),
+    pair,
+    ticket: localStorage.getItem('ticket')
+  };
+
+  return (dispatch) => {
+    dispatch({type: constants.CONVERT_FETCH_CHART_DATA});
+    return getData(1, data, 'candle.list').then((response) => {
+      if (response.ok) {
+        resultLoadDataChart(response, dispatch);
+      } else {
+        return response.json().then((json) => {
+          return dispatch({
+            type: constants.CONVERT_FETCH_CHART_DATA_ERROR,
+            payload: {
+              error: 'Unknown error!',
+            }
+          });
+        });
+      }
+    }).catch((error) => {
+      return dispatch({
+        type: constants.CONVERT_FETCH_CHART_DATA_ERROR,
+        payload: {
+          error: 'Unknown error!',
+        }
+      });
+    });
+  }
+};
+
+const time = (timeframe) => {
+
+  let time = moment().add(-2,'h').utc().format('YYYY-MM-DD HH:mm:ss');
+
+  if (timeframe === '5min') {
+    time = moment().add(-10,'h').utc().format('YYYY-MM-DD HH:mm:ss');
   }
 
+  if (timeframe === '15min') {
+    time = moment().add(-24,'h').utc().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  if (timeframe === '1h') {
+    time = moment().add(-5,'d').utc().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  if (timeframe === '1d') {
+    time = moment().add(-1,'M').utc().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  if (timeframe === '1m') {
+    time = moment().add(-1,'y').utc().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  if (timeframe === '1w') {
+    time = moment().add(-3,'w').utc().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  return time;
 };

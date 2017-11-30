@@ -6,7 +6,7 @@ class TwoFaDisable extends PureComponent {
     const { form, error, updateForm, processing, setEnable2fa} = this.props;
 
     return(
-      <div className="col-md-8 offset-md-2">
+      <div className="col-md-8" style={{height: "100%"}}>
         <div className="default__info">
           {processing ? <Processing />: null}
           <div className="row">

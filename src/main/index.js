@@ -123,10 +123,8 @@ class App extends Component {
           <Alerts />
         </div>
 
-        <div className="row">
-          <div className="col-xs-12 col-sm-12">
-{/*            <Footer />*/}
-          </div>
+        <div className="row row-center">
+          <p>2017 © Cryptonex ltd. All Rights Reserved</p>
         </div>
       </div>
     );

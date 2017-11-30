@@ -66,7 +66,7 @@ class Withdraw extends Component {
                 <div className="replenishment__payments-buttons">
                   {[...wallets].reverse().map((item, index) => {
                     return (
-                      <a className={CN({active: item.hash === ''})} key={item.hash} onClick={(e) => updateForm('from_hash', item.hash)}>
+                      <a className={CN({active: item.hash === form.from_hash})} key={item.hash} onClick={(e) => updateForm('from_hash', item.hash)}>
                         {(item.currency === 'cnx') ? <img src={require('assets/images/Big-button_Cryptonex.png')} alt=""/>:
                           (item.currency === 'btc') ? <img src={require('assets/images/Big-button_Bitcoin.png')} alt=""/>:
                             <img src={require('assets/images/Big-button_Ethereum.png')} alt=""/>

@@ -32,8 +32,8 @@ class Replenishment extends Component {
     return (
       <div className="replenishment">
           <div className="content">
-            <div className="row">
-{/*              <div className="col-sm-12 col-md-8 offset-md-2">
+{/*            <div className="row">
+              <div className="col-sm-12 col-md-8 offset-md-2">
                 <div className="default__info">
                   <div className="replenishment__info">
                     <div className="replenishment__info-text">
@@ -62,29 +62,26 @@ class Replenishment extends Component {
                     </div>
                   </div>
                 </div>
-              </div>*/}
-            </div>
+              </div>
+            </div>*/}
             <div className="row">
               <div className="col-md-12">
                 <p style={{marginBottom: '20px'}}>Make a deposit</p>
                 <div className="replenishment__payments-buttons">
-                  <a className={CN({active: this.state.content == ""})}
+                  <a className={CN({active: this.state.content == "cnx"})}
                      onClick={this.onChangeContent.bind(this, "cnx")}>
                     <img src={require('assets/images/Big-button_Cryptonex.png')} alt=""/>
                   </a>
-                  <a className={CN({active: this.state.content == ''})}
+                  <a className={CN({active: this.state.content == 'btc'})}
                      onClick={this.onChangeContent.bind(this, 'btc')}>
                     <img src={require('assets/images/Big-button_Bitcoin.png')} alt=""/></a>
-                  <a className={CN({active: this.state.content == ""})}
+                  <a className={CN({active: this.state.content == "eth"})}
                      onClick={this.onChangeContent.bind(this, "eth")}>
                     <img src={require('assets/images/Big-button_Ethereum.png')} alt=""/>
                   </a>
                 </div>
                 <div className="default__info">
                   <div className="replenishment__info">
-                    <div className="replenishment__info-title">
-                      <h5>Make a deposit</h5>
-                    </div>
                     {this.state.content != "cnx" ? 'Deposit is automatically transferred in CNX.':
                       'CNX is deposited without any bonuses.'}
                     <div className="replenishment__payments">

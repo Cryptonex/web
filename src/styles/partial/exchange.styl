@@ -12,3 +12,39 @@
     text-align: center
     input
       text-align: center
+
+.exchange-table
+  .title
+    border: 1px solid grey-n
+  .header-table
+    padding 2px 0
+    border: 1px solid grey-n
+    border-top none
+    text-align center
+    font-size 0.9em
+  .body
+    overflow-y auto
+    font-size 0.8rem
+    text-align center
+    border: 1px solid grey-n
+    border-top none
+    max-height 450px
+    min-height 320px
+    > div.col-md-12
+      cursor pointer
+      &.active
+        background #d7d7d763
+.exchange-chart
+  &_list
+    list-style-type none
+    margin 0px
+    text-align center
+    li
+      display inline-block
+      margin-left: 10px;
+      cursor: pointer;
+      color: grey;
+      border-bottom: 1px dashed #bababa;
+      &.active
+        color black;
+        border-bottom-color black

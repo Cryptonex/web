@@ -56,10 +56,36 @@ let processing = (state=false, action) => {
   }
 };
 
+const defaultChart = {
+  data: [],
+  processing: true,
+};
+
+const charts = (state=defaultChart, action) => {
+  switch (action.type) {
+    case constants.CONVERT_FETCH_CHART_DATA:
+      return update(state, {
+        processing: { $set: true }
+      });
+    case constants.CONVERT_FETCH_CHART_DATA_SUCCESS:
+      return update(state, {
+        processing: { $set: false },
+        data: { $set: action.payload.data }
+      });
+    case constants.CONVERT_FETCH_CHART_DATA_ERROR:
+      return update(state, {
+        processing: { $set: false }
+      });
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   form,
-  processing
+  processing,
+  charts
 });
 
 

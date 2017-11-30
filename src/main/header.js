@@ -45,7 +45,7 @@ class Header extends Component {
                     <span>Balances:</span>
 
                     <ul className="clear inline">
-                      {wallets.map((item, index) => {
+                      {[...wallets].reverse().map((item, index) => {
                         return (
                           <li key={item.currency}>
                             {`${item.balance} ${item.currency.toUpperCase()}`}

@@ -10,10 +10,12 @@ class Settings extends Component {
   }
   render() {
     return (
-      <div className="settings">
+      <div className="settings content">
         <div className="container">
-          <TwoFa />
-          <ChangePassword />
+          <div className="row">
+            <TwoFa />
+            <ChangePassword />
+          </div>
         </div>
       </div>
     )
