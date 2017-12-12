@@ -1,12 +1,34 @@
 import React, { PureComponent } from 'react';
 import Processing from 'elements/processing';
 import { Redirect } from 'react-router-dom';
-
+import Recaptcha from 'react-recaptcha';
 
 class Changer extends PureComponent {
 
+  componentWillReceiveProps(){
+    const { processing } = this.props;
+    if (processing && this.recaptchaInstance) {
+      this.recaptchaInstance.reset();
+    }
+  }
+
+  onSubmit = () => {
+
+    const { form, submitChanger, statusRecaptcha, dispatch } = this.props;
+    const { key } = this.props.match.params;
+    if (statusRecaptcha && form.google_recaptcha_response === '') {
+      return dispatch({
+        type: 'USERS_RESTORE_PASSWORD_FORM_ERROR',
+        payload: {
+          error: 'Fill in all the fields!'
+        }
+      });
+    }
+    submitChanger(form,key);
+  };
+
   render() {
-    const { form, updateForm, submitChanger, error, processing } = this.props;
+    const { form, updateForm, submitChanger, error, processing, statusRecaptcha} = this.props;
     const { key } = this.props.match.params;
 
     if (key.length != 32) {
@@ -33,9 +55,18 @@ class Changer extends PureComponent {
               {error}
             </p>
           </div>
-          <div className="settings__form-item">
-            <a className="button button-cover primary"
-               onClick={e => submitChanger(form, key)}>Change</a>
+          { statusRecaptcha ? <Recaptcha
+            sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
+            render='explicit'
+            elementID="login__recaptcha"
+            onloadCallback={console.log.bind(this, "recaptcha loaded")}
+            verifyCallback={hash => updateForm('google_recaptcha_response', hash)}
+            expiredCallback={() => updateForm('google_recaptcha_response', '')}
+            ref={e => this.recaptchaInstance = e}
+          />: null }
+          <div className="settings__form-item" style={{marginTop: '10px'}}>
+            <a className="button button-cover primary small"
+               onClick={this.onSubmit}>Change</a>
           </div>
         </div>
       </div>

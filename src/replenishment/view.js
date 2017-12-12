@@ -21,7 +21,7 @@ class Replenishment extends Component {
   }
 
   render() {
-    const { wallets, profile, rates } = this.props;
+    const { wallets, profile, rates, fetchChangeStatusConvert, proccesingStatus } = this.props;
 /*    const priceBTC = Number(rates.filter((item) => item.alias === 'CNX/BTC')[0].rate);
     const priceETH = Number(rates.filter((item) => item.alias === 'CNX/ETH')[0].rate);
 
@@ -84,6 +84,12 @@ class Replenishment extends Component {
                   <div className="replenishment__info">
                     {this.state.content != "cnx" ? 'Deposit is automatically transferred in CNX.':
                       'CNX is deposited without any bonuses.'}
+                    <label style={{marginTop: '10px'}}>
+                      <input type="checkbox" checked={profile.info.deposit_auto_convert}
+                             onChange={e => !proccesingStatus ? fetchChangeStatusConvert(profile.info.deposit_auto_convert): null}/>
+                      <span>Autoconvert in CNX</span>
+                      {proccesingStatus? <span><i className="fa fa-spinner fa-pulse fa-1x fa-fw"></i></span>:null}
+                    </label>
                     <div className="replenishment__payments">
                       {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
                         return <Purse wallet={item} key={index} />

@@ -9,6 +9,7 @@ import referral from 'referral/reducers';
 import activations from 'activations/reducers';
 import convert from 'convert/reducers';
 import alerts from 'elements/alerts/reducers';
+import replenishment from 'replenishment/reducers';
 
 export default combineReducers({
   router: routerReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   referral,
   activations,
   convert,
-  alerts
+  alerts,
+  replenishment
 });

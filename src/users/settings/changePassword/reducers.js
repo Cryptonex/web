@@ -3,14 +3,18 @@ import constants from 'base/constants';
 import update from 'react-addons-update';
 
 
-let form = (state={old: '', new: '', confirm: ''}, action) => {
+let form = (state={password_old: '', password_new: '', confirm: '', google_recaptcha_response: ''}, action) => {
   switch (action.type) {
     case constants.USERS_SETTINGS_PASSWORD_UPDATE_FORM:
       return update(state, {
         [action.payload.field]: {$set: action.payload.value}
       });
+    case  constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM:
+      return update(state, {
+        google_recaptcha_response: {$set: ''}
+      });
     case  constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_SUCCESS:
-      return {old: '', new: '', confirm: ''};
+      return {password_old: '', password_new: '', confirm: '', google_recaptcha_response: ''};
     default:
       return state;
   }
@@ -55,7 +59,16 @@ let processing = (state=false, action) => {
   }
 };
 
+const statusRecaptcha = (state=false, action) => {
+  switch (action.type) {
+    case constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_ERROR:
+      return true;
+    default:
+      return state
+  }
+};
+
 
 export default combineReducers({
-  form, error, processing, success
+  form, error, processing, success, statusRecaptcha
 });

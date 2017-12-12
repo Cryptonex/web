@@ -3,7 +3,7 @@ import Dropdown from 'elements/dropDown';
 import Processing from 'elements/processing';
 import Chart from './Chart';
 import TablePair from './Table';
-
+import deepEqual from 'deep-equal';
 
 const listType = [
   {name: 'H1', type: '1h'},
@@ -11,7 +11,7 @@ const listType = [
   {name: 'W1', type: '1w'}
 ];
 
-class Convert extends PureComponent {
+class Convert extends Component {
   constructor() {
     super(...arguments);
     this.state = {
@@ -33,6 +33,38 @@ class Convert extends PureComponent {
     loadDataChart(type, pair);
   }
 
+  componentWillReceiveProps(nextProps){
+    const {
+      form,
+      updateSelect,
+      wallets,
+      rates,
+      updateInput
+    } = this.props;
+
+    if (!deepEqual(nextProps.rates, rates)) {
+      console.log('yes')
+      const fromCurrentWallet = wallets.filter(item => form.from_hash === item.hash)[0];
+
+      const toCurrentWallet =  rates.filter(item => {
+        return (fromCurrentWallet.currency === item.base_currency && item.convert_type ==="cross") ||
+          (fromCurrentWallet.currency === item.rel_currency_id && item.convert_type ==="cross")
+      });
+
+      const toWallet = wallets.filter((item) => item.hash === form.to_hash)[0];
+
+      const toRate = toCurrentWallet.filter((item) => {
+        return (item.base_currency === fromCurrentWallet.currency && toWallet.currency === item.rel_currency_id) ||
+          (item.base_currency === toWallet.currency && fromCurrentWallet.currency === item.rel_currency_id)
+      })[0];
+
+
+      let currentRate = fromCurrentWallet.currency !== 'cnx' ? toRate.ask: toRate.bid;
+      currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
+      updateInput('', '', form, currentRate)
+    }
+  }
+
   componentDidUpdate(prevPrpos) {
     const {
       form,
@@ -41,6 +73,8 @@ class Convert extends PureComponent {
       rates,
       updateInput
     } = this.props;
+
+
 
     if (prevPrpos.form.from_hash !== form.from_hash || prevPrpos.form.to_hash !== form.to_hash) {
       const fromCurrentWallet = wallets.filter(item => form.from_hash === item.hash)[0];
@@ -62,6 +96,7 @@ class Convert extends PureComponent {
       currentRate = fromCurrentWallet.currency !== 'cnx' ? 1 / currentRate:  currentRate;
       updateInput('', '', form, currentRate)
     }
+
   }
 
   onChangeType = (type) => {
@@ -183,23 +218,9 @@ class Convert extends PureComponent {
                 </div>
               </div>
 
-              { userInfo.auth_2fa ?
-                <div className="col-md-12">
-                  <div className="row">
-                    <div className="col-md-8" style={{marginTop: '20px'}}>
-                      <label className="form-label">Enter the 6-digit code by Google Authenticator:</label>
-                      <input type="text"
-                             value={form.auth_2fa_code}
-                             onChange={e => updateInput('auth_2fa_code', e.target.value, form, rates)}
-                             className="form form-full__width"
-                             style={{borderWidth: '1px'}}/>
-                    </div>
-                  </div>
-                </div>
-                : null }
-
               <div className="col-xs-12 col-sm-3">
                 <button className="button button-cover primary small">Exchange</button>
+                <span style={{paddingLeft: '30px', fontSize: '0.7rem'}}>Fee <span style={{fontWeight: 'bold'}}> 0.1%</span></span>
               </div>
             </div>
           </div>

@@ -33,6 +33,12 @@ let current = function (state = currentState, action) {
       });
     case constants.USERS_PROFILE_LOGOUT_SUCCESS:
       return defaultState;
+    case constants.FETCH_AUTO_CONVERT_SUCCESS:
+      return update(state, {
+        info: {
+          deposit_auto_convert: { $set: !state.info.deposit_auto_convert}
+        }
+      });
     case constants.USERS_SETTINGS_QRCODE_SET_ENABLE_2FA_SUCCESS:
       console.log(action.payload.status)
       return update(state, {

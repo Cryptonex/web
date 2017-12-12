@@ -7,7 +7,6 @@ const defaultForm = {
   amount:'',
   from_hash:'',
   to_hash: '',
-  auth_2fa_code: '',
   to_amount: ''
 };
 

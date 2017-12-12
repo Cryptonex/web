@@ -60,7 +60,7 @@ class Registration extends Component {
                onloadCallback={console.log.bind(this, "recaptcha loaded")}
                />*/}
                <div className="submit">
-                 <a className="button button-cover primary"
+                 <a className="button button-cover primary small"
                     onClick={e => submit(registrationForm)}>
                    Create account
                  </a>

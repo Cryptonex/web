@@ -39,7 +39,7 @@ let result = {
 export let submit = form => {
   return dispatch => {
 
-    if (!form.new || !form.old || !form.confirm) {
+    if (!form.password_new || !form.password_old || !form.confirm) {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {
@@ -48,7 +48,7 @@ export let submit = form => {
       });
     }
 
-    if (form.new != form.confirm) {
+    if (form.password_new != form.confirm) {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {
@@ -59,9 +59,12 @@ export let submit = form => {
 
     const params = {
       'ticket' : localStorage.getItem('ticket'),
-      'password_old': form.old,
-      'password_new': form.new,
+      ...form,
     };
+
+    if (form.google_recaptcha_response === '') {
+      delete params.google_recaptcha_response;
+    }
 
     dispatch({type: constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM});
     return getData(2, params, 'user.password_change_internal').then( response => {

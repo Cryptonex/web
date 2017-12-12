@@ -117,8 +117,13 @@ export let submitChanger = (form, code) => {
 
     const params = {
       'password': form.new,
-      code: code
+      code: code,
+      'google_recaptcha_response': form.google_recaptcha_response
     };
+
+    if (params.google_recaptcha_response === '') {
+      delete params.google_recaptcha_response;
+    }
 
     dispatch({type: constants.USERS_RESTORE_PASSWORD_SUBMIT_CHANGER_FORM});
     return getData(2, params, 'user.password_change_external').then( response => {

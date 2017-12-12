@@ -23,7 +23,7 @@ class Request extends PureComponent {
           </div>
 
           <div className="settings__form-item">
-            <a className="button button-cover primary"
+            <a className="button button-cover primary small"
                onClick={e => submitRequest(form)}>Restore</a>
           </div>
         </div>

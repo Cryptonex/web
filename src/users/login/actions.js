@@ -83,7 +83,7 @@ export let login = {
 
       let params = Object.assign({}, form);
 
-      if (!params.password || !params.login) {
+      if (!params.password || !params.login ) {
         return dispatch({
           type: constants.USERS_LOGIN_FORM_ERROR,
           payload: {
@@ -99,6 +99,10 @@ export let login = {
             error: 'Invalid format Login!'
           }
         })
+      }
+
+      if (params.google_recaptcha_response === '') {
+        delete params.google_recaptcha_response;
       }
 
       params.password = sha256(params.password);

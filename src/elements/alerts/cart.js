@@ -43,7 +43,7 @@ class AlertCart extends Component {
     return (
       <div className={classNames('alert', 'alert-' + type, effect)}>
         <div className="header">
-          <div className="row">
+          <div className="row row-between">
             <div className="col-sm-auto col-md-auto col-lg-auto">
               <span>{type}</span>
             </div>

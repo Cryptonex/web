@@ -2,14 +2,18 @@ import { combineReducers } from 'redux';
 import constants from 'base/constants';
 import update from 'react-addons-update';
 
-let loginForm = (state={login:'', password:''}, action) => {
+let loginForm = (state={login:'', password:'', google_recaptcha_response: ''}, action) => {
   switch (action.type) {
     case constants.USERS_LOGIN_UPDATE_FORM:
       return update(state, {
         [action.payload.field]: {$set: action.payload.value}
       });
+    case constants.USERS_LOGIN_FETCH_FORM:
+      return update(state, {
+        google_recaptcha_response: {$set: ''}
+      });
     case constants.USERS_LOGIN_FETCH_FORM_SUCCESS:
-      return {login:'', password:''};
+      return {login:'', password:'', google_recaptcha_response: ''};
     default:
       return state;
   }
@@ -70,6 +74,7 @@ let authForm = (state={code: '', login: '', password: ''}, action) => {
   }
 };
 
+
 let processing = (state=false, action) => {
   switch (action.type) {
     case constants.USERS_AUTH_FORM_ERROR:
@@ -93,13 +98,23 @@ let processing = (state=false, action) => {
   }
 };
 
+const statusRecaptcha = (state=false, action) => {
+  switch (action.type) {
+    case constants.USERS_LOGIN_FETCH_FORM_ERROR:
+      return true;
+    default:
+      return state
+  }
+};
+
 
 let login =  combineReducers({
   loginForm,
   content,
   error,
   authForm,
-  processing
+  processing,
+  statusRecaptcha
 });
 
 

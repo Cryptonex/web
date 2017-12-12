@@ -26,9 +26,9 @@ class Code extends PureComponent {
       <div className="code">
         <div  ref='qrcode' style={{textAlign: 'center'}}>
         </div>
-        <p>Your secret key: {url.split('=')[1]}</p>
+        <p style={{fontSize: '0.9rem'}}>Your secret key: {url.split('=')[1]}</p>
         <div style={{marginTop: '18px', textAlign: 'center'}}>
-          <a href={this.state.url} download="qrcode.gif" className="button button-cover primary">Save QR code</a>
+          <a href={this.state.url} download="qrcode.gif" className="button button-cover primary small">Save QR code</a>
         </div>
       </div>
     )

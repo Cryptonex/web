@@ -74,7 +74,7 @@ const resultSubmitForm = (response, dispatch) => {
       });
     }
 
-    alert.success(`Success!`, 5);
+    alert.success(`Complete.`, 5);
     dispatch(getWallets());
     return dispatch({
       type: constants.CONVERT_FETCH_FORM_SUCCESS,
@@ -95,14 +95,14 @@ export const submitForm = (form, wallets) => {
   }
 
   data.auth_2fa_code = Number(data.auth_2fa_code);
-
+  console.log(fromWallet)
   return dispatch => {
     if (form.amount === '') {
       alert.warning("Amount is empty!", 5);
       return;
     }
 
-    if (form.amount > fromWallet.balance) {
+    if (Number(form.amount) > Number(fromWallet.balance)) {
       alert.warning("It is possible that you don't have enough money for transactions in the account.", 5);
       return;
     }
@@ -149,7 +149,7 @@ export const updateInput = (field, value, form, rate) => {
         type: constants.CONVERT_UPDATE_INPUTS,
         payload: {
           to_amount: value,
-          amount: value / rate
+          amount: value / rate + (value / rate)*0.1 // hard commision
         }
       })
     }
@@ -159,7 +159,7 @@ export const updateInput = (field, value, form, rate) => {
         type: constants.CONVERT_UPDATE_INPUTS,
         payload: {
           amount: value,
-          to_amount: value * rate
+          to_amount: value * rate - (value * rate) * 0.1
         }
       })
     }
@@ -168,7 +168,7 @@ export const updateInput = (field, value, form, rate) => {
       type: constants.CONVERT_UPDATE_INPUTS,
       payload: {
         amount: form.amount,
-        to_amount: form.amount * rate
+        to_amount: form.amount * rate - (form.amount * rate) * 0.1
       }
     })
   }

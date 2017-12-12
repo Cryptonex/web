@@ -11,7 +11,7 @@ class TwoFaEnable extends PureComponent {
     const { form, error, url, updateForm, getQrcodeUrl, processing, setEnable2fa} = this.props;
 
     return(
-      <div className="col-md-8">
+      <div className="col-md-7">
         <div className="default__info" style={{height: "100%"}}>
           {processing ? <Processing />: null}
           <div className="row">
@@ -25,9 +25,9 @@ class TwoFaEnable extends PureComponent {
               </div>
               <div className="settings__form-item">
                 { !url ?
-                  <a className="button button-cover primary"
+                  <a className="button button-cover primary small"
                      onClick={e => getQrcodeUrl()}>Qr Code</a> :
-                  <a className="button button-cover primary"
+                  <a className="button button-cover primary small"
                      onClick={e => setEnable2fa(form, true)}>Enable</a>}
                   <p className="error">
                     {error}

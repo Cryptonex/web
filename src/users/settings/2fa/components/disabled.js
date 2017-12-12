@@ -6,7 +6,7 @@ class TwoFaDisable extends PureComponent {
     const { form, error, updateForm, processing, setEnable2fa} = this.props;
 
     return(
-      <div className="col-md-8" style={{height: "100%"}}>
+      <div className="col-md-7" style={{height: "100%"}}>
         <div className="default__info">
           {processing ? <Processing />: null}
           <div className="row">
@@ -20,7 +20,7 @@ class TwoFaDisable extends PureComponent {
                        value={form.code} onChange={e => updateForm('code', e.target.value)}/>
               </div>
               <div className="settings__form-item">
-                <a className="button button-cover primary"
+                <a className="button button-cover primary small"
                    onClick={e => setEnable2fa(form, false)}>Disable</a>
                 <p className="error">
                   {error}

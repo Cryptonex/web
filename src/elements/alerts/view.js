@@ -62,7 +62,7 @@ class Alerts extends Component {
           list.length > 1 ?
             <Transition timeout={0}>
               <button className="button button-block button-tint button-primary" onClick={() => closeAll()}>
-                Закрыть все
+                Close all
               </button>
             </Transition>
             : null

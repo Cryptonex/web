@@ -14,6 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators(actionsChangePassword, dispatch),
+    dispatch: param => dispatch(param)
   }
 };
 

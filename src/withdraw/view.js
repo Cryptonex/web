@@ -99,7 +99,7 @@ class Withdraw extends Component {
                         error != 'Success!' ? error: 'Check your e-mail for confirming of transaction.'}
                     </div>
                     <div className="withdraw__container-form__item-button">
-                      <a className="button button-cover primary"
+                      <a className="button button-cover primary small"
                          onClick={e => submit(form, userInfo.auth_2fa)}>Send</a>
                     </div>
                   </div>

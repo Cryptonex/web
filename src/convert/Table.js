@@ -20,8 +20,9 @@ export default class TablePair extends Component {
         </div>
         <div className="col-md-12">
           <div className="row header-table">
-            <div className="col-xs-6">Pair</div>
-            <div className="col-xs-6">Price</div>
+            <div className="col-xs-4">Pair</div>
+            <div className="col-xs-4">Price</div>
+            <div className="col-xs-4">Volume</div>
           </div>
         </div>
         <div className="body">
@@ -31,8 +32,9 @@ export default class TablePair extends Component {
                    onClick={ e => onChangePair(item.alias)}
                    key={index}>
                 <div className="row">
-                  <div className="col-xs-6">{item.alias}</div>
-                  <div className="col-xs-6">{item.bid}</div>
+                  <div className="col-xs-4">{item.alias}</div>
+                  <div className="col-xs-4">{item.bid}</div>
+                  <div className="col-xs-4">0</div>
                 </div>
               </div>
             )

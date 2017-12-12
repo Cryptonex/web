@@ -18,7 +18,8 @@ const mapStateToProps = state => {
     content: state.users.login.content,
     error: state.users.login.error,
     authForm: state.users.login.authForm,
-    processing: state.users.login.processing
+    processing: state.users.login.processing,
+    statusRecaptcha: state.users.login.statusRecaptcha
   }
 };
 
