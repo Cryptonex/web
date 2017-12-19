@@ -24,8 +24,8 @@ const form = (state=defaultForm, action) => {
       });
     case constants.INIT_CONVERT:
       return update(defaultForm, {
-        from_hash: { $set: action.payload.wallets.filter(item => item.currency === 'cnx')[0].hash },
-        to_hash: { $set: action.payload.wallets.filter(item => item.currency === 'btc')[0].hash }
+        from_hash: { $set: action.payload.wallets.filter(item => item.currency === 'btc')[0].hash },
+        to_hash: { $set: action.payload.wallets.filter(item => item.currency === 'cnx')[0].hash }
       });
     case constants.CONVERT_UPDATE_INPUTS_2A:
       return update(state, {

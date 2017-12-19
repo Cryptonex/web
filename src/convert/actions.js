@@ -103,7 +103,7 @@ export const submitForm = (form, wallets) => {
     }
 
     if (Number(form.amount) > Number(fromWallet.balance)) {
-      alert.warning("It is possible that you don't have enough money for transactions in the account.", 5);
+      alert.warning("It is possible that you don't have enough money for trading transactions in the account.", 5);
       return;
     }
 
@@ -185,7 +185,7 @@ const resultLoadDataChart = (response, dispatch) => {
       });
     }
     const data = json.result.candles.map((item) => {
-      return [moment(item.create_at).valueOf(), Number(item.open), Number(item.hight), Number(item.low), Number(item.close)];
+      return [moment(item.start_at).valueOf(), Number(item.open), Number(item.hight), Number(item.low), Number(item.close)];
     });
     return dispatch({
       type: constants.CONVERT_FETCH_CHART_DATA_SUCCESS,

@@ -10,7 +10,7 @@ const resultFetchChangeStatusConvert = (response, dispatch) => {
         type: constants.FETCH_AUTO_CONVERT_ERROR,
       });
     }
-    alert.success('Success change status!', 5);
+    alert.success('Status change success!', 5);
     return dispatch({
       type: constants.FETCH_AUTO_CONVERT_SUCCESS,
     });

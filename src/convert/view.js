@@ -43,7 +43,6 @@ class Convert extends Component {
     } = this.props;
 
     if (!deepEqual(nextProps.rates, rates)) {
-      console.log('yes')
       const fromCurrentWallet = wallets.filter(item => form.from_hash === item.hash)[0];
 
       const toCurrentWallet =  rates.filter(item => {
@@ -169,7 +168,9 @@ class Convert extends Component {
               <div className="col-xs-12 col-sm-3">
                 <span className="label">You give</span>
                 <div className="form-compare">
-                  <input type="text" onChange={e => updateInput('amount', e.target.value, form, currentRate)} value={form.amount} />
+                  <input type="text"
+                         onChange={e => updateInput('amount', Math.round(e.target.value * 100000000)/100000000, form, currentRate)}
+                         value={Math.round(form.amount * 100000000)/100000000} />
                   <select value={form.from_hash} onChange={e => updateSelect('from_hash', e.target.value, rates, wallets)}>
                     {
                       wallets.map((el, i) => {
@@ -185,14 +186,14 @@ class Convert extends Component {
               <div className="col-xs-12 col-sm-3">
                 <span className="label">Exchange rate</span>
                 <div className="form-compare">
-                  <span>{currentRate}</span>
+                  <span>{Math.round(currentRate*100000000)/100000000}</span>
                 </div>
               </div>
 
               <div className="col-xs-12 col-sm-3">
                 <span className="label">You receive</span>
                 <div className="form-compare">
-                  <input type="text" onChange={e => updateInput('to_amount', e.target.value, form, currentRate)} value={form.to_amount}/>
+                  <input type="text" onChange={e => updateInput('to_amount', Math.round(e.target.value * 100000000)/100000000, form, currentRate)} value={Math.round(form.to_amount * 100000000)/100000000}/>
                   <select value={form.to_hash} onChange={e => updateSelect('to_hash', e.target.value, rates, wallets)}>
                     {
                       wallets.map((el, i) => {

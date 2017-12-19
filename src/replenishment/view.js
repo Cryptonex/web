@@ -86,7 +86,7 @@ class Replenishment extends Component {
                       'CNX is deposited without any bonuses.'}
                     <label style={{marginTop: '10px'}}>
                       <input type="checkbox" checked={profile.info.deposit_auto_convert}
-                             onChange={e => !proccesingStatus ? fetchChangeStatusConvert(profile.info.deposit_auto_convert): null}/>
+                             onChange={e => !proccesingStatus ? fetchChangeStatusConvert(!profile.info.deposit_auto_convert): null}/>
                       <span>Autoconvert in CNX</span>
                       {proccesingStatus? <span><i className="fa fa-spinner fa-pulse fa-1x fa-fw"></i></span>:null}
                     </label>

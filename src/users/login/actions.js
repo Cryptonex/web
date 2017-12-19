@@ -150,7 +150,7 @@ export let auth = {
         return dispatch({
           type: constants.USERS_AUTH_FORM_ERROR,
           payload: {
-            error: 'Fill in the field!'
+            error: 'Fill in all the fields!'
           }
         });
       }

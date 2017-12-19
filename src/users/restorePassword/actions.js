@@ -29,7 +29,7 @@ let result = {
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM_SUCCESS,
         payload: {
-          success: 'Success! The message with instructions for restore password was sent to your e-mail.'
+          success: 'Success! The message with the password recovery instructions was sent to your e-mail.'
         }
       });
 

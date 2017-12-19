@@ -35,8 +35,8 @@ class Activation extends Component {
             <div className="activation__form-container__item">
               <div className={error == 'success' ? "activation__form-container__success":
                                                    "activation__form-container__error"}>
-                {error == 'success' ? 'Your account has been activated successfully.':
-                 'ERROR. Your account has not been activated.'}
+                {error == 'success' ? 'Your account has been successfully activated.':
+                  'ERROR. Your account has not been activated.'}
               </div>
             </div>: null}
             {error == 'success' ? <div className="activation__form-container__item">
