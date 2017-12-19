@@ -95,7 +95,7 @@ export const submitForm = (form, wallets) => {
   }
 
   data.auth_2fa_code = Number(data.auth_2fa_code);
-  console.log(fromWallet)
+
   return dispatch => {
     if (form.amount === '') {
       alert.warning("Amount is empty!", 5);
@@ -149,7 +149,7 @@ export const updateInput = (field, value, form, rate) => {
         type: constants.CONVERT_UPDATE_INPUTS,
         payload: {
           to_amount: value,
-          amount: value / rate + (value / rate)*0.1 // hard commision
+          amount: Math.round((value / rate + (value / rate)*0.1) * 100000000) / 100000000 // hard commision
         }
       })
     }
@@ -159,7 +159,7 @@ export const updateInput = (field, value, form, rate) => {
         type: constants.CONVERT_UPDATE_INPUTS,
         payload: {
           amount: value,
-          to_amount: value * rate - (value * rate) * 0.1
+          to_amount: Math.round((value * rate - (value * rate) * 0.1) * 100000000) / 100000000
         }
       })
     }
@@ -168,7 +168,7 @@ export const updateInput = (field, value, form, rate) => {
       type: constants.CONVERT_UPDATE_INPUTS,
       payload: {
         amount: form.amount,
-        to_amount: form.amount * rate - (form.amount * rate) * 0.1
+        to_amount: Math.round((form.amount * rate - (form.amount * rate) * 0.1) * 100000000) / 100000000
       }
     })
   }

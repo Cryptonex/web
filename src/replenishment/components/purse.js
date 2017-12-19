@@ -23,21 +23,37 @@ export default class Purse extends PureComponent {
     qr.make();
     qrcodeLay.innerHTML = qr.createImgTag(3);
   }
+
+  copy = (ev) => {
+    let field = this.refs['hashInput'];
+    field.type='text';
+    field.select();
+    document.execCommand("Copy", false, null);
+    field.type='hidden'
+  }
+
+
   render() {
     const { wallet } = this.props;
     return (
       <div className="purse">
         <div className="row">
-          <div className="col-md-4 col-xs-12 col-sm-12">
+          <div className="col-md-4 col-xs-12 col-sm-12 contain">
             <h5 style={{textAlign: 'center', fontSize: '14px'}}><b>Deposit by scanning below</b></h5>
             <div className="q-code" id="q-code" ref='qrcode' style={{textAlign: 'center'}}>
 
             </div>
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 col-xs-12 col-sm-12 contain">
             <h5 style={{textAlign: 'center', fontSize: '14px'}}><b>or direct deposit to</b></h5>
             <div className="purse__text" id="q-code" style={{textAlign: 'center'}}>
-                <div className="purse__text-box">
+                <button
+                  onClick={this.copy}
+                  className="button button-cover primary small"
+                  style={{marginTop: '20px'}}>Copy</button>
+                <div className="purse__text-box" style={{margin: '28px 0'}}>
+                  <input type="hidden" value={wallet.hash}
+                         ref="hashInput"/>
                   {wallet.hash}
                 </div>
             </div>

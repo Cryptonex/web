@@ -82,14 +82,13 @@ class Replenishment extends Component {
                 </div>
                 <div className="default__info">
                   <div className="replenishment__info">
-                    {this.state.content != "cnx" ? 'Deposit is automatically transferred in CNX.':
-                      'CNX is deposited without any bonuses.'}
+                    {this.state.content != "cnx" ?
                     <label style={{marginTop: '10px'}}>
                       <input type="checkbox" checked={profile.info.deposit_auto_convert}
                              onChange={e => !proccesingStatus ? fetchChangeStatusConvert(!profile.info.deposit_auto_convert): null}/>
-                      <span>Autoconvert in CNX</span>
+                      <span>Autoconvert into CNX</span>
                       {proccesingStatus? <span><i className="fa fa-spinner fa-pulse fa-1x fa-fw"></i></span>:null}
-                    </label>
+                    </label> :null}
                     <div className="replenishment__payments">
                       {wallets.filter(item => item.currency == this.state.content).map((item, index) => {
                         return <Purse wallet={item} key={index} />

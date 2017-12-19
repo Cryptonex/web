@@ -169,8 +169,8 @@ class Convert extends Component {
                 <span className="label">You give</span>
                 <div className="form-compare">
                   <input type="text"
-                         onChange={e => updateInput('amount', Math.round(e.target.value * 100000000)/100000000, form, currentRate)}
-                         value={Math.round(form.amount * 100000000)/100000000} />
+                         onChange={e => updateInput('amount', e.target.value.replace(",","."), form, currentRate)}
+                         value={form.amount} />
                   <select value={form.from_hash} onChange={e => updateSelect('from_hash', e.target.value, rates, wallets)}>
                     {
                       wallets.map((el, i) => {
@@ -193,7 +193,7 @@ class Convert extends Component {
               <div className="col-xs-12 col-sm-3">
                 <span className="label">You receive</span>
                 <div className="form-compare">
-                  <input type="text" onChange={e => updateInput('to_amount', Math.round(e.target.value * 100000000)/100000000, form, currentRate)} value={Math.round(form.to_amount * 100000000)/100000000}/>
+                  <input type="text" onChange={e => updateInput('to_amount', e.target.value.replace(",","."), form, currentRate)} value={form.to_amount}/>
                   <select value={form.to_hash} onChange={e => updateSelect('to_hash', e.target.value, rates, wallets)}>
                     {
                       wallets.map((el, i) => {

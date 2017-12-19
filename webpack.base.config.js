@@ -108,7 +108,6 @@ module.exports = {
       {from: `${DIR_SRC}/6896553.txt`},
       {from: `${DIR_SRC}/capitalist_ddccb5dbd2.txt`},
       {from: `${DIR_SRC}/${DIR_IMAGES}/favicon.ico`, to: `${DIR_BUILD}/${DIR_IMAGES}/`},
-      {from: `${DIR_SRC}/assets/js`, to: `${DIR_BUILD}/assets/js/`}
     ])
   ],
 

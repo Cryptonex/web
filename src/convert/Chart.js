@@ -19,7 +19,13 @@ class Chart extends Component {
       series: [{
         type: 'candlestick',
         data: [],
-      }]
+      }],
+      yAxis: {
+        labels: {
+          x: 10,
+          align: 'left'
+        }
+      },
     });
   }
 
