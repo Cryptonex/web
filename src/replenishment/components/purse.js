@@ -47,14 +47,16 @@ export default class Purse extends PureComponent {
           <div className="col-md-8 col-xs-12 col-sm-12 contain">
             <h5 style={{textAlign: 'center', fontSize: '14px'}}><b>or direct deposit to</b></h5>
             <div className="purse__text" id="q-code" style={{textAlign: 'center'}}>
-                <button
-                  onClick={this.copy}
-                  className="button button-cover primary small"
-                  style={{marginTop: '20px'}}>Copy</button>
-                <div className="purse__text-box" style={{margin: '28px 0'}}>
-                  <input type="hidden" value={wallet.hash}
-                         ref="hashInput"/>
-                  {wallet.hash}
+
+                <div className="purse__text-box col-md-12 col-sm-12 col-xs-12" style={{margin: '50.5px 0'}}>
+                  <div className="row row-center row-middle">
+                    <input type="hidden" value={wallet.hash}
+                           ref="hashInput"/>
+                    {wallet.hash} <button
+                    onClick={this.copy}
+                    className="button button-cover primary small"
+                    style={{marginLeft: '20px'}}>Copy</button>
+                  </div>
                 </div>
             </div>
           </div>

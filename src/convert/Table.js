@@ -11,11 +11,11 @@ export default class TablePair extends Component {
             <div className="col-xs-6">
               <h5>Charts</h5>
             </div>
-            <div className="col-xs-6">
+{/*            <div className="col-xs-6">
               <div className="form-compare">
                 <input type="text" value="" placeholder="Search"/>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
         <div className="col-md-12">
