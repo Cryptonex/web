@@ -12,14 +12,6 @@ class ChangePassword extends Component {
 
   onSubmit = () => {
     const { form, submit, statusRecaptcha, dispatch } = this.props;
-    if (form.google_recaptcha_response === '') {
-      return dispatch({
-        type: 'USERS_SETTINGS_PASSWORD_FORM_ERROR',
-        payload: {
-          error: 'Fill in all the fields!'
-        }
-      });
-    }
     submit(form);
   };
 
@@ -46,15 +38,6 @@ class ChangePassword extends Component {
             <input type="password" className="form form-full__width"
                    value={form.confirm} onChange={e => updateForm('confirm', e.target.value)}/>
           </div>
-          <Recaptcha
-            sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
-            render='explicit'
-            elementID="login__recaptcha"
-            onloadCallback={console.log.bind(this, "recaptcha loaded")}
-            verifyCallback={hash => updateForm('google_recaptcha_response', hash)}
-            expiredCallback={() => updateForm('google_recaptcha_response', '')}
-            ref={e => this.recaptchaInstance = e}
-            />
           <div className="settings__form-item"style={{paddingTop: '10px'}}>
             <a className="button button-cover primary small"
                onClick={this.onSubmit}>Change</a>
