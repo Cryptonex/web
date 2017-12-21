@@ -245,11 +245,11 @@ const time = (timeframe) => {
   }
 
   if (timeframe === '1h') {
-    time = moment().add(-5,'d').utc().format('YYYY-MM-DD HH:mm:ss');
+    time = moment().add(-2,'d').utc().format('YYYY-MM-DD HH:mm:ss');
   }
 
   if (timeframe === '1d') {
-    time = moment().add(-1,'M').utc().format('YYYY-MM-DD HH:mm:ss');
+    time = moment().add(-49,'d').utc().format('YYYY-MM-DD HH:mm:ss');
   }
 
   if (timeframe === '1m') {
@@ -257,7 +257,7 @@ const time = (timeframe) => {
   }
 
   if (timeframe === '1w') {
-    time = moment().add(-3,'w').utc().format('YYYY-MM-DD HH:mm:ss');
+    time = moment().add(-1,'y').utc().format('YYYY-MM-DD HH:mm:ss');
   }
 
   return time;

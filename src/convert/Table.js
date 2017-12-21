@@ -31,7 +31,7 @@ export default class TablePair extends Component {
               <div className={className({'col-md-12': true, active: item.alias === pair})}
                    onClick={ e => onChangePair(item.alias)}
                    key={index}>
-                <div className="row">
+                <div className="row row-inline">
                   <div className="col-xs-3">{item.alias}</div>
                   <div className="col-xs-3">{item.ask}</div>
                   <div className="col-xs-6">{Math.round(item.value_last_24h * 100) / 100}</div>

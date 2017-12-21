@@ -228,10 +228,10 @@ class Convert extends Component {
         </form>
         <div className="row" style={{marginTop: '20px', position: 'relative'}}>
           {charts.processing ? <Processing/>: null}
-          <div className="col-md-4 col-sm-6 col-xs-12">
+          <div className="col-md-4 col-sm-12 col-xs-12">
             <TablePair rates={rates} onChangePair={this.onChangePair} pair={this.state.pair}/>
           </div>
-          <div className="col-md-8 col-sm-6 col-xs-12">
+          <div className="col-md-8 col-sm-12 col-xs-12">
             <ul className="exchange-chart_list">
               {
                 listType.map((item, index) => {

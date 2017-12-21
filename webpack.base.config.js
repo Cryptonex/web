@@ -53,7 +53,19 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'stylus-loader']})
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            'stylus-loader'
+          ]
+        })
       },
       {
         test: /\.js$/,
