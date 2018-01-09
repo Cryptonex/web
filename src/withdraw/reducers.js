@@ -51,7 +51,7 @@ let error = (state='', action) => {
 let withdraw = combineReducers({
   form,
   processing,
-  error
+  error,
 });
 
 export default (state, action) => {

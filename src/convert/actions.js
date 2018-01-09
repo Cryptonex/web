@@ -185,7 +185,7 @@ const resultLoadDataChart = (response, dispatch) => {
       });
     }
     const data = json.result.candles.map((item) => {
-      return [moment(item.start_at).valueOf(), Number(item.open), Number(item.hight), Number(item.low), Number(item.close)];
+      return [moment(moment(item.start_at).utc()).add('h', 5).valueOf(), Number(item.open), Number(item.hight), Number(item.low), Number(item.close)];
     });
     return dispatch({
       type: constants.CONVERT_FETCH_CHART_DATA_SUCCESS,

@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 // url api
 const API_URL = 'https://webapi.cryptonex.org/api';
 const API_TEST = 'http://dev-backoffice.cryptonex.internal/api';
-const API = API_TEST;
+const API =  API_URL;
 const DOMAIN = 'cryptonex.org';
 
 // google recaptch

@@ -247,7 +247,7 @@ class Convert extends Component {
                 })
               }
             </ul>
-            <Chart charts={charts} />
+            <Chart charts={charts} pair={this.state.pair} />
           </div>
         </div>
       </div>

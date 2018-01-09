@@ -105,7 +105,7 @@ class ResponsiveTable extends Component {
             <p>{Math.round(row['to_amount']* 100000000) /100000000} {row['to_currency'].toUpperCase()}</p>
           </td>
           <td data-label="Status">
-            {row['status']}
+            {row['status'].indexOf('moderate') !== -1 ? returnTextStatus(row['status']): row['status']}
           </td>
         </tr>
       );
@@ -138,3 +138,19 @@ let cols = {
 };
 
 export default Transactions;
+
+function returnTextStatus(status) {
+  if (status === 'admin_moderate_success') {
+    return 'Approved by admin';
+  }
+
+  if (status === 'admin_moderate_cancel') {
+    return 'Canceled by admin';
+  }
+
+  if (status === 'admin_moderate_wait') {
+    return 'Moderated by admin';
+  }
+
+  return 'moderate';
+}

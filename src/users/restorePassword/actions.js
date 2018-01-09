@@ -70,6 +70,7 @@ export let submitRequest = form => {
 
     const params = {
       'login': form.email,
+      'google_recaptcha_response': form.google_recaptcha_response
     };
 
     dispatch({type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM});

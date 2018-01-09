@@ -9,6 +9,12 @@ let fields = [
   {name: 'to_hash', title: 'Send to:'},
 ];
 
+const freeText = {
+  cnx: 'The minimum amount = 0.001 CNX | No fee',
+  btc: 'The minimum amount = 0.02 BTC | Fee = 0.01 BTC',
+  eth: 'The minimum amount = 0.002 ETH | Fee = 0.001 ETH'
+};
+
 class Withdraw extends Component {
 
   componentDidMount() {
@@ -27,7 +33,7 @@ class Withdraw extends Component {
   }
 
   render() {
-    const { updateForm, submit, error, form, processing, walletCnx, userInfo, wallets } = this.props;
+    const { updateForm, submit, error, form, processing, walletCnx, userInfo, wallets, currency } = this.props;
     let classNameError = CN({
       'withdraw__container-form__item': true,
       'half': true,
@@ -35,6 +41,8 @@ class Withdraw extends Component {
       'error': error && 'Success!' != error
     });
 
+    const wallet = wallets.filter((item => item.hash === form.from_hash ))[0];
+    const free = (typeof wallet !== 'undefined' && wallet !== null) ? wallet.currency: 'cnx';
     return(
       <div className="withdraw">
         <div className="withdraw__container">
@@ -78,6 +86,7 @@ class Withdraw extends Component {
               </div>
               <div className="col-md-9 offset-md-2">
                 <div className="withdraw__container-form default__info">
+                  <p style={{fontSize: '0.9rem', marginBottom: '20px'}}>{freeText[free]}</p>
                   {fields.map((item, index) =>
                     <div className="withdraw__container-form__item" key={index}>
                       <label className="form-label">{item.title}</label>

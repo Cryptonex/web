@@ -124,7 +124,9 @@ class App extends Component {
         </div>
 
         <div className="row row-center">
-          <p>2017 © Cryptonex ltd. All Rights Reserved</p>
+          <div className="copyright" style={{textAlign: 'center', fontSize: '0.9rem'}}>
+            <p>2017 &copy; Cryptonex LP, UTR 1326380974, 101, Rose Street South Lane, Edinburgh, EH23JG, Scotland, UK.</p>
+          </div>
         </div>
       </div>
     );

@@ -18,6 +18,7 @@ class Chart extends Component {
       },
       series: [{
         type: 'candlestick',
+        name: 'CNX/BTC',
         data: [],
       }],
       yAxis: {
@@ -34,6 +35,7 @@ class Chart extends Component {
     const charts = this.props.charts;
 
     if (!charts.processing && charts.processing !== prevProps.charts.processing) {
+      this.chart.series[0].name=this.props.pair;
       this.chart.series[0].setData(charts.data, true);
       this.chart.redraw();
     }

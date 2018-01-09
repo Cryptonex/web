@@ -54,7 +54,7 @@ export let submit = (form, status) => {
         payload: {
           error: 'Fill in all the fields!'
         }
-      })
+      });
     }
     params.amount = params.amount.replace(',', '.');
     if (!Number(params.amount)) {
@@ -65,8 +65,6 @@ export let submit = (form, status) => {
         }
       })
     }
-
-    params.amount = Number(params.amount)
 
     if (status) {
       params.auth_2fa_code = Number(params.auth_2fa_code)
@@ -90,7 +88,6 @@ export let submit = (form, status) => {
         });
       }
     }).catch(error => {
-      console.log(error)
       return dispatch({
         type: constants.WITHDRAW_FETCH_FORM_ERROR,
         payload: {
@@ -108,5 +105,5 @@ export let updateForm = (field, value) => {
       field,
       value
     }
-  }
+  };
 };
