@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import update from 'react-addons-update';
 import { combineReducers } from 'redux';
+import fiat from './components/Fiat/reducers';
 
 let proccesingStatus = function (state=false, action) {
   switch (action.type){
@@ -17,5 +18,6 @@ let proccesingStatus = function (state=false, action) {
 
 
 export default combineReducers({
-  proccesingStatus
+  proccesingStatus,
+  fiat
 });

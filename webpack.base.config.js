@@ -26,7 +26,7 @@ const DIR_PUBLIC = '/';
 module.exports = {
   context: __dirname,
   entry: {
-    main: ['react-hot-loader/patch' ,'./src/index.js'],
+    main: ["babel-polyfill", 'react-hot-loader/patch' ,'./src/index.js'],
     vendor: ['moment', 'react', 'react-dom'],
   },
   output: {

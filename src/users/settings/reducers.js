@@ -5,9 +5,10 @@ import update from 'react-addons-update';
 
 import qrcode from './2fa/reducers';
 import changePassword from './changePassword/reducers';
+import api from './Api/reducers';
 
 const settings = combineReducers({
-  qrcode, changePassword
+  qrcode, changePassword, api
 });
 
 

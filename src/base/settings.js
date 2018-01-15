@@ -2,12 +2,12 @@ import 'whatwg-fetch';
 // url api
 const API_URL = 'https://webapi.cryptonex.org/api';
 const API_TEST = 'http://dev-backoffice.cryptonex.internal/api';
-const API =  API_URL;
+const API =  API_TEST;
 const DOMAIN = 'cryptonex.org';
 
 // google recaptch
 export const KEY_RECAPTCH = "6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8";
-
+export const regIpAddress = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 let idRequest = 0;
 
 function getIdRequest() {

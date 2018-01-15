@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const propTypes = {
   path: PropTypes.array
@@ -24,9 +25,43 @@ class Breadcrumbs extends Component {
     super(...arguments);
   }
 
+  className = (path) => {
+    if (location.pathname.indexOf(path) === -1) {
+      return "button button-outline primary small";
+    }
+
+    return "button button-cover primary small";
+  };
+
   render() {
     const { path } = this.props;
     const pathObj = path.filter(item => location.pathname.indexOf(item.pathname) !== -1)[0];
+    if (pathObj === undefined) return null;
+
+    if (pathObj.name === 'Settings') {
+      return (
+        <div className="breadcrumbs">
+          <ul className="clear inline">
+            <li>
+              <NavLink
+                className={this.className("/app/settings/security")}
+                to="/app/settings/security">
+                Security
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={this.className("/app/settings/api")}
+                to="/app/settings/api"
+              >
+                Settings API
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div className="breadcrumbs">
         <ul className="clear inline">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import TwoFa from './2fa/index';
 import ChangePassword from './changePassword/index'
 
@@ -8,6 +8,7 @@ class Settings extends Component {
     const { dispatch } = this.props;
     dispatch({type: 'USERS_SETTINGS_LEAVE_PAGE'})
   }
+
   render() {
     return (
       <div className="settings content">
@@ -23,4 +24,4 @@ class Settings extends Component {
 }
 
 
-export default Settings;
+export default connect(null, null)(Settings);
