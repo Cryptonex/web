@@ -24,6 +24,13 @@ class Registration extends Component {
     }
   }
 
+  componentWillReceiveProps() {
+    const { processing } = this.props;
+    if (processing && this.recaptchaInstance) {
+      this.recaptchaInstance.reset();
+    }
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({type: 'USERS_REGISTRATION_LEAVE_PAGE'})
@@ -53,12 +60,17 @@ class Registration extends Component {
               </div>);
             })}
             <div className="registration__form-container__item">
-{/*            <Recaptcha
+              <Recaptcha
                sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
                render='explicit'
                elementID="registration__recaptcha"
                onloadCallback={console.log.bind(this, "recaptcha loaded")}
-               />*/}
+               verifyCallback={hash => updateForm('google_recaptcha_response', hash)}
+               expiredCallback={() => updateForm('google_recaptcha_response', '')}
+               ref={e => this.recaptchaInstance = e}
+               />
+            </div>
+            <div className="registration__form-container__item">
                <div className="submit">
                  <a className="button button-cover primary small"
                     onClick={e => submit(registrationForm)}>

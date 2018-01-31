@@ -45,7 +45,7 @@ class AlertCart extends Component {
         <div className="header">
           <div className="row row-between">
             <div className="col-sm-auto col-md-auto col-lg-auto">
-              <span>{type}</span>
+              <span>{type[0].toUpperCase() + type.slice(1)}</span>
             </div>
 
             <div className="col-sm-0 col-md-0 col-lg-0">

@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import Processing from 'elements/processing';
+import AdvCashForm from './AdvCashForm';
 
 class FiatForm extends Component {
   onSubmit = (ev) => {
     const { sendRequestFiat, form } = this.props;
     ev.preventDefault();
-    sendRequestFiat(form, this.from);
+    console.log(this.form)
+    sendRequestFiat(form, this.form);
   };
 
   componentDidMount() {
     const { loadPaymentSystem } = this.props;
     loadPaymentSystem();
+
+  }
+
+  componentWillUnmount () {
+    const { dispatch } = this.props;
+    dispatch({ type: 'FIAT_LEAVE_PAGE' })
   }
 
   renderError = () => {
@@ -31,23 +39,31 @@ class FiatForm extends Component {
   };
 
   render() {
+
     const { form, updateForm, processing, payment, order } = this.props;
+
+    let formPayment = null;
+
+    if (form.payment_system.indexOf('advcash') !== -1) {
+      formPayment =  <AdvCashForm amount={form.amount} id={order.id} currency={order.currency.toUpperCase()} formRef={ref=> this.form = ref}/>;
+    }
+
     return(
-      <div>
+      <div style={{marginTop: '20px'}}>
         <form className="row" onSubmit={this.onSubmit}>
           <div className="col-md-8 col-sm-12 col-xs-12" style={{position: 'relative'}}>
             <div className="row row-grid">
               <div className="col-md-12 col-sm-12 col-xs-12">
-                <label className="form-label">Payment system:</label>
+                <label className="form-label">Currency:</label>
                 <select
                   className="form form-full__width"
                   value={form.payment_system}
                   onChange={ev => updateForm('payment_system', ev.target.value)}
                 >
                   <option value="">Select</option>
-                  {payment.list.map((item) => {
+                  {payment.list.sort((first, second) => first.currency > second.currency).map((item) => {
                     return (
-                      <option value={item.payment_system} key={item.payment_system}>{item.alias}</option>
+                      <option value={item.payment_system} key={item.payment_system}>{item.currency.toUpperCase()}</option>
                     );
                   })}
                 </select>
@@ -76,20 +92,7 @@ class FiatForm extends Component {
           </div>
 
         </form>
-        <form method="post" action="https://wallet.advcash.com/sci/" ref={ref => this.from = ref}>
-          <input type="hidden" name="ac_account_email" value="hello@cryptonex.org" />
-          <input type="hidden" name="ac_sci_name" value="Cryptonex" />
-          <input type="hidden" name="ac_amount" defaultValue={form.amount} />
-          <input type="hidden" name="ac_currency" defaultValue={order.currency.toUpperCase()} />
-          <input type="hidden" name="ac_order_id" defaultValue={order.id} />
-          <input type="hidden" name="ac_success_url" value="https://wallet.cryptonex.org/advcash/success" />
-          <input type="hidden" name="ac_success_url_method" value="GET" />
-          <input type="hidden" name="ac_fail_url" value="https://wallet.cryptonex.org/advcash/fault" />
-          <input type="hidden" name="ac_fail_url_method" value="GET" />
-          <input type="hidden" name="ac_status_url" value="https://payment.cryptonex.org/advcash/status" />
-          <input type="hidden" name="ac_status_url_method" value="POST" />
-          <input type="hidden" name="ac_comments" value="Comment" />
-        </form>
+        {formPayment}
       </div>
     )
   }

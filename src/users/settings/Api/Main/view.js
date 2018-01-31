@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Processing from 'elements/processing';
-
+import { Tabs, Pane } from 'elements/Tabs';
+import Description from './Description';
 
 class Main extends Component {
 
@@ -52,7 +53,11 @@ class Main extends Component {
                 localeTime = moment(localeTime).format('YYYY-MM-DD HH:mm:ss');
                 return(
                   <tr key={item.id}>
-                    <td><Link to={`${match.path}/${item.id}`} style={{color: '#286c8e'}}>{item.name}</Link></td>
+                    <td>
+                      <Link to={`${match.path}/${item.id}`} style={{color: '#286c8e'}}>
+                        <span style={{maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{item.name}</span>
+                      </Link>
+                    </td>
                     <td>{localeTime}</td>
                     <td>{item.is_active ? "Active": "Deactive"}</td>
                   </tr>

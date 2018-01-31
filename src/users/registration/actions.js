@@ -52,6 +52,15 @@ export default {
         });
       }
 
+      if (form.google_recaptcha_response === '') {
+        return dispatch({
+          type: constants.USERS_REGISTRATION_FORM_ERROR,
+          payload: {
+            error: 'Fill in all the fields!'
+          }
+        });
+      }
+
       if (params.password != params.confirm) {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,

@@ -16,3 +16,13 @@ export const fetchRequestFiat = (params) => {
 
   return getData(1, data, 'payment_system.order_create');
 };
+
+
+export const fetchListCurrency = (params) => {
+  const data = {
+    ticket: localStorage.getItem('ticket'),
+    ...params
+  };
+
+  return getData(1, data, 'currency.list');
+};

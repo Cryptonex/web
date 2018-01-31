@@ -59,6 +59,8 @@ const processing = (state=false, action) => {
       return false;
     case constants.FIAT_FETCH_REQUEST_FIAT_SUCCESS:
       return false;
+    case constants.FIAT_LEAVE_PAGE:
+      return false;
     default:
       return state;
   }

@@ -5,8 +5,9 @@ import referral from 'referral/constants';
 import activations from 'activations/constants';
 import replenishment from 'replenishment/constants';
 import convert from 'convert/constants';
+import exchange from 'exchange/constants';
 
 export default Object.assign({
 }, users, transactions, replenishment,
-   withdraw, referral, activations, convert);
+   withdraw, referral, activations, convert, exchange);
 

@@ -42,6 +42,7 @@ export const sendRequestFiat = (params, form) => {
       actions: generateArrayConst(constants.FIAT_FETCH_REQUEST_FIAT),
       response: fetchRequestFiat(data),
       successCallback: () => {
+        console.log(form)
         setTimeout(() => {
           form.submit();
         }, 0);

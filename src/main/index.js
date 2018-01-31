@@ -20,6 +20,8 @@ import Withdraw from 'withdraw/index';
 import Referral from 'referral/index';
 import Settings from 'users/settings/index';
 import Convert from 'convert';
+import Exchange from 'exchange';
+import Payments from 'payments';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -113,7 +115,8 @@ class App extends Component {
                     <Route path='/app/withdraw' component={Withdraw}/>
                     {/*<Route path='/app/referral' component={Referral}/>*/}
                     <Route path='/app/settings'  component={Settings}/>
-                    <Route path='/app/exchange' component={Convert}/>
+                    <Route path='/app/exchange' component={Exchange}/>
+                    <Route path='/app/payments' component={Payments} />
                     <Route render={() => <Redirect to='/app/deposit'/>}/>
                   </Switch>
                 </div>
@@ -125,7 +128,7 @@ class App extends Component {
 
         <div className="row row-center">
           <div className="copyright" style={{textAlign: 'center', fontSize: '0.9rem'}}>
-            <p>2017 &copy; Cryptonex LP, UTR 1326380974, 101, Rose Street South Lane, Edinburgh, EH23JG, Scotland, UK.</p>
+            <p>2017-2018 &copy; Cryptonex LP, UTR 1326380974, 101, Rose Street South Lane, Edinburgh, EH23JG, Scotland, UK.</p>
           </div>
         </div>
       </div>

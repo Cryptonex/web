@@ -1,5 +1,7 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
+import { fetchListCurrency } from "api/payment";
+import { generateArrayConst } from "base/utils";
 
 let result = {
   info: (response, dispatch) => {
@@ -200,6 +202,20 @@ export let fetchRates = () => {
       dispatch({type: constants.USERS_PROFILE_FETCH_INFO_NETWORK_ERROR});
     });
   }
+};
+
+export const loadlListCurrency = () => {
+
+  return {
+    type: 'PROMISE',
+    payload: {
+      actions: generateArrayConst(constants.FETCH_LIST_CURRENCY),
+      response: fetchListCurrency(),
+      handlerData: (data) => {
+        return data.currencies;
+      }
+    },
+  };
 };
 
 

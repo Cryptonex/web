@@ -114,10 +114,21 @@ let processingStartApp = (state={ info: true, wallets: true, rates: true }, acti
   }
 };
 
+
+let currencies = (state=[], action) => {
+  switch (action.type) {
+    case constants.FETCH_LIST_CURRENCY_SUCCESS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   current,
   processingStartApp,
   wallets,
   walletCnx,
-  rates
+  rates,
+  currencies
 });

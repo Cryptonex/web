@@ -18,6 +18,7 @@ if (cookiesTicket) {
 export let store = createStore();
 
 store.dispatch(actionsProfile.getInfo());
+store.dispatch(actionsProfile.loadlListCurrency());
 
 setInterval(function() {
   store.dispatch(actionsProfile.getInfo());

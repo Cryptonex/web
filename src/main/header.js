@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { Link } from 'react-router-dom';
-
+import Dropdown from 'elements/dropDown';
 
 class Header extends Component {
   constructor() {
@@ -21,6 +21,12 @@ class Header extends Component {
 
   render() {
     const { logout, wallets, profile } = this.props;
+    const balanceTrigger = (
+      <div className="col-sm-0 col-xs-0 user-info">
+        <img src={require('assets/images/more-button.png')}  style={{maxWidth: '32px', cursor: 'pointer'}} alt=""/>
+      </div>
+    );
+
     return (
       <header className="header">
         <div className="row row-middle row-between">
@@ -41,18 +47,42 @@ class Header extends Component {
             <div className="col-xs-0 col-sm-12 col-md-0">
               <div className="row row-grid row-middle row-between">
                 <div className="col-xs-0 col-sm-0">
-                  <div className="user-info">
-                    <span>Balances:</span>
+                  <div className="">
 
-                    <ul className="clear inline">
-                      {[...wallets].reverse().map((item, index) => {
-                        return (
-                          <li key={item.currency}>
-                            {`${item.balance} ${item.currency.toUpperCase()}`}
-                          </li>
-                        )
+                    <div className="row row-middle">
+                      <div className="col-sm-0 col-xs-0 user-info">
+                        <span>Balances:</span>
+                      </div>
+                      {[...wallets].sort((first, second) => second.currency === 'cnx').map((item, index) => {
+                        const array = ['btc', 'cnx', 'eth'];
+                        if (array.includes(item.currency)) {
+                          return (
+                            <div className="col-sm-0 col-xs-0" key={item.currency}>
+                              {`${item.balance} ${item.currency.toUpperCase()}`}
+                            </div>
+                          );
+                        }
+
+                        return null;
                       })}
-                    </ul>
+                      Fiat: <Dropdown trigger={balanceTrigger}>
+                        <ul>
+                          {wallets.sort((first, second) => first.currency > second.currency ).map(item => {
+                            const array = ['btc', 'cnx', 'eth'];
+
+                            if (!array.includes(item.currency)) {
+                              const balance = item.type === 'crypto' ? Number(item.balance).toFixed(8): Number(item.balance).toFixed(2);
+                              return (
+                                <li key={item.currency}>
+                                  <button>{`${balance} ${item.currency.toUpperCase()}`}</button>
+                                </li>
+                              );
+                            }
+                            return null;
+                          })}
+                        </ul>
+                      </Dropdown>
+                    </div>
                   </div>
                 </div>
 

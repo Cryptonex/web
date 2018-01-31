@@ -8,8 +8,7 @@ import middlewareApi from 'middleware/api';
 export default (initialState) => {
   const store = createStore(
     reducers,
-    applyMiddleware(middlewareApi),
-    applyMiddleware(thunk, routerMiddleware(history)),
+    applyMiddleware(thunk, routerMiddleware(history), middlewareApi),
   );
 
   return store;

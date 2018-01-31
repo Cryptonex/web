@@ -1,4 +1,4 @@
-@import '~styles/variables'
+@import '~styles/general/variables'
 
 @keyframes fx-dropdown-vertical
   from
@@ -33,12 +33,6 @@
     min-width: 10rem
     background-color: #fff
     box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.25)
-    @media(max-width: width-xs)
-      position: fixed
-      top: 2rem
-      left: 1rem
-      right: 1rem
-      width: calc(100vw - 2rem)
     ul
       margin: 0
       padding: 0.25rem 0
@@ -56,5 +50,6 @@
           color: #303030
           background-color: transparent
           border: none
+          display inline-flex
           &:hover
             background-color: grey-l

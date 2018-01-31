@@ -14,7 +14,7 @@ class Replenishment extends Component {
       priceBtc: 0.0005,
       priceETH: 0.007,
       current: 'cnx',
-      content: 'fiat'
+      content: 'cnx'
     }
   }
 
@@ -60,7 +60,7 @@ class Replenishment extends Component {
               </div>
               <div className="default__info">
                 <div className="replenishment__info">
-                  {(this.state.content != "cnx" && this.state.content != "fiat")?
+                  {(this.state.content != "cnx")?
                   <label style={{marginTop: '10px'}}>
                     <input type="checkbox" checked={profile.info.deposit_auto_convert}
                            onChange={e => !proccesingStatus ? fetchChangeStatusConvert(!profile.info.deposit_auto_convert): null}/>

@@ -36,7 +36,20 @@ class Breadcrumbs extends Component {
   render() {
     const { path } = this.props;
     const pathObj = path.filter(item => location.pathname.indexOf(item.pathname) !== -1)[0];
-    if (pathObj === undefined) return null;
+
+    if (pathObj === undefined) {
+      return (
+        <div className="breadcrumbs">
+          <ul className="clear inline">
+            <li>
+            <span>
+              Cryptonex
+            </span>
+            </li>
+          </ul>
+        </div>
+      )
+    }
 
     if (pathObj.name === 'Settings') {
       return (

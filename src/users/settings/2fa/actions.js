@@ -36,7 +36,7 @@ let result = {
           }
         });
       }
-      console.log(json.result.enable)
+
       return dispatch({
         type: constants.USERS_SETTINGS_QRCODE_SET_ENABLE_2FA_SUCCESS,
         payload: {
