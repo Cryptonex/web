@@ -11,7 +11,7 @@ import Header from './header';
 import Sidebar from './sidebar';
 import Breadcrumbs from './breadcrumbs';
 import Processing from 'elements/processing';
-
+import PrivateRef from 'PrivateRef';
 
 
 import Replenishment from 'replenishment/index';
@@ -111,6 +111,7 @@ class App extends Component {
                   <Switch>
                     <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
                     <Route path='/app/deposit' component={Replenishment}/>
+                    <Route path='/app/private/ref' component={PrivateRef} />
                     <Route path='/app/transactions' component={Transactions}/>
                     <Route path='/app/withdraw' component={Withdraw}/>
                     {/*<Route path='/app/referral' component={Referral}/>*/}

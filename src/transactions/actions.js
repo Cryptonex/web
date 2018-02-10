@@ -15,14 +15,14 @@ let result = {
 
       let page_count = Math.ceil(json.result.summary.total / max_count);
 
-      let transations = Object.assign({}, json).result.transactions.sort((first, second) => {
+/*      let transations = Object.assign({}, json).result.transactions.sort((first, second) => {
         return moment(second.update_stamp).valueOf() - moment(first.update_stamp).valueOf()
-      });
+      });*/
 
       return dispatch({
         type: constants.TRANSACTIONS_FETCH_LIST_SUCCESS,
         payload: {
-          transactions: transations,
+          transactions: json.result.transactions,
           pagination: {
             max_count,
             total: json.result.summary.total,

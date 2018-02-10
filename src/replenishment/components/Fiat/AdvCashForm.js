@@ -9,9 +9,9 @@ function AdvCashForm(props) {
       <input type="hidden" name="ac_amount" defaultValue={amount} />
       <input type="hidden" name="ac_currency" defaultValue={currency} />
       <input type="hidden" name="ac_order_id" defaultValue={id} />
-      <input type="hidden" name="ac_success_url" value="https://wallet.cryptonex.org/app/advcash/success" />
+      <input type="hidden" name="ac_success_url" value="https://wallet.cryptonex.org/app/payments/advcash/success" />
       <input type="hidden" name="ac_success_url_method" value="GET" />
-      <input type="hidden" name="ac_fail_url" value="https://wallet.cryptonex.org/app/advcash/error" />
+      <input type="hidden" name="ac_fail_url" value="https://wallet.cryptonex.org/app/payments/advcash/error" />
       <input type="hidden" name="ac_fail_url_method" value="GET" />
       <input type="hidden" name="ac_status_url" value="https://payment.cryptonex.org/advcash/status" />
       <input type="hidden" name="ac_status_url_method" value="POST" />

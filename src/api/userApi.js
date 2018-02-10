@@ -62,3 +62,12 @@ export const fetchDeleteIpFromAPI = (params) => {
   return getData(1, data, 'user_api_ip.delete');
 };
 
+export const fetchRefInfo = (params) => {
+  const data = {
+    ticket: localStorage.getItem('ticket'),
+    ...params,
+  };
+
+  return getData(1, data, 'user.referer_info');
+};
+

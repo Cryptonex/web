@@ -71,7 +71,7 @@ class Header extends Component {
                             const array = ['btc', 'cnx', 'eth'];
 
                             if (!array.includes(item.currency)) {
-                              const balance = item.type === 'crypto' ? Number(item.balance).toFixed(8): Number(item.balance).toFixed(2);
+                              const balance = item.type === 'crypto' ? Math.floor(Number(item.balance)*100000000) / 100000000: Math.floor(Number(item.balance * 100)) / 100;
                               return (
                                 <li key={item.currency}>
                                   <button>{`${balance} ${item.currency.toUpperCase()}`}</button>
