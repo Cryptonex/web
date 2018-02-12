@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Processing from 'elements/processing';
 import CN from 'classnames';
-
+import { translate } from "../base/utils";
 
 
 let fields = [
-  {name: 'amount', title: 'Amount:'},
-  {name: 'to_hash', title: 'Send to:'},
+  {name: 'amount', title: 'form.amount'},
+  {name: 'to_hash', title: 'form.send_to'},
 ];
 
 const freeText = {
-  cnx: 'The minimum amount = 0.001 CNX | No fee',
-  btc: 'The minimum amount = 0.02 BTC | Fee = 0.01 BTC',
-  eth: 'The minimum amount = 0.002 ETH | Fee = 0.001 ETH'
+  cnx: 'fee.cnx',
+  btc: 'fee.btc',
+  eth: 'fee.eth'
 };
 
 class Withdraw extends Component {
@@ -68,7 +68,9 @@ class Withdraw extends Component {
             </div>*/}
             <div className="row">
               <div className="col-md-12">
-                <p style={{marginBottom: '20px'}}>Choose a withdraw type</p>
+                <p style={{marginBottom: '20px'}}>
+                  {translate('page.choose_withdraw_type')}
+                </p>
               </div>
               <div className="col-md-12">
                 <div className="replenishment__payments-buttons">
@@ -90,10 +92,10 @@ class Withdraw extends Component {
               </div>
               <div className="col-md-9 offset-md-2">
                 <div className="withdraw__container-form default__info">
-                  <p style={{fontSize: '0.9rem', marginBottom: '20px'}}>{freeText[free]}</p>
+                  <p style={{fontSize: '0.9rem', marginBottom: '20px'}}>{translate(freeText[free])}</p>
                   {fields.map((item, index) =>
                     <div className="withdraw__container-form__item" key={index}>
-                      <label className="form-label">{item.title}</label>
+                      <label className="form-label">{translate(item.title)}</label>
                       <input type="text" className="form form-full__width"
                              onChange={e => updateForm(item.name, e.target.value)}/>
                     </div>
@@ -113,7 +115,7 @@ class Withdraw extends Component {
                     </div>
                     <div className="withdraw__container-form__item-button">
                       <a className="button button-cover primary small"
-                         onClick={e => submit(form, userInfo.auth_2fa)}>Send</a>
+                         onClick={e => submit(form, userInfo.auth_2fa)}>{translate('action.send')}</a>
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import { translate } from "../base/utils";
 
 const propTypes = {
   path: PropTypes.array
@@ -9,14 +10,14 @@ const propTypes = {
   
 const defaultProps = {
   path: [
-    { name: 'Deposit', pathname: '/app/deposit' },
-    { name: 'Transactions', pathname: '/app/transactions' },
-    { name: 'Withdraw', pathname: '/app/withdraw' },
-    { name: 'Exchange', pathname: '/app/exchange' },
-    { name: 'Settings', pathname: '/app/settings' },
-    { name: 'Sign in', pathname: '/users/login' },
-    { name: 'Sign up', pathname: '/users/registration' },
-    { name: 'Restore', pathname: '/users/reset' },
+    { name: 'page.deposit', pathname: '/app/deposit' },
+    { name: 'page.transactions', pathname: '/app/transactions' },
+    { name: 'page.withdraw', pathname: '/app/withdraw' },
+    { name: 'page.exchange', pathname: '/app/exchange' },
+    { name: 'page.settings', pathname: '/app/settings' },
+    { name: 'page.sign_in', pathname: '/users/login' },
+    { name: 'page.sign_up', pathname: '/users/registration' },
+    { name: 'page.restore', pathname: '/users/reset' },
   ]
 };
 
@@ -51,7 +52,7 @@ class Breadcrumbs extends Component {
       )
     }
 
-    if (pathObj.name === 'Settings') {
+    if (pathObj.pathname === '/app/settings') {
       return (
         <div className="breadcrumbs">
           <ul className="clear inline">
@@ -80,7 +81,7 @@ class Breadcrumbs extends Component {
         <ul className="clear inline">
           <li>
             <span>
-              {typeof pathObj !== 'undefined' ? pathObj.name: 'Cryptonex'}
+              {typeof pathObj !== 'undefined' ? translate(pathObj.name): 'Cryptonex'}
             </span>
           </li>
         </ul>

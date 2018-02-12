@@ -1,8 +1,7 @@
 import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
-import { routerActions, push} from 'react-router-redux'
-import { store } from 'index';
+import { translate } from "../../base/utils";
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -14,7 +13,7 @@ let result = {
           return dispatch({
             type: constants.USERS_REGISTRATION_FETCH_FORM_ERROR,
             payload: {
-              error: 'Error while registering!'
+              error: translate('error.register_error')
             }
           });
         }
@@ -47,7 +46,7 @@ export default {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,
           payload: {
-            error: 'Fill in all the fields!'
+            error: translate('error.fill_all_field')
           }
         });
       }
@@ -56,7 +55,7 @@ export default {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,
           payload: {
-            error: 'Fill in all the fields!'
+            error: translate('error.fill_all_field')
           }
         });
       }
@@ -65,7 +64,7 @@ export default {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,
           payload: {
-            error: 'The passwords are different!'
+            error: translate('error.different_pwd')
           }
         });
       }
@@ -74,7 +73,7 @@ export default {
         return dispatch({
           type: constants.USERS_REGISTRATION_FORM_ERROR,
           payload: {
-            error: 'Invalid format Login!'
+            error: translate('error.invalid_format', {field: translate('form.email')})
           }
         })
       }
@@ -96,7 +95,7 @@ export default {
             return dispatch({
               type: constants.USERS_REGISTRATION_FETCH_FORM_ERROR,
               payload: {
-                error: 'Unknown error!',
+                error: translate('error.unknown_error'),
               }
             });
           });

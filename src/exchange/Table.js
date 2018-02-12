@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Scrollbar from 'elements/scrollbar';
-import className from 'classnames'
+import className from 'classnames';
+import { translate } from "../base/utils";
+
 export default class TablePair extends Component {
   render() {
     const { rates, onChangePair, pair } = this.props;
@@ -9,7 +11,7 @@ export default class TablePair extends Component {
         <div className="col-md-12">
           <div className="row title">
             <div className="col-xs-6">
-              <h5>Charts</h5>
+              <h5>{translate('page.charts')}</h5>
             </div>
 {/*            <div className="col-xs-6">
               <div className="form-compare">
@@ -20,9 +22,9 @@ export default class TablePair extends Component {
         </div>
         <div className="col-md-12">
           <div className="row header-table">
-            <div className="col-xs-3">Pair</div>
-            <div className="col-xs-3">Price</div>
-            <div className="col-xs-6">Volume (CNX)</div>
+            <div className="col-xs-3">{translate('page.pair')}</div>
+            <div className="col-xs-3">{translate('page.price')}</div>
+            <div className="col-xs-6">{translate('page.volume')} (CNX)</div>
           </div>
         </div>
         <div className="body">

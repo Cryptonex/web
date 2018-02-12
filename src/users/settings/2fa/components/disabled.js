@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Processing from 'elements/processing';
+import { translate } from "base/utils";
 
 class TwoFaDisable extends PureComponent {
   render() {
@@ -11,17 +12,16 @@ class TwoFaDisable extends PureComponent {
           {processing ? <Processing />: null}
           <div className="row">
             <div className="col-md-12">
-              <h5>Disable two-step verification</h5>
-              <p>If you want to turn off 2FA, input the six-digit
-                 code provided by the Google Authenticator app, then click "Disable".</p>
+              <h5>{translate('page.disable_2fa')}</h5>
+              <p>{translate('page.text_google_2fa_disable')}</p>
               <div className="settings__form-item">
-                <label className="form-label">Enter the 6-digit code:</label>
-                <input type="text" className="form form-full__width" placeholder="code"
+                <label className="form-label">{translate('form.enter_google_2fa_code')}:</label>
+                <input type="text" className="form form-full__width"
                        value={form.code} onChange={e => updateForm('code', e.target.value)}/>
               </div>
               <div className="settings__form-item">
                 <a className="button button-cover primary small"
-                   onClick={e => setEnable2fa(form, false)}>Disable</a>
+                   onClick={e => setEnable2fa(form, false)}>{translate('action.disable')}</a>
                 <p className="error">
                   {error}
                 </p>

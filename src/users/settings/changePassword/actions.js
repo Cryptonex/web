@@ -1,5 +1,6 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
+import { translate } from "base/utils";
 
 export let updateForm = (field, value) => {
   return {
@@ -19,7 +20,7 @@ let result = {
         return dispatch({
           type: constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_ERROR,
           payload: {
-            error: 'Failed to change password!'
+            error: translate('error.fail_change_pwd')
           }
         });
       }
@@ -27,7 +28,7 @@ let result = {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_SUBMIT_FORM_SUCCESS,
         payload: {
-          success: 'Success!'
+          success: translate('message.success')
         }
       });
 
@@ -43,7 +44,7 @@ export let submit = form => {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       });
     }
@@ -52,7 +53,7 @@ export let submit = form => {
       return dispatch({
         type: constants.USERS_SETTINGS_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Passwords do not match!'
+          error: translate('error.different_pwd')
         }
       });
     }

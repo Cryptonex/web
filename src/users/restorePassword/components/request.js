@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import Processing from 'elements/processing';
 import Recaptcha from 'react-recaptcha';
-
+import { translate } from "base/utils";
 
 class Request extends PureComponent {
   render() {
@@ -10,9 +10,9 @@ class Request extends PureComponent {
       <div className="col-md-8 offset-md-2">
         <div className="default__info">
           {processing ? <Processing />: null}
-          <h5>Request new password</h5>
+          <h5>{translate('page.request_new_pwd')}</h5>
           <div className="settings__form-item">
-            <label className="form-label">Your login</label>
+            <label className="form-label">{translate('form.your_login')}</label>
             <input type="test" className="form form-full__width"
                    value={form.email} onChange={e => updateForm('email', e.target.value)}/>
           </div>
@@ -35,7 +35,7 @@ class Request extends PureComponent {
 
           <div className="settings__form-item">
             <a className="button button-cover primary small"
-               onClick={e => submitRequest(form)}>Restore</a>
+               onClick={e => submitRequest(form)}>{translate('action.restore')}</a>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
 import { routerActions, push} from 'react-router-redux'
+import { translate } from "../../base/utils";
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -22,14 +23,14 @@ let result = {
         return dispatch({
           type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM_ERROR,
           payload: {
-            error: 'Wrong user!'
+            error: translate('error.wrong_user_restore_pwd')
           }
         });
       }
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM_SUCCESS,
         payload: {
-          success: 'Success! The message with the password recovery instructions was sent to your e-mail.'
+          success: translate('page.success_recovery_mail_pwd')
         }
       });
 
@@ -41,7 +42,7 @@ let result = {
         return dispatch({
           type: constants.USERS_RESTORE_PASSWORD_SUBMIT_CHANGER_FORM_ERROR,
           payload: {
-            error: 'Failed to change password!'
+            error: translate('error.fail_change_pwd')
           }
         });
       }
@@ -62,7 +63,7 @@ export let submitRequest = form => {
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Invalid format login!'
+          error: translate('error.invalid_format', {field: 'Login'})
         }
       });
     }
@@ -82,7 +83,7 @@ export let submitRequest = form => {
           return dispatch({
             type: constants.USERS_RESTORE_PASSWORD_SUBMIT_REQUEST_FORM_ERROR,
             payload: {
-              error: 'Unknown error!'
+              error: translate('error.unknown_error')
             }
           });
         });
@@ -102,7 +103,7 @@ export let submitChanger = (form, code) => {
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       });
     }
@@ -111,7 +112,7 @@ export let submitChanger = (form, code) => {
       return dispatch({
         type: constants.USERS_RESTORE_PASSWORD_FORM_ERROR,
         payload: {
-          error: 'Passwords do not match!'
+          error: translate('error.different_pwd')
         }
       });
     }

@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import { getData } from "base/settings";
 import { alert } from 'elements/alerts/index';
+import { translate } from "../base/utils";
 
 const resultFetchChangeStatusConvert = (response, dispatch) => {
   return response.json().then((json) => {
@@ -10,7 +11,7 @@ const resultFetchChangeStatusConvert = (response, dispatch) => {
         type: constants.FETCH_AUTO_CONVERT_ERROR,
       });
     }
-    alert.success('Status has been changed successfully.', 5);
+    alert.success(translate('message.status_change_autoconvert_into_cnx'), 5);
     return dispatch({
       type: constants.FETCH_AUTO_CONVERT_SUCCESS,
     });

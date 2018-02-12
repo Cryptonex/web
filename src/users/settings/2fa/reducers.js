@@ -29,6 +29,8 @@ let error = (state='', action) => {
   switch (action.type) {
     case constants.USERS_SETTINGS_QRCODE_UPDATE_FORM:
       return '';
+    case constants.USERS_SETTINGS_QRCODE_SET_ENABLE_2FA_ERROR:
+      return action.payload.error;
     case constants.USERS_SETTINGS_QRCODE_GET_URL_ERROR:
       return action.payload.error;
     case constants.USERS_SETTINGS_QRCODE_ERROR_FORM:

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Processing from 'elements/processing';
 import AdvCashForm from './AdvCashForm';
+import { translate } from "../../../base/utils";
 
 class FiatForm extends Component {
   onSubmit = (ev) => {
@@ -54,13 +55,13 @@ class FiatForm extends Component {
           <div className="col-md-8 col-sm-12 col-xs-12" style={{position: 'relative'}}>
             <div className="row row-grid">
               <div className="col-md-12 col-sm-12 col-xs-12">
-                <label className="form-label">Currency:</label>
+                <label className="form-label">{translate('form.currency')}:</label>
                 <select
                   className="form form-full__width"
                   value={form.payment_system}
                   onChange={ev => updateForm('payment_system', ev.target.value)}
                 >
-                  <option value="">Select</option>
+                  <option value="">{translate('form.select_currency')}</option>
                   {payment.list.sort((first, second) => first.currency > second.currency).map((item) => {
                     return (
                       <option value={item.payment_system} key={item.payment_system}>{item.currency.toUpperCase()}</option>
@@ -69,7 +70,7 @@ class FiatForm extends Component {
                 </select>
               </div>
               <div className="col-md-12 col-sm-12 col-xs-12">
-                <label className="form-label">Amount:</label>
+                <label className="form-label">{translate('form.amount')}:</label>
                 <input
                   type="text"
                   className="form form-full__width"
@@ -82,7 +83,7 @@ class FiatForm extends Component {
                 <div className="row row-right">
                   <div className="col-xs-0">
                     <button className="button button-cover primary small">
-                      Send
+                      {translate('action.send')}
                     </button>
                   </div>
                 </div>

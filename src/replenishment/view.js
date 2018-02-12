@@ -3,7 +3,7 @@ import DropCurrancy from './components/drop';
 import CN from 'classnames';
 import Purse from './components/purse';
 import Fiat from './components/Fiat';
-
+import { translate } from "../base/utils";
 
 class Replenishment extends Component {
   constructor(){
@@ -40,7 +40,7 @@ class Replenishment extends Component {
         <div className="content">
           <div className="row">
             <div className="col-md-12">
-              <p style={{marginBottom: '20px'}}>Make a deposit</p>
+              <p style={{marginBottom: '20px'}}>{translate('page.make_deposit')}</p>
               <div className="replenishment__payments-buttons">
                 <a className={CN({active: this.state.content == "cnx"})}
                    onClick={this.onChangeContent.bind(this, "cnx")}>
@@ -64,7 +64,7 @@ class Replenishment extends Component {
                   <label style={{marginTop: '10px'}}>
                     <input type="checkbox" checked={profile.info.deposit_auto_convert}
                            onChange={e => !proccesingStatus ? fetchChangeStatusConvert(!profile.info.deposit_auto_convert): null}/>
-                    <span>Autoconvert into CNX</span>
+                    <span>{translate('page.autoconvert_into_cnx')}</span>
                     {proccesingStatus ? <span><i className="fa fa-spinner fa-pulse fa-1x fa-fw"></i></span>:null}
                   </label> :null}
                   <div className="replenishment__payments">

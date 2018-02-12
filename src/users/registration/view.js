@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Recaptcha from 'react-recaptcha';
 import Processing from 'elements/processing';
-
+import { translate } from "../../base/utils";
 
 const fields = [
-  {name: 'email', placeholder: 'Email'},
-  {name: 'password', placeholder: 'Password'},
-  {name: 'confirm', placeholder: 'Confirm password'},
+  {name: 'email', placeholder: 'form.email'},
+  {name: 'password', placeholder: 'form.password'},
+  {name: 'confirm', placeholder:'form.confirm_pwd'},
 ];
 
 class Registration extends Component {
@@ -44,19 +44,19 @@ class Registration extends Component {
 
           <div className="registration__form-title">
             <p className="registration__form-title__description">
-              Create your account
+              {translate('page.create_your_acc')}
             </p>
           </div>
           {processing ? <Processing />:null}
           <div className="registration__form-container">
             {fields.map((item, index)=> {
               return (<div className="registration__form-container__item" key={index}>
-                <input type={(item.name == 'email' || item.name == 'code') ? 'text': 'password'}
+                <input type={(item.name === 'email' || item.name === 'code') ? 'text': 'password'}
                        className="registration__form-container__item-input"
                        value={registrationForm[item.name]}
                        onChange={e => item.name === 'email' ? updateForm(item.name, e.target.value.toLowerCase()):
                          updateForm(item.name, e.target.value)}
-                       placeholder={item.placeholder}/>
+                       placeholder={translate(item.placeholder)}/>
               </div>);
             })}
             <div className="registration__form-container__item">
@@ -74,24 +74,22 @@ class Registration extends Component {
                <div className="submit">
                  <a className="button button-cover primary small"
                     onClick={e => submit(registrationForm)}>
-                   Create account
+                   {translate('action.create_acc')}
                  </a>
                </div>
             </div>
             {error ?
             <div className="registration__form-container__item">
-              <div className={error == 'success'? "registration__form-container__success" :
+              <div className={error === 'success'? "registration__form-container__success" :
                                                   "registration__form-container__error"}>
-                {error == 'success' ?
-                  'Thank you for registration! The message with instructions for activation was sent to your e-mail.'
-                  : error}
+                {error === 'success' ? translate('Thank you for registration! The message with instructions for activation was sent to your e-mail.'): error}
               </div>
             </div>: null}
 
 
             <div className="registration__form-container__link">
               <Link to='/users/login' className="registration__form-container__link-item">
-                Already have an account? Sign in.
+                {translate('page.already_registered')}
               </Link>
             </div>
           </div>

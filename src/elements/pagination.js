@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import classNames from 'classnames'
+import { translate } from "../base/utils";
 
 const createArray = (count) => (
   Array.from(new Array(count + 1).keys()).filter(e => e != 0)
@@ -64,13 +65,13 @@ const prev = ({pagination, update})=>
   <a className={classNames({
     "list__pagination__item prev": true,
     "hidden": false})}
-     onClick={()=>  pagination.page == 1 ? null : update(pagination.page - 1)}>Previous</a>;
+     onClick={()=>  pagination.page == 1 ? null : update(pagination.page - 1)}>{translate('page.previous')}</a>;
 
 const next = ({pagination, update})=>
   <a className={classNames({
     "list__pagination__item next": true,
     "hidden": false})}
-     onClick={()=> pagination.page_count == pagination.page ? null : update(pagination.page + 1)}>Next</a>;
+     onClick={()=> pagination.page_count == pagination.page ? null : update(pagination.page + 1)}>{translate('page.next')}</a>;
 
 const list = ({pagination, update})=>
   createArray(pagination.page_count).map(item.bind(null, {pagination, update}));

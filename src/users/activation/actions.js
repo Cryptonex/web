@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
 import { push } from 'react-router-redux'
+import { translate } from "../../base/utils";
 
 let result = {
   activation: {
@@ -49,7 +50,7 @@ export default {
             return dispatch({
               type: constants.USERS_ACTIVATION_FETCH_FORM_ERROR,
               payload: {
-                error: 'Unknown error!',
+                error: translate('error.unknown_error'),
               }
             });
           });

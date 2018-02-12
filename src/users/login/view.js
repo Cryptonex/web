@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { alert } from 'elements/alerts/index';
 import Transition from 'react-transition-group/Transition';
 import Processing from 'elements/processing';
+import { translate } from "base/utils";
 
 class Login extends Component {
   constructor(){
@@ -29,7 +30,7 @@ class Login extends Component {
       return dispatch({
         type: 'USERS_LOGIN_FORM_ERROR',
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       });
     }
@@ -44,27 +45,27 @@ class Login extends Component {
         <div className="login__form">
           <div className="login__form-title">
             <p className="login__form-title__description">
-              Sign in
+              {translate('page.sign_in')}
             </p>
           </div>
           {processing ? <Processing />:null}
-          <Transition in={content == 'login'} timeout={1300}
+          <Transition in={content === 'login'} timeout={1300}
                       unmountOnExit={true}>
             {(state) => {
               return(
                 <div className={`login__form-container ${state}`}>
                 <div className="login__form-container__item">
                   <input type="text" className="login__form-container__item-input"
-                         placeholder="Email" value={loginForm.login}
+                         placeholder={translate('form.email')} value={loginForm.login}
                          onChange={e => updateLoginForm('login', e.target.value)}/>
                 </div>
                 <div className="login__form-container__item">
                   <input type="password" className="login__form-container__item-input"
-                         placeholder="Password"
+                         placeholder={translate('form.password')}
                          style={{paddingRight: '120px'}}
                          onChange={e => updateLoginForm('password', e.target.value)}/>
                   <a href="/users/reset/password"
-                     className="login__form-container__item-forgot">Forgot password?</a>
+                     className="login__form-container__item-forgot">{translate('page.forgot_pwd')}</a>
                 </div>
                   { statusRecaptcha? <Recaptcha
                     sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
@@ -81,7 +82,7 @@ class Login extends Component {
                         <div className="submit">
                           <a className="button button-cover primary small"
                              onClick={this.onSubmit}>
-                            Login
+                            {translate('action.login')}
                           </a>
                         </div>
 
@@ -96,19 +97,19 @@ class Login extends Component {
 
                 <div className="login__form-container__link">
                   <Link to='/users/registration' className="login__form-container__link-item">
-                    Don't have an account? Create it.
+                    {translate('page.not_registered')}
                   </Link>
                 </div>
               </div>
             )}}
           </Transition>
-          <Transition in={content == 'auth'} timeout={1500} unmountOnExit={true}>
+          <Transition in={content === 'auth'} timeout={1500} unmountOnExit={true}>
             {(state) => {
               return (
               <div className={`auth__form-container ${state}`}>
                 <div className="login__form-container__item">
                   <input type="text" className="login__form-container__item-input"
-                         placeholder="Authentication code" value={authForm.code}
+                         placeholder={translate('form.auth_code')} value={authForm.code}
                          onChange={e => updateAuthForm('code', e.target.value)}/>
                 </div>
                 {error ?
@@ -121,13 +122,13 @@ class Login extends Component {
                   <div className="auth__form-container__buttons-item">
                     <a className="button button-cover primary small"
                        onClick={e => cancel()}>
-                      Cancel
+                      {translate('action.cancel')}
                     </a>
                   </div>
-                  <div className="auth__form-container__buttons-item">
+                  <div className="auth__form-container__buttons-item text-right">
                     <a className="button button-cover primary small"
                        onClick={ev => submitAuthForm(authForm, loginForm.login)}>
-                      Authenticate
+                      {translate('action.authenticate')}
                     </a>
                   </div>
                 </div>

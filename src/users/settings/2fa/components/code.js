@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import qrcode from 'qrcode-generator';
+import { translate } from "base/utils";
 
 class Code extends PureComponent {
   constructor(){
@@ -26,9 +27,9 @@ class Code extends PureComponent {
       <div className="code">
         <div  ref='qrcode' style={{textAlign: 'center'}}>
         </div>
-        <p style={{fontSize: '0.9rem'}}>Your secret key: {url.split('=')[1]}</p>
+        <p style={{fontSize: '0.9rem'}}>{translate('page.your_secret_key')}: {url.split('=')[1]}</p>
         <div style={{marginTop: '18px', textAlign: 'center'}}>
-          <a href={this.state.url} download="qrcode.gif" className="button button-cover primary small">Save QR code</a>
+          <a href={this.state.url} download="qrcode.gif" className="button button-cover primary small">{translate('action.save_qr')}</a>
         </div>
       </div>
     )

@@ -1,6 +1,6 @@
 import constants from 'base/constants';
 import {getData} from 'base/settings';
-
+import { translate } from "base/utils";
 
 
 let result = {
@@ -10,7 +10,7 @@ let result = {
         return dispatch({
           type: constants.USERS_SETTINGS_QRCODE_GET_URL_ERROR,
           payload: {
-            error: 'Unknown error, reload page!'
+            error: translate('error.unknown_error')
           }
         });
       }
@@ -32,7 +32,7 @@ let result = {
         return dispatch({
           type: constants.USERS_SETTINGS_QRCODE_SET_ENABLE_2FA_ERROR,
           payload: {
-            error: 'Unknown error, reload page!'
+            error: translate('error.fail_activated_2fa')
           }
         });
       }
@@ -101,7 +101,7 @@ export let setEnable2fa = (form, status) => {
       return dispatch({
         type: constants.USERS_SETTINGS_QRCODE_ERROR_FORM,
         payload: {
-          error: "Invalid format code!"
+          error: translate('error.invalid_format', { field: translate('form.auth_code')})
         }
       })
     }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer} from 'react-router-redux';
-
+import { i18nReducer } from 'react-redux-i18n';
 
 import users from 'users/reducers';
 import transactions from 'transactions/reducers';
@@ -12,6 +12,8 @@ import alerts from 'elements/alerts/reducers';
 import replenishment from 'replenishment/reducers';
 import exchange from 'exchange/reducers';
 
+
+
 export default combineReducers({
   router: routerReducer,
   users,
@@ -22,5 +24,6 @@ export default combineReducers({
   convert,
   alerts,
   replenishment,
-  exchange
+  exchange,
+  i18n: i18nReducer,
 });

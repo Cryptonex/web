@@ -3,6 +3,7 @@ import { getData, isNumeric } from 'base/settings';
 import { getWallets } from 'users/profile/actions'
 import { alert } from 'elements/alerts/index';
 import moment from 'moment';
+import { translate } from "../base/utils";
 
 export const updateForm = (field, value) => {
   return {
@@ -14,13 +15,13 @@ export const updateForm = (field, value) => {
 const resultSubmitForm = (response, dispatch) => {
   return response.json().then(json => {
     if (json.error) {
-      alert.warning('Error!', 5);
+      alert.warning(translate('error.error'), 5);
       return dispatch({
         type: constants.EXCHANGE_FETCH_FORM_ERROR,
       });
     }
 
-    alert.success(`Complete.`, 5);
+    alert.success(translate('message.success'), 5);
     dispatch(getWallets());
     return dispatch({
       type: constants.EXCHANGE_FETCH_FORM_SUCCESS,
@@ -50,7 +51,7 @@ export const submitForm = (form, wallets) => {
     }
 
     if (typeof fromWallet === 'undefined' || Number(form.amount) > Number(fromWallet.balance)) {
-      alert.warning("It is possible that you don't have enough money for trading transactions in the account.", 5);
+      alert.warning(translate('error.exchange_not_balance'), 5);
       return;
     }
 
@@ -63,7 +64,7 @@ export const submitForm = (form, wallets) => {
           return dispatch({
             type: constants.EXCHANGE_FETCH_FORM_ERROR,
             payload: {
-              error: 'Unknown error!',
+              error: translate('error.unknown_error'),
             }
           });
         });
@@ -72,7 +73,7 @@ export const submitForm = (form, wallets) => {
       return dispatch({
         type: constants.EXCHANGE_FETCH_FORM_ERROR,
         payload: {
-          error: 'Unknown error!',
+          error: translate('error.unknown_error'),
         }
       });
     });
@@ -83,7 +84,7 @@ const resultLoadDataChart = (response, dispatch) => {
   return response.json().then(json => {
     if (json.error) {
       console.log(json)
-      alert.warning('Error!', 5);
+      alert.warning(translate('error.unknown_error'), 5);
       return dispatch({
         type: constants.EXCHANGE_FETCH_CHART_DATA_ERROR,
       });
@@ -122,7 +123,7 @@ export const loadDataChart = (type, pair) => {
           return dispatch({
             type: constants.EXCHANGE_FETCH_CHART_DATA_ERROR,
             payload: {
-              error: 'Unknown error!',
+              error: translate('error.unknown_error'),
             }
           });
         });
@@ -131,7 +132,7 @@ export const loadDataChart = (type, pair) => {
       return dispatch({
         type: constants.EXCHANGE_FETCH_CHART_DATA_ERROR,
         payload: {
-          error: 'Unknown error!',
+          error: translate('error.unknown_error'),
         }
       });
     });

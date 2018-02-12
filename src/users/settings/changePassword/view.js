@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Processing from 'elements/processing';
 import Recaptcha from 'react-recaptcha';
+import { translate } from "base/utils";
 
 class ChangePassword extends Component {
   componentWillReceiveProps(){
@@ -24,23 +25,23 @@ class ChangePassword extends Component {
           {processing ? <Processing />: null}
           <h5>Change password</h5>
           <div className="settings__form-item">
-            <label className="form-label">Old password</label>
+            <label className="form-label">{translate('form.old_pwd')}</label>
             <input type="password" className="form form-full__width"
                    value={form.password_old} onChange={e => updateForm('password_old', e.target.value)}/>
           </div>
           <div className="settings__form-item">
-            <label className="form-label">New password</label>
+            <label className="form-label">{translate('form.new_pwd')}</label>
             <input type="password" className="form form-full__width"
                    value={form.password_new} onChange={e => updateForm('password_new', e.target.value)}/>
           </div>
           <div className="settings__form-item">
-            <label className="form-label">Confirm password</label>
+            <label className="form-label">{translate('form.confirm_pwd')}</label>
             <input type="password" className="form form-full__width"
                    value={form.confirm} onChange={e => updateForm('confirm', e.target.value)}/>
           </div>
           <div className="settings__form-item"style={{paddingTop: '10px'}}>
             <a className="button button-cover primary small"
-               onClick={this.onSubmit}>Change</a>
+               onClick={this.onSubmit}>{translate('action.change')}</a>
             <p className={error ? "error": 'success'}>
               {error || success}
             </p>

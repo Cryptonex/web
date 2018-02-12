@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { map } from 'underscore';
 import moment from 'moment';
-
+import { translate } from "../base/utils";
 
 import Pagination from 'elements/pagination';
 import Processing from 'elements/processing';
 
 const statusOptions = [
-  {name: 'All', value: ''}, {name: 'Created', value: 'created'}, {name: 'Moderated', value: 'moderated'},
-  {name: 'Unconfirmed', value: 'unconfirmed'}, {name: 'Confirmed', value: 'confirmed'}
+  {name: 'page.all', value: ''}, {name: 'statusTransaction.created', value: 'created'}, {name: 'statusTransaction.moderated', value: 'moderated'},
+  {name: 'statusTransaction.unconfirmed', value: 'unconfirmed'}, {name: 'statusTransaction.confirmed', value: 'confirmed'}
 ];
 
 const dateOptions = [
-  {name: 'All', value: ''}, {name:'Today', value: 'day'}, {name: 'This week', value: 'week'},
-  {name: 'This month', value: 'month'}, {name: 'Last month', value: 'last_month'}, {name: 'This year', value: 'year'}
+  {name: 'page.all', value: ''}, {name:'page.today', value: 'day'}, {name: 'page.this_week', value: 'week'},
+  {name: 'page.this_month', value: 'month'}, {name: 'page.last_month', value: 'last_month'}, {name: 'page.this_year', value: 'year'}
 ];
 
 class Transactions extends Component {
@@ -35,7 +35,7 @@ class Transactions extends Component {
                 <select className="form form-full__width"
                         onChange={e => updateFilter(filter, 'date', e.target.value)}>
                   {dateOptions.map((item, index) =>
-                    <option value={item.value} key={index}>{item.name}</option>
+                    <option value={item.value} key={index}>{translate(item.name)}</option>
                   )}
                 </select>
               </div>
@@ -140,17 +140,10 @@ let cols = {
 export default Transactions;
 
 function returnTextStatus(status) {
-  if (status === 'admin_moderate_success') {
-    return 'Approved by admin';
+  if (status) {
+    return translate(`statusTransaction.${status}`);
   }
 
-  if (status === 'admin_moderate_cancel') {
-    return 'Canceled by admin';
-  }
 
-  if (status === 'admin_moderate_wait') {
-    return 'Moderated by admin';
-  }
-
-  return 'moderate';
+  return translate(`statusTransaction.moderate`);
 }

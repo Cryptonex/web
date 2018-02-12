@@ -2,11 +2,12 @@ import constants from 'base/constants';
 import { fetchCreateUserAPI, fetchListUserAPI } from 'api/userApi';
 import { generateArrayConst } from "base/utils";
 import { alert } from 'elements/alerts/index';
+import { translate } from "base/utils";
 
 export const createAPIKey = (params) => {
   return (dispatch) => {
     if (params.name === '') {
-      alert.warning('Title is empty!', 5);
+      alert.warning(translate('error.is_empty', { field: translate('form.title')}), 5);
       return dispatch;
     }
 

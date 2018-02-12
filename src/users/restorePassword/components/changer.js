@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Processing from 'elements/processing';
 import { Redirect } from 'react-router-dom';
 import Recaptcha from 'react-recaptcha';
+import { translate } from "base/utils";
 
 class Changer extends PureComponent {
 
@@ -16,11 +17,11 @@ class Changer extends PureComponent {
 
     const { form, submitChanger, statusRecaptcha, dispatch } = this.props;
     const { key } = this.props.match.params;
-    if (statusRecaptcha && form.google_recaptcha_response === '') {
+    if (form.google_recaptcha_response === '') {
       return dispatch({
         type: 'USERS_RESTORE_PASSWORD_FORM_ERROR',
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       });
     }
@@ -41,12 +42,12 @@ class Changer extends PureComponent {
           {processing ? <Processing />: null}
           <h5>Change password</h5>
           <div className="settings__form-item">
-            <label className="form-label">New password</label>
+            <label className="form-label">{translate('form.password')}</label>
             <input type="password" className="form form-full__width"
                    value={form.new} onChange={e => updateForm('new', e.target.value)}/>
           </div>
           <div className="settings__form-item">
-            <label className="form-label">Confirm password</label>
+            <label className="form-label">{translate('form.confirm_pwd')}</label>
             <input type="password" className="form form-full__width"
                    value={form.confirm} onChange={e => updateForm('confirm', e.target.value)}/>
           </div>
@@ -55,7 +56,7 @@ class Changer extends PureComponent {
               {error}
             </p>
           </div>
-          { statusRecaptcha ? <Recaptcha
+          <Recaptcha
             sitekey="6Lf2mQ8UAAAAAHxT3TvPR2KMOYW2qS4g8j7qsLH8"
             render='explicit'
             elementID="login__recaptcha"
@@ -63,10 +64,10 @@ class Changer extends PureComponent {
             verifyCallback={hash => updateForm('google_recaptcha_response', hash)}
             expiredCallback={() => updateForm('google_recaptcha_response', '')}
             ref={e => this.recaptchaInstance = e}
-          />: null }
+          />
           <div className="settings__form-item" style={{marginTop: '10px'}}>
             <a className="button button-cover primary small"
-               onClick={this.onSubmit}>Change</a>
+               onClick={this.onSubmit}>{translate('action.change')}</a>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import constants from 'base/constants';
 import sha256 from 'sha256';
 import { getData } from 'base/settings';
 import * as actionsProfile from 'users/profile/actions'
-
+import { translate } from "../../base/utils";
 
 
 let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -15,7 +15,7 @@ let result = {
           return dispatch({
             type: constants.USERS_LOGIN_FETCH_FORM_ERROR,
             payload: {
-              error: 'Access denied: wrong user or password'
+              error: translate('error.wrong_user')
             }
           });
         }
@@ -24,7 +24,7 @@ let result = {
           return dispatch({
             type: constants.USERS_AUTH_FORM_ERROR,
             payload: {
-              error: 'You’ve been sent a message with the link to your e-mail. Follow the link from the message to activate your account.'
+              error: translate('error.not_activated_acc')
             }
           })
         }
@@ -51,7 +51,7 @@ let result = {
           return dispatch({
             type: constants.USERS_AUTH_FETCH_FORM_ERROR,
             payload: {
-              error: 'Invalid authentication code!'
+              error: translate('error.invalid_auth_key')
             }
           });
         }
@@ -87,7 +87,7 @@ export let login = {
         return dispatch({
           type: constants.USERS_LOGIN_FORM_ERROR,
           payload: {
-            error: 'Fill in all the fields!'
+            error: translate('error.fill_all_field')
           }
         });
       }
@@ -96,7 +96,7 @@ export let login = {
         return dispatch({
           type: constants.USERS_LOGIN_FORM_ERROR,
           payload: {
-            error: 'Invalid format Login!'
+            error: translate('error.invalid_format', {field: translate('form.email')})
           }
         })
       }
@@ -118,7 +118,7 @@ export let login = {
             return dispatch({
               type: constants.USERS_LOGIN_FETCH_FORM_ERROR,
               payload: {
-                error: 'Unknown error!',
+                error: translate('error.unknown_error'),
               }
             });
           });
@@ -150,7 +150,7 @@ export let auth = {
         return dispatch({
           type: constants.USERS_AUTH_FORM_ERROR,
           payload: {
-            error: 'Fill in all the fields!'
+            error: translate('error.fill_all_field')
           }
         });
       }
@@ -182,7 +182,7 @@ export let auth = {
             return dispatch({
               type: constants.USERS_AUTH_FETCH_FORM_ERROR,
               payload: {
-                error: 'Unknown error!',
+                error: translate('error.unknown_error'),
               }
             });
           });

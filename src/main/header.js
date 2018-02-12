@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { Link } from 'react-router-dom';
 import Dropdown from 'elements/dropDown';
+import { translate } from "../base/utils";
 
 class Header extends Component {
   constructor() {
@@ -51,7 +52,7 @@ class Header extends Component {
 
                     <div className="row row-middle">
                       <div className="col-sm-0 col-xs-0 user-info">
-                        <span>Balances:</span>
+                        <span>{translate('page.balances')}:</span>
                       </div>
                       {[...wallets].sort((first, second) => second.currency === 'cnx').map((item, index) => {
                         const array = ['btc', 'cnx', 'eth'];
@@ -65,7 +66,7 @@ class Header extends Component {
 
                         return null;
                       })}
-                      Fiat: <Dropdown trigger={balanceTrigger}>
+                      {translate('page.fiat')}: <Dropdown trigger={balanceTrigger}>
                         <ul>
                           {wallets.sort((first, second) => first.currency > second.currency ).map(item => {
                             const array = ['btc', 'cnx', 'eth'];
@@ -90,8 +91,8 @@ class Header extends Component {
                   <div className="row row-middle">
                     <div className="col-xs-0 col-sm-0">
                       <div className="user-menu">
-                        <Link to="/app/settings" className="button button-cover primary small">Settings</Link>
-                        <a className="button button-cover primary small" onClick={e => logout()}>Sign out</a>
+                        <Link to="/app/settings" className="button button-cover primary small">{translate('page.settings')}</Link>
+                        <a className="button button-cover primary small" onClick={e => logout()}>{translate('page.sign_out')}</a>
                       </div>
                     </div>
                   </div>

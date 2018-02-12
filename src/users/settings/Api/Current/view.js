@@ -4,6 +4,7 @@ import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Processing from 'elements/processing';
 import moment from 'moment';
+import { translate } from "base/utils";
 
 class Current extends Component {
 
@@ -46,7 +47,7 @@ class Current extends Component {
     if (info.expire_at === "") {
       return (
         <Datepicker
-          placeholderText="Expired time"
+          placeholderText={translate('form.expired_time')}
           dateFormat="YYYY-MM-DD"
           onChange={this.onChangeExpiredTime}
           className="form"
@@ -56,7 +57,7 @@ class Current extends Component {
 
     return(
       <Datepicker
-        placeholderText="Expired time"
+        placeholderText={translate('form.expired_time')}
         dateFormat="YYYY-MM-DD"
         selected={moment(info.expire_at)}
         onChange={this.onChangeExpiredTime}
@@ -69,16 +70,16 @@ class Current extends Component {
   render() {
     const { processing, status, info, updateProp, updatePropRule, deleteIp } = this.props;
 
-    if (Object.keys(info).length === 0 ) {
+    if (Object.keys(info).length === 0 && processing) {
       return (
         <h1>Loading...</h1>
       )
     }
 
-    if (status === 'error') {
+    if (status === 'error' ) {
       return (
         <div>
-          <h1>You have not this key</h1>
+          <h1>{translate('page.have_not_api_key')}</h1>
         </div>
       );
     }
@@ -94,7 +95,7 @@ class Current extends Component {
           <div className="default__info">
             <div className="row row-grid">
               <div className="col-md-12 col-sm-12 col-xs-12">
-                <h2>Your keys</h2>
+                <h2>{translate('page.your_api_keys')}</h2>
                 <p>Key: {info.key}</p>
               </div>
               <div className="col-md-12 col-sm-12 col-xs-12">
@@ -110,7 +111,7 @@ class Current extends Component {
         <div className="default__info">
           <div className="row">
             <div className="col-md-12 col-sm-12 col-xs-12">
-              <h2>Settings</h2>
+              <h2>{translate('page.settings')}</h2>
             </div>
             <div className="col-md-12 col-sm-12 col-xs-12">
               <div className="row row-grid">
@@ -123,7 +124,7 @@ class Current extends Component {
                           onChange={ev => updateProp('is_active', !info.is_active)}
                           checked={info.is_active}/>
                         <div>
-                          <span>Active status</span>
+                          <span>{translate('page.active')}</span>
                         </div>
                       </label>
                     </div>
@@ -135,7 +136,7 @@ class Current extends Component {
                           checked={info.user_api_rule.is_allow_account}
                         />
                         <div>
-                          <span>Methods accounts</span>
+                          <span>{translate('page.api_methods_acc')}</span>
                         </div>
                       </label>
                     </div>
@@ -147,7 +148,7 @@ class Current extends Component {
                           checked={info.user_api_rule.is_allow_convert}
                         />
                         <div>
-                          <span>Methods covert currencies</span>
+                          <span>{translate('page.api_convert_currency')}</span>
                         </div>
                       </label>
                     </div>
@@ -166,7 +167,7 @@ class Current extends Component {
                   </div>
                 </div>
                 <div className="col-md-4 col-sm-12 col-xs-12">
-                  <label>Expired time</label>
+                  <label>{translate('form.expired_time')}</label>
                   <div className="text-left">
                     {this.renderTime()}
                   </div>
@@ -179,7 +180,7 @@ class Current extends Component {
 
       <div className="col-md-8 col-sm-12 col-xs-12">
         <div className="default__info">
-          <h2>Ip address</h2>
+          <h2>{translate('page.ip_address')}</h2>
           <div className="row">
             <div className="col-md-12 col-sm-12 col-xs-12">
               <div className="row row-grid row-middle">
@@ -197,7 +198,7 @@ class Current extends Component {
                     className="button small button-cover primary"
                     onClick={this.addIp}
                   >
-                    Add
+                    {translate('action.add')}
                   </button>
                 </div>
               </div>
@@ -207,7 +208,7 @@ class Current extends Component {
             <thead>
             <tr>
               <th>Ip</th>
-              <th>Actions</th>
+              <th>{translate('page.actions')}</th>
             </tr>
             </thead>
             <tbody>
@@ -237,7 +238,7 @@ class Current extends Component {
               className="button small button-cover primary"
               onClick={this.updateInfo}
             >
-              Save
+              {translate('action.save')}
             </button>
           </div>
         </div>

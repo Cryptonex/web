@@ -1,6 +1,6 @@
 import constants from 'base/constants';
 import { getData } from 'base/settings';
-
+import { translate } from "../base/utils";
 
 let result = {
   submit: (response, dispatch) => {
@@ -9,7 +9,7 @@ let result = {
         return dispatch({
           type: constants.WITHDRAW_FETCH_FORM_ERROR,
           payload: {
-            error: 'Error send!'
+            error: translate('error.error_send')
           }
         });
       }
@@ -34,7 +34,7 @@ export let submit = (form, status) => {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       })
     }
@@ -43,7 +43,7 @@ export let submit = (form, status) => {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
         payload: {
-          error: 'Invalid format code!'
+          error: translate('error.invalid_format', { field: translate('form.auth_code')})
         }
       })
     }
@@ -52,7 +52,7 @@ export let submit = (form, status) => {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
         payload: {
-          error: 'Fill in all the fields!'
+          error: translate('error.fill_all_field')
         }
       });
     }
@@ -61,7 +61,7 @@ export let submit = (form, status) => {
       return dispatch({
         type: constants.WITHDRAW_FORM_ERROR,
         payload: {
-          error: 'Amount should be numeric!'
+          error: translate('error.should_num', { field: translate('form.amount')})
         }
       })
     }
@@ -82,7 +82,7 @@ export let submit = (form, status) => {
           return dispatch({
             type: constants.WITHDRAW_FETCH_FORM_ERROR,
             payload: {
-              error: 'Unknown error!',
+              error: translate('error.unknown_error'),
             }
           });
         });
@@ -91,7 +91,7 @@ export let submit = (form, status) => {
       return dispatch({
         type: constants.WITHDRAW_FETCH_FORM_ERROR,
         payload: {
-          error: 'Unknown error!',
+          error: translate('error.unknown_error'),
         }
       });
     });

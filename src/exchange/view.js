@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Processing from 'elements/processing';
 import Chart from './Chart';
 import TablePair from './Table';
+import { translate } from "../base/utils";
 
 const listType = [
   {name: 'H1', type: '1h'},
@@ -70,7 +71,7 @@ class Exchange extends Component {
             {processing ? <Processing/>: null}
             <div className="row row-grid row-bottom">
               <div className="col-xs-12 col-sm-3">
-                <span className="label">You give</span>
+                <span className="label">{translate('page.you_give')}</span>
                 <div className="form-compare">
                   <input type="number" value={form.amount} onChange={ev => updateInput('amount', ev.target.value)} />
                   <select value={form.from_currency} onChange={ev => updateSelect('from_currency', ev.target.value)}>
@@ -80,14 +81,14 @@ class Exchange extends Component {
               </div>
 
               <div className="col-xs-12 col-sm-3">
-                <span className="label">Exchange rate</span>
+                <span className="label">{translate('page.exchange_rate')}</span>
                 <div className="form-compare">
                   <span>{Math.round(rate*100000000)/100000000}</span>
                 </div>
               </div>
 
               <div className="col-xs-12 col-sm-3">
-                <span className="label">You receive</span>
+                <span className="label">{translate('page.you_receive')}</span>
                 <div className="form-compare">
                   <input type="number" value={form.to_amount} onChange={ev => updateInput('to_amount', ev.target.value)} />
                   <select value={form.to_currency} onChange={ev => updateSelect('to_currency', ev.target.value)}>
@@ -96,8 +97,8 @@ class Exchange extends Component {
                 </div>
               </div>
               <div className="col-xs-12 col-sm-3">
-                <button className="button button-cover primary small">Exchange</button>
-                <span style={{paddingLeft: '30px', fontSize: '0.7rem'}}>Fee <span style={{fontWeight: 'bold'}}> 0.1%</span></span>
+                <button className="button button-cover primary small">{translate('action.exchange')}</button>
+                <span style={{paddingLeft: '30px', fontSize: '0.7rem'}}>{translate('page.fee')} <span style={{fontWeight: 'bold'}}> 0.1%</span></span>
               </div>
             </div>
           </div>

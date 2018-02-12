@@ -1,6 +1,7 @@
 import constants from 'base/constants';
 import { generateArrayConst } from 'base/utils';
 import { fetchPaymentSystemList, fetchRequestFiat } from 'api/payment'
+import { translate } from "base/utils";
 
 export const loadPaymentSystem = () => {
   return {
@@ -18,7 +19,7 @@ export const sendRequestFiat = (params, form) => {
     return {
       type: constants.FIAT_ERROR_FORM,
       payload: {
-        error: 'Fill in all the fields!'
+        error: translate('error.fill_all_field')
       }
     };
   }
@@ -27,7 +28,7 @@ export const sendRequestFiat = (params, form) => {
     return {
       type: constants.FIAT_ERROR_FORM,
       payload: {
-        error: 'Amount should be numeric!'
+        error: translate('error.should_num', { field: translate('form.amount')})
       }
     };
   }

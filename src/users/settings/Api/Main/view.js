@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Processing from 'elements/processing';
 import { Tabs, Pane } from 'elements/Tabs';
-import Description from './Description';
+import { translate } from "base/utils";
 
 class Main extends Component {
 
@@ -17,13 +17,13 @@ class Main extends Component {
     return(
       <div className="row row-grid">
         <div className="col-md-12 col-sm-12 col-xs-12">
-          <h3>Create user API</h3>
+          <h3>{translate('page.create_user_api')}</h3>
           <div className="row row-grid row-middle">
             <div className="col-md-4 col-sm-12 col-xs-12">
               <input
                 type="text"
                 className="form"
-                placeholder="Title"
+                placeholder={translate('form.title')}
                 value={createForm.name}
                 onChange={ev => updateCreateForm('name', ev.target.value)}
               />
@@ -33,7 +33,7 @@ class Main extends Component {
                 className="button small button-cover primary"
                 onClick={ev => createAPIKey(createForm)}
               >
-                Create
+                {translate('action.create')}
               </button>
             </div>
           </div>
@@ -42,9 +42,9 @@ class Main extends Component {
           <table className="responsive-table">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Status</th>
+                <th>{translate('page.title')}</th>
+                <th>{translate('page.date')}</th>
+                <th>{translate('page.status')}</th>
               </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@ class Main extends Component {
                       </Link>
                     </td>
                     <td>{localeTime}</td>
-                    <td>{item.is_active ? "Active": "Deactive"}</td>
+                    <td>{item.is_active ? translate('page.active'): translate('page.deactive')}</td>
                   </tr>
                 )
               })}

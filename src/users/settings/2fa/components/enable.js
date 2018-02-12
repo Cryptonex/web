@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-
+import { translate } from "../../../../base/utils";
 
 import Code from './code';
 import Processing from 'elements/processing';
@@ -16,26 +16,28 @@ class TwoFaEnable extends PureComponent {
           {processing ? <Processing />: null}
           <div className="row">
             <div className="col-md-6">
-              <h5>Enable two-step verification</h5>
-              <p>For the sake of your account safety, activate the two-factor authentication (2FA). To do this you need the 6 - digit code. To get this code, download Google Authenticator and scan the QR code.</p>
+              <h5>{translate('page.enable_2fa')}</h5>
+              <p>{translate('page.text_google_2fa')}</p>
               <div className="settings__form-item">
-                <label className="form-label">Enter the 6-digit code:</label>
-                <input type="text" className="form" placeholder="code"
+                <label className="form-label">{translate('form.enter_google_2fa_code')}:</label>
+                <input type="text" className="form"
                        value={form.code} onChange={e => updateForm('code', e.target.value)}/>
               </div>
               <div className="settings__form-item">
                 { !url ?
                   <a className="button button-cover primary small"
-                     onClick={e => getQrcodeUrl()}>Show Qr code</a> :
+                     onClick={e => getQrcodeUrl()}>{translate('action.show_qr')}</a> :
                   <a className="button button-cover primary small"
-                     onClick={e => setEnable2fa(form, true)}>Enable</a>}
-                  <p className="error">
-                    {error}
-                  </p>
+                     onClick={e => setEnable2fa(form, true)}>{translate('action.enable')}</a>}
+              </div>
+              <div className="settings__form-item">
+                <p className="error">
+                  {error}
+                </p>
               </div>
             </div>
             <div className="col-md-6">
-              <h5 style={{textAlign: 'center'}}>Qr code</h5>
+              <h5 style={{textAlign: 'center'}}>{translate('page.qr_code')}</h5>
               {url ? <Code url={url}/> : null}
             </div>
           </div>
