@@ -15,7 +15,19 @@ export default {
     amount: 'Amount',
     select_currency: 'Select currency',
     send_to: 'Send to',
-
+    order_type: 'Order type',
+    country: 'Country',
+    payment_system: 'Payment system',
+    amount_min: 'Minimum amount',
+    amount_min_info: 'Minimum transaction limit',
+    amount_max: 'Maximum amount',
+    amount_max_info: 'Maximum transaction limit',
+    amount_limit: 'Amount limit',
+    payment_rate: 'Rate for one currency unit',
+    payment_currency: 'Payment currency',
+    exchange_currency: 'Exchange currency',
+    time_expired_minutes: 'Time expired(Minutes)',
+    description: 'Description'
   },
   action: {
     login: 'Login',
@@ -33,7 +45,8 @@ export default {
     save: 'Save',
     copy: 'Copy',
     send: 'Send',
-    exchange: 'Exchange'
+    exchange: 'Exchange',
+    select: 'Select'
   },
   page: {
     activation_acc: 'Account activation',
@@ -98,7 +111,9 @@ export default {
     exchange:'Exchange',
     restore: 'Restore',
     balances: 'Balances',
-    fiat: 'Fiat'
+    fiat: 'Fiat',
+    adverts: 'Adverts',
+    create_advert: 'Create advert',
   },
   message: {
     success: 'Success',
@@ -138,5 +153,11 @@ export default {
     admin_moderate_cancel: 'Canceled by admin',
     admin_moderate_wait: 'Moderated by admin',
     moderate: 'Moderate'
+  },
+  stable: {
+    buy_online: 'Buy online',
+    buy_offline: 'Buy offline',
+    sell_online: 'Sell online',
+    sell_offline: 'Sell offline',
   }
 }

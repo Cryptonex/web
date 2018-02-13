@@ -19,9 +19,9 @@ import Transactions from 'transactions/index';
 import Withdraw from 'withdraw/index';
 import Referral from 'referral/index';
 import Settings from 'users/settings/index';
-import Convert from 'convert';
 import Exchange from 'exchange';
 import Payments from 'payments';
+import P2P from 'components/P2P';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -110,6 +110,7 @@ class App extends Component {
                 <div className="col-xs-12 col-sm-12">
                   <Switch>
                     <Route path='/app' exact render={() => <Redirect to='/app/deposit'/>}/>
+                    <Route path='/app/p2p' component={P2P} />
                     <Route path='/app/deposit' component={Replenishment}/>
                     <Route path='/app/private/ref' component={PrivateRef} />
                     <Route path='/app/transactions' component={Transactions}/>

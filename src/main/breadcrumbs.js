@@ -18,6 +18,7 @@ const defaultProps = {
     { name: 'page.sign_in', pathname: '/users/login' },
     { name: 'page.sign_up', pathname: '/users/registration' },
     { name: 'page.restore', pathname: '/users/reset' },
+    { name: 'page.p2p-service', pathname: '/app/p2p' },
   ]
 };
 
@@ -27,11 +28,12 @@ class Breadcrumbs extends Component {
   }
 
   className = (path) => {
-    if (location.pathname.indexOf(path) === -1) {
-      return "button button-outline primary small";
+    if (location.pathname === path) {
+      return "button button-cover primary small";
+
     }
 
-    return "button button-cover primary small";
+    return "button button-outline primary small";
   };
 
   render() {
@@ -69,6 +71,30 @@ class Breadcrumbs extends Component {
                 to="/app/settings/api"
               >
                 Settings API
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      );
+    }
+
+    if (pathObj.pathname === '/app/p2p') {
+      return (
+        <div className="breadcrumbs">
+          <ul className="clear inline">
+            <li>
+              <NavLink
+                className={this.className("/app/p2p/adverts")}
+                to='/app/p2p/adverts'>
+                {translate('page.adverts')}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={this.className('/app/p2p/adverts/create')}
+                to="/app/p2p/adverts/create"
+              >
+                {translate('page.create_advert')}
               </NavLink>
             </li>
           </ul>

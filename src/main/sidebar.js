@@ -30,6 +30,11 @@ class Sidebar extends Component {
             <img src={require('assets/icons/Icon-Transactions_gray.png')} />
             <span>{translate('page.transactions')}</span>
           </NavLink>
+
+          <NavLink to="/app/p2p" activeClassName="active">
+            <img src={require('assets/icons/hand-shake.png')} style={{width: '60px'}}/>
+            <span>{translate('page.P2P Service')}</span>
+          </NavLink>
                               
 {/*          <NavLink to="/support" activeClassName="active">
             <img src={require('assets/icons/Icon-Support_gray.png')} />

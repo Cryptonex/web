@@ -26,6 +26,7 @@
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-html-parser": "^2.0.2",
+    "react-numeric-input": "^2.2.3",
     "react-recaptcha": "^2.3.3",
     "react-redux": "^5.0.5",
     "react-redux-i18n": "^1.9.2",

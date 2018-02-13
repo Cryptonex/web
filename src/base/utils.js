@@ -18,3 +18,7 @@ export const translate = (text='', params={}, inner=false) => {
   return I18n.t(text, params);
 };
 
+
+export const parseNumber = (stringValue) => {
+  return stringValue.replace(/,/, ".");
+};
