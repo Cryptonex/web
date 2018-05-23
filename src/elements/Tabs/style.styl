@@ -1,4 +1,4 @@
-@import '~styles/general/variables'
+@import '~styles/variables.styl'
 
 tab-border = 2px
 
@@ -30,31 +30,34 @@ tab-border = 2px
     .tab-content
       flex: 0 0 75%
 
+  &.top
+    .tab-link
+      border-bottom-width: tab-border !important
+  &.bottom
+    .tab-link
+      border-top-width: tab-border !important
+  &.left
+    .tab-link
+      border-right-width: tab-border !important
+  &.right
+    .tab-link
+      border-left-width: tab-border !important
+
   .tab-menu
     display: flex
-    justify-content: center
-    margin-bottom: 2rem
+    background-color: grey-l
     .tab-link
       user-select: none
       cursor: pointer
-      padding: .75rem 1.5rem
-      border: 1px solid primary-n
-      color: #27a2db
-      &:first-child
-        border-top-left-radius: .5rem
-        border-bottom-left-radius: .5rem
-      &:last-child
-        border-top-right-radius: .5rem
-        border-bottom-right-radius: .5rem
-      &:not(:last-child)
-        border-right: none
+      padding: 0.75rem 1rem
+      border-color: transparent
+      border-style: solid
+      border-width: 0px
       &:hover
-        color: primary-n
+        border-color: primary-n
       &.active
-        background-color: primary-n
-        color: #fff
+        background-color: grey-n
+        border-color: danger-n
 
   .tab-content
-    width: 100%
-    margin: 0 auto
-    border-radius: .5rem
+    padding: 2rem

@@ -1,46 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
-import style from './style';
-
-import Pane from './pane';
+import style from './style.styl';
 
 const propTypes = {
   placement: PropTypes.string,
-  selected: PropTypes.number,
-  onSwitch: PropTypes.func
+  index: PropTypes.number
 };
 
 const defaultProps = {
   placement: 'top',
-  selected: 0,
-  onSwitch: null
+  index: 0
 };
 
 class Tabs extends Component {
   constructor() {
     super(...arguments);
 
-    const { selected } = this.props;
+    const { index } = this.props;
 
     this.state = {
-      index: selected
+      index: index
     };
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    const state = { ...this.state };
-    const { onSwitch } = this.props;
-    if (state.index !== nextState.index) {
-      if(typeof onSwitch === 'function') {
-        onSwitch(nextState.index);
-      }
-    }
+  onSwitch(num) {
+    this.setState({ index: num });
   }
-
-  onSwitch = (id, onClick) => {
-    this.setState({ index: id });
-  };
 
   render() {
     const { index } = this.state;
@@ -50,38 +36,46 @@ class Tabs extends Component {
       <div className={`tabs ${placement}`}>
         <div className="tab-menu">
           {
-            React.Children.map(children, ((el, i) => {
-              const linkClass = className({
-                'tab-link': true,
-                'active': i === index
-              });
+            children.length ?
+              children.map((el, i) => {
+                const _show = className({
+                  'tab-link': true,
+                  'active': i == index
+                });
 
-              const onClick = el.props.onClick;
-              return (
-                <div
-                  key={i}
-                  className={linkClass}
-                  onClick={e => this.onSwitch(i, onClick)}
-                >
-                  {el.props.label}
-                </div>
-              );
-            }))
+                return (
+                  <div className={_show} key={i} onClick={this.onSwitch.bind(this, i)}>
+                    {el.props.label}
+                  </div>
+                )
+              })
+              : null
           }
         </div>
         {
           React.Children.map(children, ((el, i) => {
-            if (index == i) {
+            if (index == i)
               return el;
-            }
           }))
         }
       </div>
-    );
+    )
+  }
+}
+
+class Tab extends Component {
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div className="tab-content">
+        {children}
+      </div>
+    )
   }
 }
 
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
-export { Tabs, Pane };
+export { Tabs, Tab };
